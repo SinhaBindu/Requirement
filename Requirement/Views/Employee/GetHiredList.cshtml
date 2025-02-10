@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "New Hired List";
+}
+<div class="page-bread page-titles">
+    <div class="bread-flex">
+        <h1>@ViewBag.Title</h1>
+        <ol class="breadcrumb">
+            @*<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item active">@ViewBag.Title</li>*@
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div id="participantTableContainer">
+                <!-- The participant table will be injected here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: document.baseURI + "/Employee/GetHiredList/",
+                dataType: 'json',
+                success: function (resp) {
+                    if (resp.IsSuccess) {
+                        $('#participantTableContainer').html(resp.Data);
+                        toastr.success("Success", "Data loaded successfully.");
+
+                        // Initialize DataTable after loading the HTML
+                        $('#tbl').DataTable(); // Ensure you have included DataTables library
+                    } else {
+                        toastr.error("Error", resp.Data);
+                    }
+                },
+                error: function (req, error) {
+                    var errormsg = 'There was a communication error: ' + (error === 'error' ? req.statusText : error);
+                    toastr.error("Error", errormsg);
+                }
+            });
+        });
+    </script>
+}

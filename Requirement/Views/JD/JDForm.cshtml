@@ -1,0 +1,138 @@
+﻿@model Requirement.Models.JD_Model
+@using Requirement.Manager
+@{
+    ViewBag.Title = "Job Description Form";
+}
+
+<div class="page-bread page-titles">
+    <div class="bread-flex">
+        <h1>@ViewBag.Title</h1>
+        <ol class="breadcrumb"></ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-center">Job Description</h5>
+
+                <div class="pci-info">
+                    <h3>About PCI India</h3>
+                    <p>PCI India, a registered Indian society, has been working in India for the past 26 years. We drive interventions to transform the lives of communities at scale by solving complex development problems. In the past year, PCI India reached more than 1.7 crore, i.e. 17 million people in 202 Districts of 15 States.</p>
+
+                    <h3>Our Vision and Mission</h3>
+                    <p><strong>Vision –</strong> A happy, healthy, safe, and a sustainable world for all.</p>
+                    <p><strong>Mission –</strong> Rooted in community realities, we co-create and scale sustainable solutions to complex development problems.</p>
+
+                    <h3>Our Values</h3>
+                    <ul>
+                        <li><strong>Excellence –</strong> Quality in everything no matter how small, is paramount.</li>
+                        <li><strong>Respect –</strong> There is inherent value in all people for who they are and what they contribute.</li>
+                        <li><strong>Collaboration –</strong> Only through collaboration we can address complex development problems.</li>
+                        <li><strong>Boldness –</strong> Boldness requires disruptive thinking backed up by courage and conviction.</li>
+                        <li><strong>Creativity –</strong> Creativity ensures dynamic responsiveness, relevance, and impact.</li>
+                        <li><strong>Integrity –</strong> Integrity is non-negotiable in both personal and professional domains.</li>
+                    </ul>
+
+                    <h3>PCI is an Equal Opportunity Employer</h3>
+                    <p>PCI is committed to providing equal opportunity to all working for it and in creating an inclusive work environment. We respect the diversity of our people and follow a fair, non-discriminatory approach in terms of gender, age, nationality, race, caste, religion, community, marital status, physical challenge, and sexual orientation.</p>
+                    <p>We promote diversity in the workplace and ensure a culture of zero tolerance to any form of discrimination, abuse, or harassment whether sexual, physical, or psychological.</p>
+                    <p>PCI provides equal opportunity in recruitment, appraisals, promotion, and career progression. Our people policies are fair, objective, and non-discriminatory and everyone is expected to adhere to them.</p>
+                </div>
+
+                @using (Html.BeginForm("JDForm", "JD", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="flex-form">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.JobTittle, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.JobTittle, new { @class = "form-control", @id = "JobTittleEditor" })
+                            @Html.ValidationMessageFor(model => model.JobTittle, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.NoofPositions, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.NoofPositions, new { @class = "form-control", @id = "NoofPositionsEditor" })
+                            @Html.ValidationMessageFor(model => model.NoofPositions, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Location, new { @class = "form-control", @id = "LocationEditor" })
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Grade, new { @class = "form-control", @id = "GradeEditor" })
+                            @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-row pt-1">
+                            <div class="form-group col-md-4 offset-4">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <!-- Load CKEditor (Latest Secure Free Version) with "defer" -->
+    <script defer src="https://cdn.ckeditor.com/4.25.1/standard/ckeditor.js"></script>
+    <script>
+        ////$(window).on("load", function () {
+        ////    // Ensure CKEditor is fully loaded before running
+        ////    if (typeof CKEDITOR !== "undefined") l
+        ////        // Apply CKEditor to specific fields
+        ////        CKEDITOR.replace('JobTittleEditor');
+        ////        CKEDITOR.replace('LocationEditor');
+        ////        CKEDITOR.replace('GradeEditor');
+        ////    } else {
+        ////        console.error("CKEDITOR is not defined. Check if the script is loading properly.");
+        ////    }
+        ////});
+
+        $(document).ready(function () {
+            $("#formid").on("submit", function (event) {
+                event.preventDefault();
+
+                // Ensure CKEditor instances exist before fetching data
+                if (typeof CKEDITOR !== "undefined") {
+                    var formData = new FormData(this);
+                    formData.append("JobTittle", CKEDITOR.instances.JobTittleEditor.getData());
+                    formData.append("Location", CKEDITOR.instances.LocationEditor.getData());
+                    formData.append("Grade", CKEDITOR.instances.GradeEditor.getData());
+
+                    if (confirm('Are you sure you want to submit the form?')) {
+                        $.ajax({
+                            type: "POST",
+                            url: document.baseURI + "/JDForm/JD/",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (resp) {
+                                if (resp.success) {
+                                    toastr.success("Success", resp.message);
+                                    $("#formid")[0].reset();
+
+                                    // Reset CKEditor content
+                                    CKEDITOR.instances.JobTittleEditor.setData("");
+                                    CKEDITOR.instances.LocationEditor.setData("");
+                                    CKEDITOR.instances.GradeEditor.setData("");
+                                } else {
+                                    toastr.error("Error", resp.message);
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    console.error("CKEDITOR is not defined. Ensure CKEditor script is properly loaded.");
+                }
+            });
+        });
+    </script>
+}

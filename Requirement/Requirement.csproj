@@ -47,9 +47,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SubSonic.Core">
+      <HintPath>E:\proj\nopCommerce_3.60_Source\Presentation\Nop.Web\bin\SubSonic.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -169,14 +174,106 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JDController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Manager\CommonModel.cs" />
+    <Compile Include="Manager\Enums.cs" />
+    <Compile Include="Manager\SPManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\EmpReg Model.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JD Model.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\mst_Applicable.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_CostCentreCode.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_Designation.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_District.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_EmpCode.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_Grade.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_HiringType.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_JobLocation.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_Location.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_Name.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_Position.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_Sal.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_SelectionProcess.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_State.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_TypeYesNo.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_EmpReg.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_JD.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_NewHire.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Signature.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -476,9 +573,400 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\dashboard\css\login.css" />
+    <Content Include="Content\dashboard\css\style.css" />
+    <Content Include="Content\dashboard\icons\cryptocoins\css\cryptocoins-colors.css" />
+    <Content Include="Content\dashboard\icons\cryptocoins\css\cryptocoins.css" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flag-icon.min.css" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ad.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ae.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\af.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ag.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ai.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\al.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\am.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ao.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\aq.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ar.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\as.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\at.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\au.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\aw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ax.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\az.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ba.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bb.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bd.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\be.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bh.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bi.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bj.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bl.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bo.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bq.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\br.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bs.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bt.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bv.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\by.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\bz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ca.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cc.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cd.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ch.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ci.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ck.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cl.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\co.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cu.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cv.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cx.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cy.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\cz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\de.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\dj.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\dk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\dm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\do.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\dz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ec.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ee.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\eg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\eh.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\er.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\es.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\et.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\fi.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\fj.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\fk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\fm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\fo.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\fr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ga.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gb.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gd.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ge.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gh.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gi.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gl.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gp.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gq.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gs.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gt.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gu.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\gy.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\hk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\hm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\hn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\hr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ht.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\hu.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\id.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ie.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\il.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\im.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\in.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\io.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\iq.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ir.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\is.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\it.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\je.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\jm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\jo.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\jp.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ke.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\kg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\kh.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ki.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\km.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\kn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\kp.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\kr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\kw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ky.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\kz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\la.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\lb.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\lc.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\li.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\lk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\lr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ls.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\lt.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\lu.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\lv.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ly.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ma.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mc.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\md.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\me.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mh.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ml.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mo.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mp.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mq.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ms.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mt.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mu.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mv.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mx.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\my.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\mz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\na.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\nc.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ne.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\nf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ng.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ni.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\nl.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\no.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\np.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\nr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\nu.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\nz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\om.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pa.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pe.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ph.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pl.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ps.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pt.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\pw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\py.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\qa.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\re.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ro.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\rs.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ru.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\rw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sa.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sb.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sc.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sd.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\se.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sh.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\si.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sj.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sl.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\so.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ss.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\st.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sv.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sx.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sy.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\sz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tc.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\td.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\th.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tj.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tk.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tl.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\to.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tr.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tt.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tv.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tw.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\tz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ua.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ug.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\um.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\us.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\uy.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\uz.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\va.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\vc.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ve.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\vg.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\vi.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\vn.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\vu.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\wf.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ws.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\ye.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\yt.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\za.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\zm.svg" />
+    <Content Include="Content\dashboard\icons\flag-icon-css\flags\zw.svg" />
+    <Content Include="Content\dashboard\icons\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\dashboard\icons\font-awesome\fonts\fontawesome-webfont3e6e3e6e.svg" />
+    <Content Include="Content\dashboard\icons\ionicons\css\ionicons.css" />
+    <Content Include="Content\dashboard\icons\ionicons\fonts\ionicons28b5.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-arrows-10.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-10.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-elaboration-10.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-ecommerce-10.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-music-10.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-software-10.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-weather-10.svg" />
+    <Content Include="Content\dashboard\icons\linea-icons\linea.css" />
+    <Content Include="Content\dashboard\icons\material-design-iconic-font\fonts\materialdesignicons-webfont683c.svg" />
+    <Content Include="Content\dashboard\icons\material-design-iconic-font\materialdesignicons.min.css" />
+    <Content Include="Content\dashboard\icons\pe-icon-set-weather\css\pe-icon-set-weather.min.css" />
+    <Content Include="Content\dashboard\icons\pe-icon-set-weather\fonts\pe-icon-set-weathere60d.svg" />
+    <Content Include="Content\dashboard\icons\simple-line-icons\css\simple-line-icons.css" />
+    <Content Include="Content\dashboard\icons\simple-line-icons\fonts\Simple-Line-Icons4c824c82.svg" />
+    <Content Include="Content\dashboard\icons\themify-icons\fonts\themify9f249f24.svg" />
+    <Content Include="Content\dashboard\icons\themify-icons\themify-icons.css" />
+    <Content Include="Content\dashboard\icons\weather-icons\css\weather-icons.min.css" />
+    <Content Include="Content\dashboard\images\blog\1.html" />
+    <Content Include="Content\dashboard\images\blog\2.html" />
+    <Content Include="Content\dashboard\images\blog\3.html" />
+    <Content Include="Content\dashboard\images\blog\4.html" />
+    <Content Include="Content\dashboard\images\EnterpriseOnboarded.png" />
+    <Content Include="Content\dashboard\images\favicon.png" />
+    <Content Include="Content\dashboard\images\GHG reduced.png" />
+    <Content Include="Content\dashboard\images\icon.png" />
+    <Content Include="Content\dashboard\images\Installationcapacity.png" />
+    <Content Include="Content\dashboard\images\login-bg.jpg" />
+    <Content Include="Content\dashboard\images\logo-compact.png" />
+    <Content Include="Content\dashboard\images\logo-text.png" />
+    <Content Include="Content\dashboard\images\logo.png" />
+    <Content Include="Content\dashboard\images\pci-color-logo.png" />
+    <Content Include="Content\dashboard\images\pci-logo.png" />
+    <Content Include="Content\dashboard\images\UserLogo.jpg" />
+    <Content Include="Content\dashboard\js\custom.min.js" />
+    <Content Include="Content\dashboard\js\dashboard\dashboard-1.js" />
+    <Content Include="Content\dashboard\js\dashboard\dashboard-2.html" />
+    <Content Include="Content\dashboard\js\gleek.js" />
+    <Content Include="Content\dashboard\js\plugins-init\chartist.init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\chartjs-init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\form-pickers-init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\fullcalendar-init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\jquery-steps-init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\morris-init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\nouislider-init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\peitychart.init.js" />
+    <Content Include="Content\dashboard\js\plugins-init\sparkline.init.js" />
+    <Content Include="Content\dashboard\js\settings.js" />
+    <Content Include="Content\dashboard\js\styleSwitcher.js" />
+    <Content Include="Content\dashboard\plugins\animate\animate.min.css" />
+    <Content Include="Content\dashboard\plugins\bootstrap-datepicker\bootstrap-datepicker.min.css" />
+    <Content Include="Content\dashboard\plugins\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Content\dashboard\plugins\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="Content\dashboard\plugins\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Content\dashboard\plugins\bootstrap-material-datetimepicker\css\bootstrap-material-datetimepicker.css" />
+    <Content Include="Content\dashboard\plugins\bootstrap-material-datetimepicker\js\bootstrap-material-datetimepicker.js" />
+    <Content Include="Content\dashboard\plugins\bootstrap-select\dist\css\bootstrap-select.min.css" />
+    <Content Include="Content\dashboard\plugins\chart.js\Chart.bundle.min.js" />
+    <Content Include="Content\dashboard\plugins\chartist-plugin-tooltips\css\chartist-plugin-tooltip.css" />
+    <Content Include="Content\dashboard\plugins\chartist-plugin-tooltips\js\chartist-plugin-tooltip.min.js" />
+    <Content Include="Content\dashboard\plugins\chartist\css\chartist.min.css" />
+    <Content Include="Content\dashboard\plugins\chartist\js\chartist.min.js" />
+    <Content Include="Content\dashboard\plugins\circle-progress\circle-progress.min.js" />
+    <Content Include="Content\dashboard\plugins\clockpicker\dist\jquery-clockpicker.min.css" />
+    <Content Include="Content\dashboard\plugins\clockpicker\dist\jquery-clockpicker.min.js" />
+    <Content Include="Content\dashboard\plugins\common\common.min.js" />
+    <Content Include="Content\dashboard\plugins\d3v3\index.js" />
+    <Content Include="Content\dashboard\plugins\datamaps\datamaps.world.min.js" />
+    <Content Include="Content\dashboard\plugins\flot\js\jquery.flot.init.js" />
+    <Content Include="Content\dashboard\plugins\flot\js\jquery.flot.min.js" />
+    <Content Include="Content\dashboard\plugins\flot\js\jquery.flot.pie.js" />
+    <Content Include="Content\dashboard\plugins\flot\js\jquery.flot.resize.js" />
+    <Content Include="Content\dashboard\plugins\flot\js\jquery.flot.spline.js" />
+    <Content Include="Content\dashboard\plugins\fullcalendar\css\fullcalendar.min.css" />
+    <Content Include="Content\dashboard\plugins\fullcalendar\js\fullcalendar.min.js" />
+    <Content Include="Content\dashboard\plugins\highlightjs\highlight.pack.min.js" />
+    <Content Include="Content\dashboard\plugins\highlightjs\styles\darcula.css" />
+    <Content Include="Content\dashboard\plugins\highlightjs\styles\darkula.css" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\css\asColorPicker.css" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\dist\jquery-asColorPicker.min.js" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\images\alpha.png" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\images\hue.png" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\images\saturation.png" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\images\transparent.png" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\libs\jquery-asColor.js" />
+    <Content Include="Content\dashboard\plugins\jquery-asColorPicker-master\libs\jquery-asGradient.js" />
+    <Content Include="Content\dashboard\plugins\jquery-sparkline\jquery.sparkline.min.js" />
+    <Content Include="Content\dashboard\plugins\jquery-steps\build\jquery.steps.min.js" />
+    <Content Include="Content\dashboard\plugins\jquery-steps\css\jquery.steps.css" />
+    <Content Include="Content\dashboard\plugins\jquery-validation\jquery.validate.min.js" />
+    <Content Include="Content\dashboard\plugins\jqueryui\js\jquery-ui.min.js" />
+    <Content Include="Content\dashboard\plugins\metismenu\css\metisMenu.min.css" />
+    <Content Include="Content\dashboard\plugins\moment\moment.js" />
+    <Content Include="Content\dashboard\plugins\moment\moment.min.js" />
+    <Content Include="Content\dashboard\plugins\morris\morris.min.js" />
+    <Content Include="Content\dashboard\plugins\nestable\css\nestable.css" />
+    <Content Include="Content\dashboard\plugins\nestable\js\jquery.nestable.js" />
+    <Content Include="Content\dashboard\plugins\nestable\js\nestable.init.js" />
+    <Content Include="Content\dashboard\plugins\nouislider\nouislider.min.css" />
+    <Content Include="Content\dashboard\plugins\nouislider\nouislider.min.js" />
+    <Content Include="Content\dashboard\plugins\peity\jquery.peity.min.js" />
+    <Content Include="Content\dashboard\plugins\pg-calendar\css\pignose.calendar.min.css" />
+    <Content Include="Content\dashboard\plugins\pg-calendar\fonts\pignose.calendarab26.svg" />
+    <Content Include="Content\dashboard\plugins\pg-calendar\js\pignose.calendar.min.js" />
+    <Content Include="Content\dashboard\plugins\raphael\raphael.min.js" />
+    <Content Include="Content\dashboard\plugins\summernote\dist\summernote-init.js" />
+    <Content Include="Content\dashboard\plugins\summernote\dist\summernote.css" />
+    <Content Include="Content\dashboard\plugins\summernote\dist\summernote.min.js" />
+    <Content Include="Content\dashboard\plugins\sweetalert\css\sweetalert.css" />
+    <Content Include="Content\dashboard\plugins\sweetalert\js\sweetalert.init.js" />
+    <Content Include="Content\dashboard\plugins\sweetalert\js\sweetalert.min.js" />
+    <Content Include="Content\dashboard\plugins\tables\css\datatable\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\dashboard\plugins\tables\js\datatable-init\datatable-basic.min.js" />
+    <Content Include="Content\dashboard\plugins\tables\js\datatable\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\dashboard\plugins\tables\js\jquery.dataTables.min.js" />
+    <Content Include="Content\dashboard\plugins\timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="Content\dashboard\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Content\dashboard\plugins\toastr\css\toastr.min.css" />
+    <Content Include="Content\dashboard\plugins\toastr\js\toastr.init.js" />
+    <Content Include="Content\dashboard\plugins\toastr\js\toastr.min.js" />
+    <Content Include="Content\dashboard\plugins\topojson\topojson.min.js" />
+    <Content Include="Content\dashboard\plugins\validation\jquery.validate-init.js" />
+    <Content Include="Content\dashboard\plugins\validation\jquery.validate.min.js" />
+    <Content Include="Content\dashboard\plugins\wnumb\wNumb.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Employee.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Employee.edmx</DependentUpon>
+      <LastGenOutput>Employee.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Employee.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Employee.edmx</DependentUpon>
+      <LastGenOutput>Employee.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -502,6 +990,81 @@
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.ttf" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.woff" />
+
+    <EntityDeploy Include="Models\Employee.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Employee.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Employee.edmx.diagram">
+      <DependentUpon>Employee.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.ttf" />
+    <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.woff" />
+    <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.woff2" />
+    <Content Include="Content\dashboard\icons\font-awesome\fonts\fontawesome-webfont3e6e3e6e.eot" />
+    <Content Include="Content\dashboard\icons\font-awesome\fonts\fontawesome-webfont3e6e3e6e.ttf" />
+    <Content Include="Content\dashboard\icons\font-awesome\fonts\fontawesome-webfont3e6e3e6e.woff" />
+    <Content Include="Content\dashboard\icons\font-awesome\fonts\fontawesome-webfont3e6e3e6e.woff2" />
+    <Content Include="Content\dashboard\icons\font-awesome\fonts\fontawesome-webfontd41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\ionicons\fonts\ionicons28b5.eot" />
+    <Content Include="Content\dashboard\icons\ionicons\fonts\ionicons28b5.ttf" />
+    <Content Include="Content\dashboard\icons\ionicons\fonts\ionicons28b5.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-arrows-10.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-arrows-10.ttf" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-arrows-10.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-arrows-10d41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-10.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-10.ttf" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-10.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-10d41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-elaboration-10.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-elaboration-10.ttf" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-elaboration-10.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-basic-elaboration-10d41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-ecommerce-10.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-ecommerce-10.ttf" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-ecommerce-10.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-ecommerce-10d41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-music-10.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-music-10.ttf" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-music-10.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-music-10d41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-software-10.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-software-10.ttf" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-software-10.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-software-10d41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-weather-10.eot" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-weather-10.ttf" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-weather-10.woff" />
+    <Content Include="Content\dashboard\icons\linea-icons\fonts\linea-weather-10d41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\material-design-iconic-font\fonts\materialdesignicons-webfont683c.eot" />
+    <Content Include="Content\dashboard\icons\material-design-iconic-font\fonts\materialdesignicons-webfont683c.ttf" />
+    <Content Include="Content\dashboard\icons\material-design-iconic-font\fonts\materialdesignicons-webfont683c.woff" />
+    <Content Include="Content\dashboard\icons\material-design-iconic-font\fonts\materialdesignicons-webfont683c.woff2" />
+    <Content Include="Content\dashboard\icons\material-design-iconic-font\fonts\materialdesignicons-webfontd41d.eot" />
+    <Content Include="Content\dashboard\icons\pe-icon-set-weather\fonts\pe-icon-set-weathere60d.eot" />
+    <Content Include="Content\dashboard\icons\pe-icon-set-weather\fonts\pe-icon-set-weathere60d.ttf" />
+    <Content Include="Content\dashboard\icons\pe-icon-set-weather\fonts\pe-icon-set-weathere60d.woff" />
+    <Content Include="Content\dashboard\icons\simple-line-icons\fonts\Simple-Line-Icons4c824c82.eot" />
+    <Content Include="Content\dashboard\icons\simple-line-icons\fonts\Simple-Line-Icons4c824c82.ttf" />
+    <Content Include="Content\dashboard\icons\simple-line-icons\fonts\Simple-Line-Icons4c824c82.woff" />
+    <Content Include="Content\dashboard\icons\simple-line-icons\fonts\Simple-Line-Icons4c824c82.woff2" />
+    <Content Include="Content\dashboard\icons\simple-line-icons\fonts\Simple-Line-Iconsd41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\themify-icons\fonts\themify.ttf" />
+    <Content Include="Content\dashboard\icons\themify-icons\fonts\themify.woff" />
+    <Content Include="Content\dashboard\icons\themify-icons\fonts\themify9f249f24.eot" />
+    <Content Include="Content\dashboard\icons\themify-icons\fonts\themifyd41dd41d.eot" />
+    <Content Include="Content\dashboard\icons\weather-icons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="Content\dashboard\icons\weather-icons\fonts\weathericons-regular-webfontd41d.eot" />
+    <Content Include="Content\dashboard\images\enterprises solarized.webp" />
+    <Content Include="Content\dashboard\plugins\pg-calendar\fonts\pignose.calendarab26.eot" />
+    <Content Include="Content\dashboard\plugins\pg-calendar\fonts\pignose.calendarab26.ttf" />
+    <Content Include="Content\dashboard\plugins\pg-calendar\fonts\pignose.calendarab26.woff" />
+    <Content Include="Content\dashboard\plugins\summernote\dist\font\summernoted41dd41d.eot" />
+    <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.eot" />
+    <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.ttf" />
+    <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.woff" />
+
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -513,7 +1076,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -547,12 +1112,25 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+
+    <Content Include="Views\Employee\EmpReg.cshtml" />
+    <Content Include="Views\Employee\GetHiredList.cshtml" />
+    <Content Include="Views\Employee\_NewHiredData.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\JD\JDForm.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\dashboard\images\avatar\" />
+    <Folder Include="Content\dashboard\images\big\" />
+    <Folder Include="Content\dashboard\images\users\" />
+    <Folder Include="Content\dashboard\images\user\" />
+    <Folder Include="Images\NewHired_Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -580,6 +1158,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

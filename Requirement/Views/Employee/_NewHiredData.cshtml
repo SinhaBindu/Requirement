@@ -1,0 +1,70 @@
+﻿@model DataTable
+@using System.Data
+
+<table class="table table-bordered table-hover dt-responsive display tbl" id="tbl" width="100%">
+    <thead>
+        <tr>
+            <th>HiredDate</th>
+            <th>Hiring Type</th>
+            <th>Position Name</th>
+            <th>Project Name</th>
+            <th>Location</th>
+            <th>Applicable Type</th>
+            <th>No of Positions</th>
+            <th>Job Location Type</th>
+            <th>Reporting Manager</th>
+            <th>F Date</th>
+            <th>T Date</th>
+            <th>Cost Centre Code</th>
+            <th>Base Salary Range Per month</th>
+            <th>Grade Type</th>
+            <th>JD Availability</th>
+            <th>Advertisement</th>
+            <th>Empaneled Head</th>
+            <th>Interview Panel</th>
+            <th>Selection Process Type</th>
+            <th>Laptop with Specifications</th>
+            <th>Any specific software with license</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model.Rows.Count > 0)
+            {
+                foreach (DataRow row in Model.Rows)
+                {
+                    <tr>
+                        <td>@row["HiredDate"]</td>
+                        <td>@row["HiringType"]</td>
+                        <td>@row["PositionName"]</td>
+                        <td>@row["ProjectName"]</td>
+                        <td>@row["ApplicableType"]</td>
+                        <td>@row["NoofPositions_Id"]</td>
+                        <td>@row["JobLocationType"]</td>
+                        <td>@row["ReportingManager"]</td>
+                        <td>@row["FDate"]</td>
+                        <td>@row["TDate"]</td>
+                        <td>@row["CostCentreCode_Id"]</td>
+                        <td>@row["BaseSalRangePermonth_Id"]</td>
+                        <td>@row["GradeType"]</td>
+                        <td>@row["JD_Availability_Id"]</td>
+                        <td>@row["Advertisement_Id"]</td>
+                        <td>@row["EmpaneledHead_Id"]</td>
+                        <td>@row["InterviewPanel"]</td>
+                        <td>@row["SelectionProcessType"]</td>
+                        <td>@row["LaptopwithSpecifications_Id"]</td>
+                        <td>@row["Anyspecificsoftwarewithlicense"]</td>
+                        
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="11" class="text-center">No data available</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
