@@ -69,6 +69,10 @@ namespace Requirement.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -81,34 +85,32 @@ namespace Requirement.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public int Id_pk { get; set; }
-        //[Required]
+        [Required]
         [Display(Name = "Emp Code")]
-        public int Emp_Code { get; set; }
-        //[Required]
+        public string Emp_Code { get; set; }
+        [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
-        //[Required]
+        [Required]
         [Display(Name = "Designation")]
-        public string Designation { get; set; }
-        //[Required]
-        [Display(Name = "Location")]
-        public string Location { get; set; }
-        //[Required]
+        public int Designation { get; set; }
+        [Display(Name = "Designation (Other)")]
+        public string OtherDesignation { get; set; }
+        [Required]
+        [Display(Name = "State")]
+        public int Location { get; set; }
+        [Required]
         [Display(Name = "Role")]
-        public int Role { get; set; }
-        //[Required]
+        public int RoleId { get; set; }
+        [Required]
         [Display(Name = "Username")]
         public string Username { get; set; }
-
-        public System.Guid EmpID_pk { get; set; }
-        public string UserID_fk { get; set; }
-        public string RoleID_fk { get; set; }
-
-
+        public Guid EmpId { get; set; }
+        public string UserId { get; set; }
+        [Display(Name = "Role")]
+        public string RoleName { get; set; }
 
 
-        //[Required]
         [Display(Name = "Is Active")]
         public bool IsActive { get; set; }
 

@@ -37,62 +37,62 @@ namespace Requirement.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Registration(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var tbLu = db.AspNetUsers.Find(model.Id_pk);
-                if (tbLu == null)
-                {
-                    ModelState.AddModelError("", "User  not found.");
-                    return View(model);
-                }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Registration(RegisterViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var tbLu = db.AspNetUsers.Find(model.Id_pk);
+        //        if (tbLu == null)
+        //        {
+        //            ModelState.AddModelError("", "User  not found.");
+        //            return View(model);
+        //        }
 
-                // Find the employee registration in Tbl_EmpReg table
-                var tbLe = db.Tbl_EmpReg.Find(model.EmpID_pk);
-                if (tbLe == null)
-                {
-                    ModelState.AddModelError("", "Employee registration not found.");
-                    return View(model);
-                }
-                tbLu.Email = model.Email;
-                tbLu.UserName = model.Username;
-                tbLu.CreatedBy = model.CreatedBy;
-                tbLu.Emp_ID = model.EmpID_pk;
-                tbLu.CreatedOn = DateTime.Now;
-                tbLu.IsActive = true;
+        //        // Find the employee registration in Tbl_EmpReg table
+        //        var tbLe = db.Tbl_EmpReg.Find(model.EmpID_pk);
+        //        if (tbLe == null)
+        //        {
+        //            ModelState.AddModelError("", "Employee registration not found.");
+        //            return View(model);
+        //        }
+        //        tbLu.Email = model.Email;
+        //        tbLu.UserName = model.Username;
+        //        tbLu.CreatedBy = model.CreatedBy;
+        //        tbLu.Emp_ID = model.EmpID_pk;
+        //        tbLu.CreatedOn = DateTime.Now;
+        //        tbLu.IsActive = true;
 
-                tbLe.EmpID_pk = Guid.NewGuid();
-                //tbLe.UserID_fk = User.Id;
-                //tbLe.RoleID_fk = model.RoleID_fk;
-                tbLe.Emp_Code = model.Emp_Code;
-                tbLe.Name = model.Name;
-                tbLe.Designation = model.Designation;
-                tbLe.Location = model.Location;
-                tbLe.Role = model.Role;
-                tbLe.Username = model.Username;
-                tbLe.Password = model.Password;
-                tbLe.IsActive = true;
-                tbLe.CreatedOn = DateTime.Now;
+        //        tbLe.EmpID_pk = Guid.NewGuid();
+        //        //tbLe.UserID_fk = User.Id;
+        //        //tbLe.RoleID_fk = model.RoleID_fk;
+        //        tbLe.Emp_Code = model.Emp_Code;
+        //        tbLe.Name = model.Name;
+        //        tbLe.Designation = model.Designation;
+        //        tbLe.Location = model.Location;
+        //        tbLe.Role = model.Role;
+        //        tbLe.Username = model.Username;
+        //        tbLe.Password = model.Password;
+        //        tbLe.IsActive = true;
+        //        tbLe.CreatedOn = DateTime.Now;
 
-                // Save changes to both tables
-                int res = await db.SaveChangesAsync();
-                if (res > 0)
-                {
-                    return Json(new { success = true, message = "Registration successful!" });
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Error saving data.");
-                }
-            }
+        //        // Save changes to both tables
+        //        int res = await db.SaveChangesAsync();
+        //        if (res > 0)
+        //        {
+        //            return Json(new { success = true, message = "Registration successful!" });
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "Error saving data.");
+        //        }
+        //    }
 
  
-            return Json(new { success = false, message = "Validation failed." });
-        }
+        //    return Json(new { success = false, message = "Validation failed." });
+        //}
         private string ConvertViewToString(string viewName, object model)
         {
             ViewData.Model = model;

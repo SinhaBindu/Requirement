@@ -8,7 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Requirement.Manager;
 using Requirement.Models;
+using static Requirement.Manager.Enums;
 
 namespace Requirement.Controllers
 {
@@ -145,18 +147,47 @@ namespace Requirement.Controllers
 
         //
         // POST: /Account/Register
+        //
+        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, PhoneNumber = model.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var uporg = dbe.AspNetUsers.Find(user.Id);
+                    if (uporg != null)
+                    {
+                        //Role mapping code likhiye shivam
+                        var result1 = UserManager.AddToRole(user.Id, model.RoleName);
+
+                        //uporg.Name = model.Name;
+                        //uporg. = model.Location;
+                        //uporg.IDOrganization = model.IDOrganization;
+                        //uporg.CreatedBy = user.UserName;
+                        //uporg.CreatedOn = DateTime.Now;
+                        //dbe.SaveChanges();
+
+                        ////if (model.Location.Count() > 0)
+                        ////{
+                        ////    for (int i = 0; i < model.Location.Count(); i++)
+                        ////    {
+                        //var tbl = new AspNetUsers_Location();
+                        //tbl.ID = Guid.NewGuid();
+                        //tbl.UserId = Guid.Parse(user.Id);
+                        //tbl.LocationId = model.LocationID;
+                        //dbe.AspNetUsers_Location.Add(tbl);
+                        //dbe.SaveChanges();
+                        // }
+                        // }
+                    }
+                    // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -165,6 +196,7 @@ namespace Requirement.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("UserDetaillist", "Master");
                 }
                 AddErrors(result);
             }
@@ -172,6 +204,100 @@ namespace Requirement.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+      
+
+        ////
+        //// POST: /Account/Register
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        ////public async Task<ActionResult> EditUser(UserEditViewModel model)
+        //public ActionResult EditUser(UserEditViewModel model)
+        //{
+        //    IPELEntities dbe = new IPELEntities();
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = dbe.AspNetUsers.Find(model.Id);
+        //        if (user != null)
+        //        {
+        //            if (!dbe.AspNetUsers.Any(x => x.Email == model.Email && x.Id != model.Id))
+        //            {
+        //                user.UserName = user.Email = model.Email;
+        //                user.PhoneNumber = model.PhoneNumber;
+        //                user.Name = model.Name;
+        //                user.LocationID = model.LocationID;
+        //                user.IDOrganization = model.IDOrganization;
+
+        //                // dbe.Entry(user).Property("ID").IsModified = false;
+        //                //dbe.Entry(user).State = System.Data.Entity.EntityState.Modified;
+
+
+        //                //dbe.AspNetUsers.Add(user);
+        //                //var res = dbe.SaveChanges();
+        //                //if (res > 0)
+        //                //{
+        //                var userRoles = UserManager.GetRoles(model.Id);
+        //                foreach (var item in userRoles)
+        //                {
+        //                    if (model.Role != item)
+        //                    {
+        //                        UserManager.RemoveFromRoles(model.Id, item);
+        //                        UserManager.AddToRole(model.Id, model.Role);
+        //                    }
+        //                }
+
+        //                var userLocations = dbe.AspNetUsers_Location.Where(x => x.UserId.ToString() == model.Id);
+        //                foreach (var item in userLocations)
+        //                {
+        //                    if (item.LocationId != model.LocationID)
+        //                    {
+        //                        dbe.AspNetUsers_Location.Remove(item);
+        //                        var tbl = new AspNetUsers_Location
+        //                        {
+        //                            ID = Guid.NewGuid(),
+        //                            UserId = Guid.Parse(model.Id),
+        //                            LocationId = model.LocationID
+        //                        };
+        //                        dbe.AspNetUsers_Location.Add(tbl);
+
+        //                    }
+        //                }
+        //                dbe.SaveChanges();
+        //                GlobalUtilityManager.MessageToaster(this, "Edit User", Enums.GetEnumDescription(Enums.eReturnReg.Update), eAlertType.success.ToString());
+        //                return RedirectToAction("UserDetaillist", "Master");
+        //                //}
+        //                //else
+        //                //{
+        //                //    ModelState.AddModelError("UserNotFound", "User Not Found");
+        //                //}
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError("DuplicateEmail", "Email already exists!");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("UserNotFound", "User Not Found");
+        //        }
+        //    }
+        //    return View(model);
+        //}
+        public ActionResult Register_Lock(RegisterViewModel model)
+        {
+            var lockoutEndDate = DateTime.Now.Date;
+            UserManager.SetLockoutEndDate(model.UserId, DateTimeOffset.Now.Date);
+            UserManager.SetLockoutEnabled(model.UserId, false);
+            return RedirectToLocal("~/Master/UserDetaillist");
+        }
+        public ActionResult Register_Enable(RegisterViewModel model)
+        {
+            var lockoutEndDate = DateTime.Now.Date;
+            UserManager.SetLockoutEndDate(model.UserId, DateTimeOffset.Now.Date);
+            UserManager.SetLockoutEnabled(model.UserId, true);
+            return RedirectToLocal("~/Master/UserDetaillist");
+        }
+
 
         //
         // GET: /Account/ConfirmEmail

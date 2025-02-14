@@ -1109,7 +1109,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Register_old.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -1128,9 +1128,9 @@
     <Content Include="Views\Employee\EmpReg.cshtml" />
     <Content Include="Views\Employee\HiredList.cshtml" />
     <Content Include="Views\Employee\_NewHiredData.cshtml" />
-    <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\JD\JDForm.cshtml" />
     <Content Include="Views\Employee\MultipleHireF.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
