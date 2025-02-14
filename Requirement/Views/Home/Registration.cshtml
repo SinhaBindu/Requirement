@@ -1,4 +1,4 @@
-﻿@model Requirement.Models.EmpReg_Model
+﻿@model Requirement.Models.RegisterViewModel
 @using Requirement.Manager
 @{
     ViewBag.Title = "Registration";
@@ -24,63 +24,63 @@
                     @using (Html.BeginForm("Registration", "Home", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
                     {
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="flex-form">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Emp_Code, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.Emp_Code, CommonModel.GetALLEmp(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Emp_Code, "", new { @class = "text-danger" })
+                        <div class="flex-form">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Emp_Code, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.Emp_Code, CommonModel.GetALLEmp(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Emp_Code, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.Designation, CommonModel.GetALLDesignation(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.Location, CommonModel.GetALLLocation(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.Role, CommonModel.GetALLRoles(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-row pt-1">
+                                <div class="form-group col-md-6 ">
+                                    <button type="submit" class="btn btn-primary">Register Here</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.Designation, CommonModel.GetALLDesignation(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.Location, CommonModel.GetALLLocation(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.Role, CommonModel.GetALLRoles(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-row pt-1">
-                            <div class="form-group col-md-6 ">
-                                <button type="submit" class="btn btn-primary">Register Here</button>
-                            </div>
-                        </div>
-                    </div>
                     }
                 </div>
             </div>
@@ -90,29 +90,30 @@
 
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
             $("#formid").on("submit", function (event) {
                 event.preventDefault();
-
                 var formData = new FormData(this);
                 if (confirm('Are you sure you want to submit the form?')) {
                     $.ajax({
                         type: "POST",
-                        url: "@Url.Action("Registration", "Home")",
+                        url: document.baseURI + "/Home/Registration/",
                         data: formData,
                         processData: false,
                         contentType: false,
                         success: function (resp) {
                             if (resp.success) {
-                                toastr.success(resp.message);
+                                toastr.success("Success", resp.message);
                                 $("#formid")[0].reset();
                             } else {
-                                toastr.error(resp.message);
+                                toastr.error("Error", resp.message);
                             }
                         },
-                        error: function (req) {
-                            toastr.error("Error", "There was a communication error: " + req.statusText);
+                        error: function (req, error) {
+                            var errorMsg = req.statusText ? req.statusText : error;
+                            toastr.error("Error", `There was a communication error: ${errorMsg}`);
                         }
                     });
                 }

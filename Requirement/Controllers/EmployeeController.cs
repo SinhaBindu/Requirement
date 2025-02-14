@@ -48,7 +48,9 @@ namespace Requirement.Controllers
                     JD_Availability_Id = model.JD_Availability_Id,
                     Advertisement_Id = model.Advertisement_Id,
                     EmpaneledHead_Id = model.EmpaneledHead_Id,
+                    TypeOfInterview = model.TypeOfInterview,
                     InterviewPanel = model.InterviewPanel,
+                    InterviewPanel2 = model.InterviewPanel2,
                     SelectionProcess_Id = model.SelectionProcess_Id,
                     LaptopwithSpecifications_Id = model.LaptopwithSpecifications_Id,
                     Anyspecificsoftwarewithlicense = model.Anyspecificsoftwarewithlicense,
@@ -89,6 +91,11 @@ namespace Requirement.Controllers
             }
         }
 
+        public ActionResult HiredList()
+        {
+            return View();
+        }
+
         public ActionResult GetHiredList()
         {
             DataTable tbllist = SPManager.Get_USP_GetHiredList();
@@ -108,6 +115,11 @@ namespace Requirement.Controllers
             {
                 return Json(new { IsSuccess = false, Data = "An error occurred: " + ex.Message }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult MultipleHireF()
+        {
+            return View();
         }
 
         private string ConvertViewToString(string viewName, object model)

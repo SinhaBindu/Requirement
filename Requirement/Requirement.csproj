@@ -197,6 +197,9 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -213,10 +216,12 @@
       <DependentUpon>Employee.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeModel.cs" />
-    <Compile Include="Models\EmpReg Model.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JD Model.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\mst_Advertisement.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mst_Applicable.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
@@ -259,9 +264,13 @@
     <Compile Include="Models\mst_State.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\mst_TypeofInterview.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mst_TypeYesNo.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Multiple Model.cs" />
     <Compile Include="Models\Tbl_EmpReg.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
@@ -269,6 +278,9 @@
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_NewHire.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_NewHireMultiple.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Signature.cs">
@@ -990,7 +1002,6 @@
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.ttf" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.woff" />
-
     <EntityDeploy Include="Models\Employee.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Employee.Designer.cs</LastGenOutput>
@@ -1064,7 +1075,6 @@
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.eot" />
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.ttf" />
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.woff" />
-
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1112,17 +1122,15 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-
     <Content Include="Views\Employee\EmpReg.cshtml" />
-    <Content Include="Views\Employee\GetHiredList.cshtml" />
+    <Content Include="Views\Employee\HiredList.cshtml" />
     <Content Include="Views\Employee\_NewHiredData.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\JD\JDForm.cshtml" />
-
+    <Content Include="Views\Employee\MultipleHireF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

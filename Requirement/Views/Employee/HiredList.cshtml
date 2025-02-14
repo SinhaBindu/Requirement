@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div id="participantTableContainer">
+            <div id="subdata">
                 <!-- The participant table will be injected here -->
             </div>
         </div>
@@ -22,30 +22,35 @@
 </div>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
+            LoadData();
+        });
+        function LoadData() {
             $.ajax({
-                type: "GET",
+                type: "get",
                 url: document.baseURI + "/Employee/GetHiredList/",
-                dataType: 'json',
+                //   dataType: 'json',
                 success: function (resp) {
+                    debugger;
                     if (resp.IsSuccess) {
-                        $('#participantTableContainer').html(resp.Data);
+                        debugger;
+                        $('#subdata').html(resp.Data);
                         toastr.success("Success", "Data loaded successfully.");
 
                         // Initialize DataTable after loading the HTML
-                        $('#tbl').DataTable(); // Ensure you have included DataTables library
+                     //   $('#tbl').DataTable(); // Ensure you have included DataTables library
                     } else {
                         toastr.error("Error", resp.Data);
                     }
                 },
                 error: function (req, error) {
+                    debugger;
                     var errormsg = 'There was a communication error: ' + (error === 'error' ? req.statusText : error);
                     toastr.error("Error", errormsg);
                 }
             });
-        });
+        }
     </script>
 }

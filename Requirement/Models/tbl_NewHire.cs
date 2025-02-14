@@ -47,5 +47,7 @@ namespace Requirement.Models
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> IsDeletedOn { get; set; }
         public Nullable<int> OrderBy { get; set; }
+        public Nullable<int> TypeOfInterview { get; set; }
+        public string InterviewPanel2 { get; set; }
     }
 }

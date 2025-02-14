@@ -1,7 +1,10 @@
 ﻿using Requirement.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +13,127 @@ namespace Requirement.Manager
     public class CommonModel
     {
         private static Recruitment_DBEntities _db = new Recruitment_DBEntities();
+
+        #region BaseUrl
+        //public static string GetLocalIPAddress()
+        //{
+        //    var host = Dns.GetHostEntry(Dns.GetHostName());
+        //    foreach (var ip in host.AddressList)
+        //    {
+        //        if (ip.AddressFamily == AddressFamily.InterNetwork)
+        //        {
+        //            return ip.ToString();
+        //        }
+        //    }
+        //    // throw new Exception("No network adapters with an IPv4 address in the system!");
+        //    return "Error";
+        //}
+        //public static string GetPublicIPAddress()
+        //{
+        //    using (HttpClient client = new HttpClient())
+        //    {
+        //        string publicIPAddress = client.GetStringAsync("https://api.ipify.org").Result;
+        //        return publicIPAddress;
+        //    }
+        //}
+
+        public static string GetBaseUrl()
+        {
+            var str = HttpContext.Current.Request.Url.Host;
+            //return str;
+            UrlHelper urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+
+            string host = HttpContext.Current.Request.Url.Host;
+            if (host == "localhost")
+            {
+                host = HttpContext.Current.Request.Url.Authority;
+                return HttpContext.Current.Request.Url.Scheme + "://" + host;
+            }
+            //return urlHelper.Content("~/");
+            return HttpContext.Current.Request.Url.Scheme + "://" + str;
+        }
+        public static string GetWebUrl()
+        {
+            return ConfigurationManager.AppSettings["WebUrl"];
+        }
+        public static bool ValidateImageSizeMemory(MemoryStream ms)
+        {
+            const int maxSizeInBytes = 1 * 1024 * 1024; // 1 MB in bytes
+
+            // Check if the stream size is less than or equal to 1 MB
+            if (ms.Length <= maxSizeInBytes)
+            {
+                return true; // Valid size
+            }
+
+            return false; // Invalid size
+        }
+        public static bool ValidateImageSize(HttpPostedFileBase image)
+        {
+            const int maxSizeInBytes = 1 * 1024 * 1024; // 1 MB in bytes
+
+            // Check if the stream size is less than or equal to 1 MB
+            if (image.ContentLength <= maxSizeInBytes)
+            {
+                return true; // Valid size
+            }
+
+            return false; // Invalid size
+        }
+
+        public static bool IsEmailConfiguredToLive()
+        {
+            var isLive = Convert.ToBoolean(ConfigurationManager.AppSettings["IsEmailSetLive"].ToString());
+            return isLive;
+        }
+        public static string GetLocalEmailAddress()
+        {
+            var emailAddr = ConfigurationManager.AppSettings["LocalEmailAddress"].ToString();
+            return emailAddr;
+        }
+
+        public static string GetFileUrl(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath))
+                return CommonModel.GetBaseUrl() + filePath.ToString().Replace("~", "");
+            else
+                return string.Empty;
+        }
+
+        public static string GetMultipleFileUrlFromComma(string filePaths)
+        {
+            //string filePath = string.Empty;
+            //var filePathArray = filePaths.Split(',');
+            List<string> filePathList = new List<string>();
+            foreach (var path in filePaths.Split(','))
+            {
+                if (!string.IsNullOrEmpty(path))
+                {
+                    //return CommonModel.GetBaseUrl() + path.ToString().Replace("~", "");
+                    filePathList.Add(CommonModel.GetBaseUrl() + path.Trim().ToString().Replace("~", ""));
+                }
+                //else
+                //    return string.Empty;
+            }
+            //filePathList=.Join(',');
+            return string.Join(",", filePathList);
+        }
+
+        public static string GetHeaderUSLogo(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath))
+                return filePath.ToString().Replace("src=\"..//Content/images/USAID_Template.png\"", "src=\"" + CommonModel.GetWebUrl() + "/Content/images/USAID_Template.png\"");
+            else
+                return string.Empty;
+        }
+        public static string GetHeaderCareLogo(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath))
+                return filePath.ToString().Replace("src=\"..//Content/images/Care_Template.png\"", "src=\"" + CommonModel.GetWebUrl() + "/Content/images/Care_Template.png\"");
+            else
+                return string.Empty;
+        }
+        #endregion
 
         public static List<SelectListItem> GetALLHyringM(int IsSelect = 0)
         {
@@ -108,6 +232,22 @@ namespace Requirement.Manager
 
             return list;
         }
+        public static List<SelectListItem> GetALLIT(int IsSelect = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list = _db.mst_TypeofInterview.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.InterviewId.ToString(), Text = x.InterviewType }).ToList();
+            if (IsSelect == 0)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
 
         public static List<SelectListItem> GetALLBSM(int IsSelect = 0)
         {
@@ -141,14 +281,46 @@ namespace Requirement.Manager
 
             return list;
         }
-        public static List<SelectListItem> GetALLYesNoM(int IsSelect = 0)
+        public static List<SelectListItem> GetALLYesNoMId(int IsSelect = 0)
         {
             Recruitment_DBEntities _db = new Recruitment_DBEntities();
             List<SelectListItem> list = new List<SelectListItem>();
             list = _db.mst_TypeYesNo.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Type }).ToList();
             if (IsSelect == 0)
             {
-                list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+                //list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
+        public static List<SelectListItem> GetALLYesNoM(int IsSelect = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list = _db.mst_TypeYesNo.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.Type.ToString(), Text = x.Type }).ToList();
+            if (IsSelect == 0)
+            {
+                //list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
+        public static List<SelectListItem> GetALLAdvertisement(int IsSelect = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list = _db.mst_Advertisement.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.AdvertisementId.ToString(), Text = x.AdvertisementType}).ToList();
+            if (IsSelect == 0)
+            {
+                //list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
             }
             else if (IsSelect == 1)
             {

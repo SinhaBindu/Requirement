@@ -23,195 +23,221 @@
                 @using (Html.BeginForm("EmpReg", "Employee", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="flex-form">
+                <div class="flex-form">
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.HiringType_Id, htmlAttributes: new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                        <div class="col-md-10s">
+                            @Html.DropDownListFor(model => model.HiringType_Id, CommonModel.GetALLHyringM(), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.HiringType_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.HiringType_Id, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Location, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.TypeofApplicable_Id, htmlAttributes: new { @class = "control-label" })
                             <span style="color:red;">*</span>
                             <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.HiringType_Id, CommonModel.GetALLHyringM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.HiringType_Id, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.Location, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.TypeofApplicable_Id, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                <div class="col-md-10s">
-                                    @Html.DropDownListFor(model => model.TypeofApplicable_Id, CommonModel.GetALLApplicableM(), null, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.TypeofApplicable_Id, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.NoofPositions_Id, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.NoofPositions_Id, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.NoofPositions_Id, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.jobLocationType_Id, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                <div class="col-md-10s">
-                                    @Html.DropDownListFor(model => model.jobLocationType_Id, CommonModel.GetALLJobLocationM(), null, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.jobLocationType_Id, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.ReportingManager, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.ReportingManager, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ReportingManager, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.Durationoftheposition_Fdate, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.Durationoftheposition_Fdate, new { @class = "datepicker form-control", id = "FD", name = "FD", autocomplete = "off" })
-                                @Html.ValidationMessageFor(model => model.Durationoftheposition_Fdate, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.Durationoftheposition_Tdate, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.Durationoftheposition_Tdate, new { @class = "datepicker form-control", id = "TD", name = "TD", autocomplete = "off" })
-                                @Html.ValidationMessageFor(model => model.Durationoftheposition_Tdate, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.CostCentreCode_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.CostCentreCode_Id, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.CostCentreCode_Id, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.BaseSalRangepermonth_Id, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.BaseSalRangepermonth_Id, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.BaseSalRangepermonth_Id, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.Grade_Id, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                <div class="col-md-10s">
-                                    @Html.DropDownListFor(model => model.Grade_Id, CommonModel.GetALLGradeM(), null, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Grade_Id, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6" id="div_JD_Availability_Id">
-                            @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label " })
-                            <div>
-                                <label>
-                                    @Html.RadioButtonFor(model => model.JD_Availability_Id, "1", new { @id = "JD_Yes" }) Yes
-                                </label>
-                                <label>
-                                    @Html.RadioButtonFor(model => model.JD_Availability_Id, "2", new { @id = "JD_No" }) No
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
-                            @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
-                                @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.Advertisement_Id, htmlAttributes: new { @class = "control-label " })
-                                <div>
-                                    <label>
-                                        @Html.RadioButtonFor(model => model.Advertisement_Id, "1", new { @id = "Internal" }) Internal
-                                    </label>
-                                    <label>
-                                        @Html.RadioButtonFor(model => model.Advertisement_Id, "2", new { @id = "External" }) External
-                                    </label>
-                                    <label>
-                                        @Html.RadioButtonFor(model => model.Advertisement_Id, "3", new { @id = "All" }) All
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.EmpaneledHead_Id, htmlAttributes: new { @class = "control-label " })
-                                <div>
-                                    <label>
-                                        @Html.RadioButtonFor(model => model.EmpaneledHead_Id, "1", new { @id = "Yes" }) Yes
-                                    </label>
-                                    <label>
-                                        @Html.RadioButtonFor(model => model.EmpaneledHead_Id, "2", new { @id = "No" }) No
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.InterviewPanel, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextAreaFor(model => model.InterviewPanel, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.InterviewPanel, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.SelectionProcess_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.SelectionProcess_Id, CommonModel.GetALLSPM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.SelectionProcess_Id, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.LaptopwithSpecifications_Id, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.LaptopwithSpecifications_Id, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.LaptopwithSpecifications_Id, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.Anyspecificsoftwarewithlicense, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.Anyspecificsoftwarewithlicense, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Anyspecificsoftwarewithlicense, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-row pt-1">
-                            <div class="form-group col-md-4 offset-4">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                @Html.DropDownListFor(model => model.TypeofApplicable_Id, CommonModel.GetALLApplicableM(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TypeofApplicable_Id, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.NoofPositions_Id, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.NoofPositions_Id, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NoofPositions_Id, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.jobLocationType_Id, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.DropDownListFor(model => model.jobLocationType_Id, CommonModel.GetALLJobLocationM(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.jobLocationType_Id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.ReportingManager, htmlAttributes: new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                        @Html.TextBoxFor(model => model.ReportingManager, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ReportingManager, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Durationoftheposition_Fdate, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Durationoftheposition_Fdate, new { @class = "datepicker form-control", id = "FD", name = "FD", autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.Durationoftheposition_Fdate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Durationoftheposition_Tdate, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Durationoftheposition_Tdate, new { @class = "datepicker form-control", id = "TD", name = "TD", autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.Durationoftheposition_Tdate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.CostCentreCode_Id, htmlAttributes: new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                        @Html.TextBoxFor(model => model.CostCentreCode_Id, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CostCentreCode_Id, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.BaseSalRangepermonth_Id, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.BaseSalRangepermonth_Id, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BaseSalRangepermonth_Id, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Grade_Id, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.DropDownListFor(model => model.Grade_Id, CommonModel.GetALLGradeM(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Grade_Id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="div_JD_Availability_Id">
+                        @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label col-xs-12 col-lg-4" })
+                        <div class="checkbox">
+                            @foreach (var item in CommonModel.GetALLYesNoM())
+                            {
+                                <div class="input-spacer">
+                                    @Html.RadioButtonFor(model => model.JD_Availability_Id, item.Value, new { id = "div_JD_Availability_Id" + item.Value }) @item.Text
+                                </div>
+                            }
+
+                            @Html.ValidationMessageFor(model => model.JD_Availability_Id, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mark-devide"></div>
+                    </div>
+
+
+                    <div class="form-group" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
+                        @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
+                            @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Advertisement_Id, htmlAttributes: new { @class = "control-label col-xs-12 col-lg-4" })
+                            <div class="checkbox">
+                                @foreach (var item in CommonModel.GetALLAdvertisement())
+                                {
+                                    <div class="input-spacer">
+                                        @Html.RadioButtonFor(model => model.Advertisement_Id, item.Value, new { id = "GetALLAdvertisement" + item.Value }) @item.Text
+                                    </div>
+                                }
+
+                                @Html.ValidationMessageFor(model => model.Advertisement_Id, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mark-devide"></div>
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.EmpaneledHead_Id, htmlAttributes: new { @class = "control-label col-xs-12 col-lg-4" })
+                            <div class="checkbox">
+                                @foreach (var item in CommonModel.GetALLYesNoM())
+                                {
+                                    <div class="input-spacer">
+                                        @Html.RadioButtonFor(model => model.EmpaneledHead_Id, item.Value, new { id = "EmpaneledHead_Id" + item.Value }) @item.Text
+                                    </div>
+                                }
+
+                                @Html.ValidationMessageFor(model => model.EmpaneledHead_Id, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="mark-devide"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-md-6" id="div_TypeOfInterview">
+                        @Html.LabelFor(model => model.TypeOfInterview, htmlAttributes: new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                        <div class="col-md-10s">
+                            @Html.DropDownListFor(model => model.TypeOfInterview, CommonModel.GetALLIT(), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TypeOfInterview, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6" id="div_InterviewPanel" style="display: none;">
+                        @Html.LabelFor(model => model.InterviewPanel, htmlAttributes: new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                        @Html.TextAreaFor(model => model.InterviewPanel, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.InterviewPanel, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-6" id="div_InterviewPanel2" style="display: none;">
+                        @Html.LabelFor(model => model.InterviewPanel2, htmlAttributes: new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                        @Html.TextAreaFor(model => model.InterviewPanel2, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.InterviewPanel2, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.SelectionProcess_Id, htmlAttributes: new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                        <div class="col-md-10s">
+                            @Html.DropDownListFor(model => model.SelectionProcess_Id, CommonModel.GetALLSPM(), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SelectionProcess_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.LaptopwithSpecifications_Id, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.LaptopwithSpecifications_Id, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LaptopwithSpecifications_Id, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Anyspecificsoftwarewithlicense, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Anyspecificsoftwarewithlicense, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Anyspecificsoftwarewithlicense, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row pt-1">
+                        <div class="form-group col-md-4 offset-4">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
                 }
             </div>
         </div>
@@ -221,11 +247,8 @@
 
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script>
         $(document).ready(function () {
             var dateFormat = "dd-M-yy";
@@ -246,19 +269,47 @@
                     dateFormat: dateFormat
                 }).on("change", function () {
                     from.datepicker("option", "maxDate", getDate(this));
-                });
+                    });
+            $('#TypeOfInterview').change(function () {
+                var selectedValue = $(this).val();
+
+                if (selectedValue == '1') { // Round 1
+                    $('#div_InterviewPanel').show();
+                    $('#div_InterviewPanel2').hide();
+                } else if (selectedValue == '2') { // Round 2
+                    $('#div_InterviewPanel, #div_InterviewPanel2').show();
+                } else {
+                    $('#div_InterviewPanel, #div_InterviewPanel2').hide();
+                }
+            });
             function toggleJDAvailabilityDoc() {
-                if ($('#JD_Yes').is(':checked')) {
+                if ($('input[name="JD_Availability_Id"]:checked').val() == "1") { // Assuming "1" is for Yes
                     $('#div_JD_AvailabilityIfYes_Doc').show();
                 } else {
                     $('#div_JD_AvailabilityIfYes_Doc').hide();
-                    $('#JD_AvailabilityIfYes_Doc').val('');
+                    $('#JD_AvailabilityIfYes_Doc').val(''); // Clear the file input
                 }
             }
+
+            // Initial call to set the correct visibility
             toggleJDAvailabilityDoc();
+
+            // Event listener for changes in JD_Availability_Id radio buttons
             $('input[name="JD_Availability_Id"]').change(function () {
                 toggleJDAvailabilityDoc();
             });
+            //function toggleJDAvailabilityDoc() {
+            //    if ($('#Yes').is(':checked')) {
+            //        $('#div_JD_AvailabilityIfYes_Doc').show();
+            //    } else {
+            //        $('#div_JD_AvailabilityIfYes_Doc').hide();
+            //        $('#JD_AvailabilityIfYes_Doc').val('');
+            //    }
+            //}
+            //toggleJDAvailabilityDoc();
+            //$('input[name="div_JD_Availability_Id"]').change(function () {
+            //    toggleJDAvailabilityDoc();
+            //});
             function getDate(element) {
                 var date;
                 try {

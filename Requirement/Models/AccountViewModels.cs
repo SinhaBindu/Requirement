@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Requirement.Models
@@ -79,6 +80,49 @@ namespace Requirement.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public int Id_pk { get; set; }
+        //[Required]
+        [Display(Name = "Emp Code")]
+        public int Emp_Code { get; set; }
+        //[Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+        //[Required]
+        [Display(Name = "Designation")]
+        public string Designation { get; set; }
+        //[Required]
+        [Display(Name = "Location")]
+        public string Location { get; set; }
+        //[Required]
+        [Display(Name = "Role")]
+        public int Role { get; set; }
+        //[Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        public System.Guid EmpID_pk { get; set; }
+        public string UserID_fk { get; set; }
+        public string RoleID_fk { get; set; }
+
+
+
+
+        //[Required]
+        [Display(Name = "Is Active")]
+        public bool IsActive { get; set; }
+
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+        [Display(Name = "Created On")]
+        public DateTime CreatedOn { get; set; }
+
+        [Display(Name = "Updated By")]
+        public string UpdatedBy { get; set; }
+
+        [Display(Name = "Updated On")]
+        public DateTime UpdatedOn { get; set; }
     }
 
     public class ResetPasswordViewModel

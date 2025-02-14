@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Recruitment_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,6 +65,21 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Emp_ID" Type="uniqueidentifier" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="mst_Advertisement">
+          <Key>
+            <PropertyRef Name="AdvertisementId" />
+          </Key>
+          <Property Name="AdvertisementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementType" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Recruitment_DB.dbo.mst_Applicable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -113,7 +138,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_CostCentreCode' does not ha
             <PropertyRef Name="Id_pk" />
           </Key>
           <Property Name="Id_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Emp_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Emp_Code" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -237,6 +262,17 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_SelectionProcess' does not 
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
+        <EntityType Name="mst_TypeofInterview">
+          <Key>
+            <PropertyRef Name="InterviewId" />
+          </Key>
+          <Property Name="InterviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InterviewType" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="mst_TypeYesNo">
@@ -250,11 +286,17 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Recruitment_DB.dbo.Tbl_EmpReg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tbl_EmpReg">
           <Key>
             <PropertyRef Name="Id_pk" />
+            <PropertyRef Name="EmpID_pk" />
           </Key>
           <Property Name="Id_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID_pk" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserID_fk" Type="nvarchar" MaxLength="300" />
+          <Property Name="RoleID_fk" Type="nvarchar(max)" />
           <Property Name="Emp_Code" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" />
           <Property Name="Designation" Type="nvarchar" MaxLength="255" />
@@ -332,6 +374,44 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="IsDeletedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
+          <Property Name="TypeOfInterview" Type="int" />
+          <Property Name="InterviewPanel2" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_NewHireMultiple">
+          <Key>
+            <PropertyRef Name="Id_pk" />
+          </Key>
+          <Property Name="Id_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NewHiredDate" Type="datetime" />
+          <Property Name="HiringType_Id" Type="int" />
+          <Property Name="PositionName" Type="varchar" MaxLength="255" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" />
+          <Property Name="TypeofApplicable_Id" Type="int" />
+          <Property Name="NoofPositions_Id" Type="int" />
+          <Property Name="ReportingManager" Type="nvarchar" MaxLength="100" />
+          <Property Name="Durationoftheposition_Fdate" Type="date" />
+          <Property Name="Durationoftheposition_Tdate" Type="date" />
+          <Property Name="CostCentreCode_Id" Type="int" />
+          <Property Name="CTCSalRangepermonth_Id" Type="int" />
+          <Property Name="Grade_Id" Type="int" />
+          <Property Name="JD_Availability_Id" Type="int" />
+          <Property Name="JD_AvailabilityIfYes_Doc" Type="varchar(max)" />
+          <Property Name="Advertisement_Id" Type="int" />
+          <Property Name="EmpaneledHead_Id" Type="int" />
+          <Property Name="InterviewPanel1" Type="int" />
+          <Property Name="InterviewPanel2" Type="int" />
+          <Property Name="SelectionProcess_Id" Type="int" />
+          <Property Name="LaptopwithSpecifications_Id" Type="int" />
+          <Property Name="Anyspecificsoftwarewithlicense" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsDeletedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
         </EntityType>
         <EntityType Name="tbl_Signature">
           <Key>
@@ -398,20 +478,23 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Recruitment_DBModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mst_Advertisement" EntityType="Self.mst_Advertisement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Designation" EntityType="Self.mst_Designation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_District" EntityType="Self.mst_District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_EmpCode" EntityType="Self.mst_EmpCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Location" EntityType="Self.mst_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Name" EntityType="Self.mst_Name" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_State" EntityType="Self.mst_State" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_EmpReg" EntityType="Self.Tbl_EmpReg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mst_TypeofInterview" EntityType="Self.mst_TypeofInterview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_JD" EntityType="Self.Tbl_JD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHire" EntityType="Self.tbl_NewHire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_NewHireMultiple" EntityType="Self.tbl_NewHireMultiple" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Signature" EntityType="Self.tbl_Signature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Applicable" EntityType="Self.mst_Applicable" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -503,6 +586,27 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
     [mst_TypeYesNo].[OrderBy] AS [OrderBy]
     FROM [dbo].[mst_TypeYesNo] AS [mst_TypeYesNo]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Tbl_EmpReg" EntityType="Self.Tbl_EmpReg" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tbl_EmpReg].[Id_pk] AS [Id_pk], 
+    [Tbl_EmpReg].[EmpID_pk] AS [EmpID_pk], 
+    [Tbl_EmpReg].[UserID_fk] AS [UserID_fk], 
+    [Tbl_EmpReg].[RoleID_fk] AS [RoleID_fk], 
+    [Tbl_EmpReg].[Emp_Code] AS [Emp_Code], 
+    [Tbl_EmpReg].[Name] AS [Name], 
+    [Tbl_EmpReg].[Designation] AS [Designation], 
+    [Tbl_EmpReg].[Location] AS [Location], 
+    [Tbl_EmpReg].[Role] AS [Role], 
+    [Tbl_EmpReg].[Username] AS [Username], 
+    [Tbl_EmpReg].[IsActive] AS [IsActive], 
+    [Tbl_EmpReg].[CreatedBy] AS [CreatedBy], 
+    [Tbl_EmpReg].[CreatedOn] AS [CreatedOn], 
+    [Tbl_EmpReg].[UpdatedBy] AS [UpdatedBy], 
+    [Tbl_EmpReg].[UpdatedOn] AS [UpdatedOn], 
+    [Tbl_EmpReg].[OrderBy] AS [OrderBy], 
+    [Tbl_EmpReg].[Password] AS [Password]
+    FROM [dbo].[Tbl_EmpReg] AS [Tbl_EmpReg]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -527,7 +631,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
         <EntityContainer Name="Recruitment_DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="mst_District" EntityType="Recruitment_DBModel.mst_District" />
           <EntitySet Name="mst_State" EntityType="Recruitment_DBModel.mst_State" />
-          <EntitySet Name="tbl_NewHire" EntityType="Recruitment_DBModel.tbl_NewHire" />
           <EntitySet Name="tbl_Signature" EntityType="Recruitment_DBModel.tbl_Signature" />
           <EntitySet Name="mst_Applicable" EntityType="Recruitment_DBModel.mst_Applicable" />
           <EntitySet Name="mst_CostCentreCode" EntityType="Recruitment_DBModel.mst_CostCentreCode" />
@@ -541,8 +644,18 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="AspNetRoles" EntityType="Recruitment_DBModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Recruitment_DBModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Recruitment_DBModel.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Recruitment_DBModel.AspNetUser" />
           <EntitySet Name="Tbl_JD" EntityType="Recruitment_DBModel.Tbl_JD" />
+          <EntitySet Name="mst_Designation" EntityType="Recruitment_DBModel.mst_Designation" />
+          <EntitySet Name="mst_EmpCode" EntityType="Recruitment_DBModel.mst_EmpCode" />
+          <EntitySet Name="mst_Location" EntityType="Recruitment_DBModel.mst_Location" />
+          <EntitySet Name="mst_Name" EntityType="Recruitment_DBModel.mst_Name" />
+          <EntitySet Name="tbl_NewHireMultiple" EntityType="Recruitment_DBModel.tbl_NewHireMultiple" />
+          <EntitySet Name="mst_Advertisement" EntityType="Recruitment_DBModel.mst_Advertisement" />
+          <EntitySet Name="mst_TypeofInterview" EntityType="Recruitment_DBModel.mst_TypeofInterview" />
+          <EntitySet Name="tbl_NewHire" EntityType="Recruitment_DBModel.tbl_NewHire" />
+          <EntitySet Name="C__MigrationHistory" EntityType="Recruitment_DBModel.C__MigrationHistory" />
+          <EntitySet Name="Tbl_EmpReg" EntityType="Recruitment_DBModel.Tbl_EmpReg" />
+          <EntitySet Name="AspNetUsers" EntityType="Recruitment_DBModel.AspNetUser" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -555,11 +668,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="mst_Designation" EntityType="Recruitment_DBModel.mst_Designation" />
-          <EntitySet Name="mst_EmpCode" EntityType="Recruitment_DBModel.mst_EmpCode" />
-          <EntitySet Name="mst_Location" EntityType="Recruitment_DBModel.mst_Location" />
-          <EntitySet Name="mst_Name" EntityType="Recruitment_DBModel.mst_Name" />
-          <EntitySet Name="Tbl_EmpReg" EntityType="Recruitment_DBModel.Tbl_EmpReg" />
         </EntityContainer>
         <EntityType Name="mst_District">
           <Key>
@@ -584,44 +692,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderBy" Type="Int32" />
-        </EntityType>
-        <EntityType Name="tbl_NewHire">
-          <Key>
-            <PropertyRef Name="Id_pk" />
-          </Key>
-          <Property Name="Id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Id" Type="Guid" Nullable="false" />
-          <Property Name="NewHiredDate" Type="DateTime" Precision="3" />
-          <Property Name="HiringType_Id" Type="Int32" />
-          <Property Name="PositionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ProjectName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="TypeofApplicable_Id" Type="Int32" />
-          <Property Name="NoofPositions_Id" Type="Int32" />
-          <Property Name="jobLocationType_Id" Type="Int32" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ReportingManager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Durationoftheposition_Fdate" Type="DateTime" Precision="0" />
-          <Property Name="Durationoftheposition_Tdate" Type="DateTime" Precision="0" />
-          <Property Name="CostCentreCode_Id" Type="Int32" />
-          <Property Name="BaseSalRangepermonth_Id" Type="Int32" />
-          <Property Name="Grade_Id" Type="Int32" />
-          <Property Name="JD_Availability_Id" Type="Int32" />
-          <Property Name="JD_AvailabilityIfYes_Doc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Advertisement_Id" Type="Int32" />
-          <Property Name="EmpaneledHead_Id" Type="Int32" />
-          <Property Name="InterviewPanel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SelectionProcess_Id" Type="Int32" />
-          <Property Name="LaptopwithSpecifications_Id" Type="Int32" />
-          <Property Name="Anyspecificsoftwarewithlicense" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="IsDeletedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_Signature">
@@ -760,26 +830,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
-        <EntityType Name="AspNetUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Recruitment_DBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-        </EntityType>
         <EntityType Name="Tbl_JD">
           <Key>
             <PropertyRef Name="Id_pk" />
@@ -806,38 +856,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Recruitment_DBModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaim">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Recruitment_DBModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogin">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="Recruitment_DBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
-        </Association>
         <EntityType Name="mst_Designation">
           <Key>
             <PropertyRef Name="Id_pk" />
@@ -856,7 +874,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
             <PropertyRef Name="Id_pk" />
           </Key>
           <Property Name="Id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -890,11 +908,123 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
-        <EntityType Name="Tbl_EmpReg">
+        <EntityType Name="tbl_NewHireMultiple">
           <Key>
             <PropertyRef Name="Id_pk" />
           </Key>
           <Property Name="Id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Guid" Nullable="false" />
+          <Property Name="NewHiredDate" Type="DateTime" Precision="3" />
+          <Property Name="HiringType_Id" Type="Int32" />
+          <Property Name="PositionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TypeofApplicable_Id" Type="Int32" />
+          <Property Name="NoofPositions_Id" Type="Int32" />
+          <Property Name="ReportingManager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Durationoftheposition_Fdate" Type="DateTime" Precision="0" />
+          <Property Name="Durationoftheposition_Tdate" Type="DateTime" Precision="0" />
+          <Property Name="CostCentreCode_Id" Type="Int32" />
+          <Property Name="CTCSalRangepermonth_Id" Type="Int32" />
+          <Property Name="Grade_Id" Type="Int32" />
+          <Property Name="JD_Availability_Id" Type="Int32" />
+          <Property Name="JD_AvailabilityIfYes_Doc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Advertisement_Id" Type="Int32" />
+          <Property Name="EmpaneledHead_Id" Type="Int32" />
+          <Property Name="InterviewPanel1" Type="Int32" />
+          <Property Name="InterviewPanel2" Type="Int32" />
+          <Property Name="SelectionProcess_Id" Type="Int32" />
+          <Property Name="LaptopwithSpecifications_Id" Type="Int32" />
+          <Property Name="Anyspecificsoftwarewithlicense" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="IsDeletedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="mst_Advertisement">
+          <Key>
+            <PropertyRef Name="AdvertisementId" />
+          </Key>
+          <Property Name="AdvertisementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="mst_TypeofInterview">
+          <Key>
+            <PropertyRef Name="InterviewId" />
+          </Key>
+          <Property Name="InterviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InterviewType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_NewHire">
+          <Key>
+            <PropertyRef Name="Id_pk" />
+          </Key>
+          <Property Name="Id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Guid" Nullable="false" />
+          <Property Name="NewHiredDate" Type="DateTime" Precision="3" />
+          <Property Name="HiringType_Id" Type="Int32" />
+          <Property Name="PositionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TypeofApplicable_Id" Type="Int32" />
+          <Property Name="NoofPositions_Id" Type="Int32" />
+          <Property Name="jobLocationType_Id" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReportingManager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Durationoftheposition_Fdate" Type="DateTime" Precision="0" />
+          <Property Name="Durationoftheposition_Tdate" Type="DateTime" Precision="0" />
+          <Property Name="CostCentreCode_Id" Type="Int32" />
+          <Property Name="BaseSalRangepermonth_Id" Type="Int32" />
+          <Property Name="Grade_Id" Type="Int32" />
+          <Property Name="JD_Availability_Id" Type="Int32" />
+          <Property Name="JD_AvailabilityIfYes_Doc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Advertisement_Id" Type="Int32" />
+          <Property Name="EmpaneledHead_Id" Type="Int32" />
+          <Property Name="InterviewPanel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SelectionProcess_Id" Type="Int32" />
+          <Property Name="LaptopwithSpecifications_Id" Type="Int32" />
+          <Property Name="Anyspecificsoftwarewithlicense" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="IsDeletedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+          <Property Name="TypeOfInterview" Type="Int32" />
+          <Property Name="InterviewPanel2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_EmpReg">
+          <Key>
+            <PropertyRef Name="Id_pk" />
+            <PropertyRef Name="EmpID_pk" />
+          </Key>
+          <Property Name="Id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID_pk" Type="Guid" Nullable="false" />
+          <Property Name="UserID_fk" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID_fk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Emp_Code" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Designation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -909,6 +1039,62 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="OrderBy" Type="Int32" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_ID" Type="Guid" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Recruitment_DBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Recruitment_DBModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Recruitment_DBModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="Recruitment_DBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -939,45 +1125,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
                 <ScalarProperty Name="StateCode" ColumnName="StateCode" />
                 <ScalarProperty Name="StateId_pk" ColumnName="StateId_pk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_NewHire">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHire">
-              <MappingFragment StoreEntitySet="tbl_NewHire">
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="IsDeletedOn" ColumnName="IsDeletedOn" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Anyspecificsoftwarewithlicense" ColumnName="Anyspecificsoftwarewithlicense" />
-                <ScalarProperty Name="LaptopwithSpecifications_Id" ColumnName="LaptopwithSpecifications_Id" />
-                <ScalarProperty Name="SelectionProcess_Id" ColumnName="SelectionProcess_Id" />
-                <ScalarProperty Name="InterviewPanel" ColumnName="InterviewPanel" />
-                <ScalarProperty Name="EmpaneledHead_Id" ColumnName="EmpaneledHead_Id" />
-                <ScalarProperty Name="Advertisement_Id" ColumnName="Advertisement_Id" />
-                <ScalarProperty Name="JD_AvailabilityIfYes_Doc" ColumnName="JD_AvailabilityIfYes_Doc" />
-                <ScalarProperty Name="JD_Availability_Id" ColumnName="JD_Availability_Id" />
-                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
-                <ScalarProperty Name="BaseSalRangepermonth_Id" ColumnName="BaseSalRangepermonth_Id" />
-                <ScalarProperty Name="CostCentreCode_Id" ColumnName="CostCentreCode_Id" />
-                <ScalarProperty Name="Durationoftheposition_Tdate" ColumnName="Durationoftheposition_Tdate" />
-                <ScalarProperty Name="Durationoftheposition_Fdate" ColumnName="Durationoftheposition_Fdate" />
-                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="jobLocationType_Id" ColumnName="jobLocationType_Id" />
-                <ScalarProperty Name="NoofPositions_Id" ColumnName="NoofPositions_Id" />
-                <ScalarProperty Name="TypeofApplicable_Id" ColumnName="TypeofApplicable_Id" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
-                <ScalarProperty Name="HiringType_Id" ColumnName="HiringType_Id" />
-                <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
-                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1125,24 +1272,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tbl_JD">
             <EntityTypeMapping TypeName="Recruitment_DBModel.Tbl_JD">
               <MappingFragment StoreEntitySet="Tbl_JD">
@@ -1170,14 +1299,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Recruitment_DBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="mst_Designation">
             <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Designation">
               <MappingFragment StoreEntitySet="mst_Designation">
@@ -1234,6 +1355,118 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_NewHireMultiple">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHireMultiple">
+              <MappingFragment StoreEntitySet="tbl_NewHireMultiple">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="IsDeletedOn" ColumnName="IsDeletedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Anyspecificsoftwarewithlicense" ColumnName="Anyspecificsoftwarewithlicense" />
+                <ScalarProperty Name="LaptopwithSpecifications_Id" ColumnName="LaptopwithSpecifications_Id" />
+                <ScalarProperty Name="SelectionProcess_Id" ColumnName="SelectionProcess_Id" />
+                <ScalarProperty Name="InterviewPanel2" ColumnName="InterviewPanel2" />
+                <ScalarProperty Name="InterviewPanel1" ColumnName="InterviewPanel1" />
+                <ScalarProperty Name="EmpaneledHead_Id" ColumnName="EmpaneledHead_Id" />
+                <ScalarProperty Name="Advertisement_Id" ColumnName="Advertisement_Id" />
+                <ScalarProperty Name="JD_AvailabilityIfYes_Doc" ColumnName="JD_AvailabilityIfYes_Doc" />
+                <ScalarProperty Name="JD_Availability_Id" ColumnName="JD_Availability_Id" />
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="CTCSalRangepermonth_Id" ColumnName="CTCSalRangepermonth_Id" />
+                <ScalarProperty Name="CostCentreCode_Id" ColumnName="CostCentreCode_Id" />
+                <ScalarProperty Name="Durationoftheposition_Tdate" ColumnName="Durationoftheposition_Tdate" />
+                <ScalarProperty Name="Durationoftheposition_Fdate" ColumnName="Durationoftheposition_Fdate" />
+                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
+                <ScalarProperty Name="NoofPositions_Id" ColumnName="NoofPositions_Id" />
+                <ScalarProperty Name="TypeofApplicable_Id" ColumnName="TypeofApplicable_Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="HiringType_Id" ColumnName="HiringType_Id" />
+                <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Advertisement">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Advertisement">
+              <MappingFragment StoreEntitySet="mst_Advertisement">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AdvertisementType" ColumnName="AdvertisementType" />
+                <ScalarProperty Name="AdvertisementId" ColumnName="AdvertisementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_TypeofInterview">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_TypeofInterview">
+              <MappingFragment StoreEntitySet="mst_TypeofInterview">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InterviewType" ColumnName="InterviewType" />
+                <ScalarProperty Name="InterviewId" ColumnName="InterviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_NewHire">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHire">
+              <MappingFragment StoreEntitySet="tbl_NewHire">
+                <ScalarProperty Name="InterviewPanel2" ColumnName="InterviewPanel2" />
+                <ScalarProperty Name="TypeOfInterview" ColumnName="TypeOfInterview" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="IsDeletedOn" ColumnName="IsDeletedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Anyspecificsoftwarewithlicense" ColumnName="Anyspecificsoftwarewithlicense" />
+                <ScalarProperty Name="LaptopwithSpecifications_Id" ColumnName="LaptopwithSpecifications_Id" />
+                <ScalarProperty Name="SelectionProcess_Id" ColumnName="SelectionProcess_Id" />
+                <ScalarProperty Name="InterviewPanel" ColumnName="InterviewPanel" />
+                <ScalarProperty Name="EmpaneledHead_Id" ColumnName="EmpaneledHead_Id" />
+                <ScalarProperty Name="Advertisement_Id" ColumnName="Advertisement_Id" />
+                <ScalarProperty Name="JD_AvailabilityIfYes_Doc" ColumnName="JD_AvailabilityIfYes_Doc" />
+                <ScalarProperty Name="JD_Availability_Id" ColumnName="JD_Availability_Id" />
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="BaseSalRangepermonth_Id" ColumnName="BaseSalRangepermonth_Id" />
+                <ScalarProperty Name="CostCentreCode_Id" ColumnName="CostCentreCode_Id" />
+                <ScalarProperty Name="Durationoftheposition_Tdate" ColumnName="Durationoftheposition_Tdate" />
+                <ScalarProperty Name="Durationoftheposition_Fdate" ColumnName="Durationoftheposition_Fdate" />
+                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="jobLocationType_Id" ColumnName="jobLocationType_Id" />
+                <ScalarProperty Name="NoofPositions_Id" ColumnName="NoofPositions_Id" />
+                <ScalarProperty Name="TypeofApplicable_Id" ColumnName="TypeofApplicable_Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="HiringType_Id" ColumnName="HiringType_Id" />
+                <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tbl_EmpReg">
             <EntityTypeMapping TypeName="Recruitment_DBModel.Tbl_EmpReg">
               <MappingFragment StoreEntitySet="Tbl_EmpReg">
@@ -1250,10 +1483,43 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Emp_Code" ColumnName="Emp_Code" />
+                <ScalarProperty Name="RoleID_fk" ColumnName="RoleID_fk" />
+                <ScalarProperty Name="UserID_fk" ColumnName="UserID_fk" />
+                <ScalarProperty Name="EmpID_pk" ColumnName="EmpID_pk" />
                 <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Recruitment_DBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
