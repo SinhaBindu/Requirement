@@ -25,8 +25,20 @@ namespace Requirement.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<mst_Advertisement> mst_Advertisement { get; set; }
+        public virtual DbSet<mst_Designation> mst_Designation { get; set; }
         public virtual DbSet<mst_District> mst_District { get; set; }
+        public virtual DbSet<mst_EmpCode> mst_EmpCode { get; set; }
+        public virtual DbSet<mst_Location> mst_Location { get; set; }
+        public virtual DbSet<mst_Name> mst_Name { get; set; }
         public virtual DbSet<mst_State> mst_State { get; set; }
+        public virtual DbSet<mst_TypeofInterview> mst_TypeofInterview { get; set; }
+        public virtual DbSet<Tbl_JD> Tbl_JD { get; set; }
+        public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
+        public virtual DbSet<tbl_NewHireMultiple> tbl_NewHireMultiple { get; set; }
         public virtual DbSet<tbl_Signature> tbl_Signature { get; set; }
         public virtual DbSet<mst_Applicable> mst_Applicable { get; set; }
         public virtual DbSet<mst_CostCentreCode> mst_CostCentreCode { get; set; }
@@ -37,20 +49,7 @@ namespace Requirement.Models
         public virtual DbSet<mst_Sal> mst_Sal { get; set; }
         public virtual DbSet<mst_SelectionProcess> mst_SelectionProcess { get; set; }
         public virtual DbSet<mst_TypeYesNo> mst_TypeYesNo { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<Tbl_JD> Tbl_JD { get; set; }
-        public virtual DbSet<mst_Designation> mst_Designation { get; set; }
-        public virtual DbSet<mst_EmpCode> mst_EmpCode { get; set; }
-        public virtual DbSet<mst_Location> mst_Location { get; set; }
-        public virtual DbSet<mst_Name> mst_Name { get; set; }
-        public virtual DbSet<tbl_NewHireMultiple> tbl_NewHireMultiple { get; set; }
-        public virtual DbSet<mst_Advertisement> mst_Advertisement { get; set; }
-        public virtual DbSet<mst_TypeofInterview> mst_TypeofInterview { get; set; }
-        public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<Tbl_EmpReg> Tbl_EmpReg { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Tbl_EmpReg> Tbl_EmpReg { get; set; }
     }
 }

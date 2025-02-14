@@ -1,0 +1,48 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "User List";
+    DataTable dt = new DataTable();
+    if (Model != null)
+    {
+        dt = Model;
+    }
+}
+
+<div class="table-responsive">
+    <table class="table table-striped nowrap table-bordered dataTable exampleDatatable no-footer" id="DataList">
+        <thead>
+            <tr>
+                <th>SrNo.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>User Name</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int sno = 1;
+                if (Model != null)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        <tr>
+                            <td class="text-left">@(sno++)</td>
+                            <td class="text-left">@dr["Name"]</td>
+                            <td class="text-left">@dr["Email"]</td>
+                            <td class="text-left">@dr["PhoneNumber"]</td>
+                            <td class="text-left">@dr["UserName"]</td>
+                            <td class="text-left"><strong class="badge bg-warning-500/10 fnsz">@dr["RoleName"]</strong></td> 
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="9" class="text-danger"><strong> Record Not Found !!</strong></td></tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>

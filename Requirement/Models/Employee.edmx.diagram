@@ -5,33 +5,32 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7aaedff42186479bb5819e231002cffd" Name="Diagram1">
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_District" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_State" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_Signature" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Applicable" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_CostCentreCode" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Grade" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_HiringType" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_JobLocation" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Position" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Sal" Width="1.5" PointX="8.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_SelectionProcess" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_TypeYesNo" Width="1.5" PointX="4.75" PointY="9.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetRole" Width="1.5" PointX="7.375" PointY="11.5" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetUserClaim" Width="1.5" PointX="11.875" PointY="12.625" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetUserLogin" Width="1.5" PointX="11.875" PointY="10" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_JD" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Designation" Width="1.5" PointX="3.375" PointY="12.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_EmpCode" Width="1.5" PointX="13.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Location" Width="1.5" PointX="13.375" PointY="4.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Name" Width="1.5" PointX="5.375" PointY="14.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHireMultiple" Width="1.5" PointX="14.375" PointY="8.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Advertisement" Width="1.5" PointX="15.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.mst_TypeofInterview" Width="1.5" PointX="3.375" PointY="4.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHire" Width="1.5" PointX="7.375" PointY="15.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.C__MigrationHistory" Width="1.5" PointX="15.375" PointY="3.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_EmpReg" Width="1.5" PointX="0.75" PointY="12.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetUser" Width="1.5" PointX="9.625" PointY="10" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Advertisement" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Designation" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_District" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_EmpCode" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Location" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Name" Width="1.5" PointX="8.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_State" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_TypeofInterview" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_JD" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHire" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHireMultiple" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_Signature" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Applicable" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_CostCentreCode" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Grade" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_HiringType" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_JobLocation" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Position" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_Sal" Width="1.5" PointX="12.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_SelectionProcess" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_TypeYesNo" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.AspNetUser" Width="1.5" PointX="3" PointY="19.625" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_EmpReg" Width="1.5" PointX="9.375" PointY="14.75" />
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Recruitment_DBModel.AspNetUserRoles" />

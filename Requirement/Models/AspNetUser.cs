@@ -34,7 +34,11 @@ namespace Requirement.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
-        public Nullable<System.Guid> Emp_ID { get; set; }
+        public string Emp_Code { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> Designation { get; set; }
+        public string OtherDesignation { get; set; }
+        public Nullable<int> Location { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }

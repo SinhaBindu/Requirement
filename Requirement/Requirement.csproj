@@ -197,9 +197,6 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>Employee.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Employee.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1131,6 +1128,8 @@
     <Content Include="Views\JD\JDForm.cshtml" />
     <Content Include="Views\Employee\MultipleHireF.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Account\UserDetaillist.cshtml" />
+    <Content Include="Views\Account\_UserDetailData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,5 +17,13 @@ namespace Requirement.Manager
             DataTable dt = sp.ExecuteDataSet().Tables[0];
             return dt;
         }
+        public static DataTable Usp_GetUserlist(int? RoleId)
+        {
+            StoredProcedure sp = new StoredProcedure("Usp_GetUserlist");
+            sp.Command.AddParameter("@RoleId", RoleId, DbType.Int32);
+            sp.Command.AddParameter("@User", HttpContext.Current.User.Identity.Name, DbType.String);
+            DataTable dt = sp.ExecuteDataSet().Tables[0];
+            return dt;
+        }
     }
 }

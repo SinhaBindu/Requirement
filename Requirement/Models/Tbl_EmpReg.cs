@@ -14,22 +14,19 @@ namespace Requirement.Models
     
     public partial class Tbl_EmpReg
     {
-        public int Id_pk { get; set; }
-        public System.Guid EmpID_pk { get; set; }
-        public string UserID_fk { get; set; }
-        public string RoleID_fk { get; set; }
-        public Nullable<int> Emp_Code { get; set; }
+        public int EmpId_pk { get; set; }
+        public string AspUserId_fk { get; set; }
+        public string RoleId_fk { get; set; }
+        public string Emp_Code { get; set; }
         public string Name { get; set; }
         public string Designation { get; set; }
-        public string Location { get; set; }
-        public Nullable<int> Role { get; set; }
-        public string Username { get; set; }
+        public string OtherDesignation { get; set; }
+        public Nullable<int> Location { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<int> OrderBy { get; set; }
-        public string Password { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using static Requirement.Manager.Enums;
 
 namespace Requirement.Controllers
 {
+    
     [Authorize]
     public class AccountController : Controller
     {
@@ -137,22 +139,15 @@ namespace Requirement.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Registration()
         {
             return View();
         }
-
-        //
-        // POST: /Account/Register
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Registration(RegisterViewModel model)
         {
             Recruitment_DBEntities dbe = new Recruitment_DBEntities();
             if (ModelState.IsValid)
@@ -164,28 +159,17 @@ namespace Requirement.Controllers
                     var uporg = dbe.AspNetUsers.Find(user.Id);
                     if (uporg != null)
                     {
-                        //Role mapping code likhiye shivam
-                        var result1 = UserManager.AddToRole(user.Id, model.RoleName);
-
-                        //uporg.Name = model.Name;
-                        //uporg. = model.Location;
-                        //uporg.IDOrganization = model.IDOrganization;
-                        //uporg.CreatedBy = user.UserName;
-                        //uporg.CreatedOn = DateTime.Now;
-                        //dbe.SaveChanges();
-
-                        ////if (model.Location.Count() > 0)
-                        ////{
-                        ////    for (int i = 0; i < model.Location.Count(); i++)
-                        ////    {
-                        //var tbl = new AspNetUsers_Location();
-                        //tbl.ID = Guid.NewGuid();
-                        //tbl.UserId = Guid.Parse(user.Id);
-                        //tbl.LocationId = model.LocationID;
-                        //dbe.AspNetUsers_Location.Add(tbl);
-                        //dbe.SaveChanges();
-                        // }
-                        // }
+                        var rolen = dbe.AspNetRoles.Where(x=>x.Id==model.RoleId.ToString())?.FirstOrDefault().Name;
+                        var result1 = UserManager.AddToRole(user.Id, rolen);
+                        uporg.Emp_Code = model.Emp_Code;
+                        uporg.Name = model.Name;
+                        uporg.Designation = model.Designation;
+                        uporg.OtherDesignation = model.OtherDesignation;
+                        uporg.Location = model.Location;
+                        uporg.IsActive = true;
+                        uporg.CreatedBy = user.UserName;
+                        uporg.CreatedOn = DateTime.Now;
+                        dbe.SaveChanges();
                     }
                     // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
@@ -204,85 +188,38 @@ namespace Requirement.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-      
 
-        ////
-        //// POST: /Account/Register
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        ////public async Task<ActionResult> EditUser(UserEditViewModel model)
-        //public ActionResult EditUser(UserEditViewModel model)
-        //{
-        //    IPELEntities dbe = new IPELEntities();
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = dbe.AspNetUsers.Find(model.Id);
-        //        if (user != null)
-        //        {
-        //            if (!dbe.AspNetUsers.Any(x => x.Email == model.Email && x.Id != model.Id))
-        //            {
-        //                user.UserName = user.Email = model.Email;
-        //                user.PhoneNumber = model.PhoneNumber;
-        //                user.Name = model.Name;
-        //                user.LocationID = model.LocationID;
-        //                user.IDOrganization = model.IDOrganization;
+        public ActionResult UserDetaillist()
+        {
+            RegisterViewModel model = new RegisterViewModel();
+            return View(model);
+        }
+        public ActionResult GetUserDetailData(int? RoleId, int CheckBox = 0)
+        {
+            try
+            {
+                RoleId = RoleId == null ? 0 : RoleId;
+                bool IsCheck = false;
+                var tbllist = SPManager.Usp_GetUserlist(RoleId);
+                if (tbllist != null)
+                {
+                    IsCheck = true;
+                }
+                var html = ConvertViewToString("_UserDetailData", tbllist);
+                var res = Json(new { IsSuccess = IsCheck, Data = html }, JsonRequestBehavior.AllowGet);
+                res.MaxJsonLength = int.MaxValue;
+                return res;
 
-        //                // dbe.Entry(user).Property("ID").IsModified = false;
-        //                //dbe.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            }
+            catch (Exception ex)
+            {
+                string er = ex.Message;
+                return Json(new { IsSuccess = false, Data = "" }, JsonRequestBehavior.AllowGet); throw;
+            }
+        }
 
 
-        //                //dbe.AspNetUsers.Add(user);
-        //                //var res = dbe.SaveChanges();
-        //                //if (res > 0)
-        //                //{
-        //                var userRoles = UserManager.GetRoles(model.Id);
-        //                foreach (var item in userRoles)
-        //                {
-        //                    if (model.Role != item)
-        //                    {
-        //                        UserManager.RemoveFromRoles(model.Id, item);
-        //                        UserManager.AddToRole(model.Id, model.Role);
-        //                    }
-        //                }
 
-        //                var userLocations = dbe.AspNetUsers_Location.Where(x => x.UserId.ToString() == model.Id);
-        //                foreach (var item in userLocations)
-        //                {
-        //                    if (item.LocationId != model.LocationID)
-        //                    {
-        //                        dbe.AspNetUsers_Location.Remove(item);
-        //                        var tbl = new AspNetUsers_Location
-        //                        {
-        //                            ID = Guid.NewGuid(),
-        //                            UserId = Guid.Parse(model.Id),
-        //                            LocationId = model.LocationID
-        //                        };
-        //                        dbe.AspNetUsers_Location.Add(tbl);
-
-        //                    }
-        //                }
-        //                dbe.SaveChanges();
-        //                GlobalUtilityManager.MessageToaster(this, "Edit User", Enums.GetEnumDescription(Enums.eReturnReg.Update), eAlertType.success.ToString());
-        //                return RedirectToAction("UserDetaillist", "Master");
-        //                //}
-        //                //else
-        //                //{
-        //                //    ModelState.AddModelError("UserNotFound", "User Not Found");
-        //                //}
-        //            }
-        //            else
-        //            {
-        //                ModelState.AddModelError("DuplicateEmail", "Email already exists!");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("UserNotFound", "User Not Found");
-        //        }
-        //    }
-        //    return View(model);
-        //}
         public ActionResult Register_Lock(RegisterViewModel model)
         {
             var lockoutEndDate = DateTime.Now.Date;
@@ -607,6 +544,20 @@ namespace Requirement.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+        
+
+        private string ConvertViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (StringWriter writer = new StringWriter())
+            {
+                ViewEngineResult vResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                ViewContext vContext = new ViewContext(this.ControllerContext, vResult.View, ViewData, new TempDataDictionary(), writer);
+                vResult.View.Render(vContext, writer);
+                return writer.ToString();
+            }
+        }
+
         #endregion
     }
 }
