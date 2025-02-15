@@ -139,7 +139,7 @@ namespace Requirement.Manager
         {
             Recruitment_DBEntities _db = new Recruitment_DBEntities();
             List<SelectListItem> list = new List<SelectListItem>();
-            list = _db.mst_HiringType.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.HiringTypeId.ToString(), Text = x.HiringType}).ToList();
+            list = _db.mst_HiringType.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.HiringTypeId.ToString(), Text = x.HiringType }).ToList();
             if (IsSelect == 0)
             {
                 list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
@@ -317,7 +317,7 @@ namespace Requirement.Manager
         {
             Recruitment_DBEntities _db = new Recruitment_DBEntities();
             List<SelectListItem> list = new List<SelectListItem>();
-            list = _db.mst_Advertisement.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.AdvertisementId.ToString(), Text = x.AdvertisementType}).ToList();
+            list = _db.mst_Advertisement.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.AdvertisementId.ToString(), Text = x.AdvertisementType }).ToList();
             if (IsSelect == 0)
             {
                 //list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
@@ -393,5 +393,81 @@ namespace Requirement.Manager
 
             return list;
         }
+        #region Upload files
+        public static bool ValidateImageSizeDocoument(HttpPostedFileBase file)
+        {
+            byte[] image = new byte[file.ContentLength];
+            file.InputStream.Read(image, 0, image.Length);
+            // Convert MB to bytes (1 MB = 1024 * 1024 bytes)
+            //int maxSizeInBytes = 5242880;//maxMB * 1024 * 1024;
+            int maxSizeInBytes = 20971520;//maxMB * 1024 * 1024;/20mb
+
+            // Check if the image size is less than or equal to the specified limit
+            if (image.Length <= maxSizeInBytes)
+            {
+                return true; // Valid size
+            }
+
+            return false; // Invalid size
+        }
+        public static FileModel saveFile(HttpPostedFileBase item, string Fldpath, string FileName)
+        {
+            FileModel fileModel = new FileModel();
+            if (ValidateImageSizeDocoument(item))
+            {
+                string URL = "";
+                string filepath = string.Empty;
+                if (item != null && item.ContentLength > 0)
+                {
+                    if (Fldpath != URL)
+                    {
+                        URL = Fldpath;
+                    }
+                    URL = "/Uploads/" + Fldpath + "/";
+                    string folderPath = HttpContext.Current.Server.MapPath("~" + URL);
+
+                    var supportedTypes = new[] { "pdf", "xls", "xlsx", "jpeg", "png", "jpg" };
+
+                    var fileName = Path.GetFileName(item.FileName);
+                    // var rondom = Guid.NewGuid() + fileName;
+
+                    // var fileExt = System.IO.Path.GetExtension(rondom).Substring(1).ToLower();
+
+                    //if (!supportedTypes.Contains(fileExt.ToLower()))
+                    //{
+                    //   // Danger("File Extension Is InValid - Upload Only PDF/EXCEL/JPEG/PNG/JPG File");
+                    //   // return RedirectToAction("VendorDetails", new { id = d.guid });
+                    //}
+
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    // string Document = Path.Combine("~/Uploads/VendorDoc/" + rondom);
+
+                    item.SaveAs(folderPath + fileName);
+                    filepath = URL + fileName;
+                    fileModel.FolderPath = URL;
+                }
+                fileModel.IsvalidFile = true;
+                fileModel.FilePathFull = filepath;
+                return fileModel;
+            }
+            else
+            {
+                fileModel.IsvalidFile = false;
+                return fileModel;
+            }
+
+        }
+
+        public class FileModel
+        {
+            public string FilePathFull { get; set; }
+            public string FolderPath { get; set; }
+            public bool IsvalidFile { get; set; }
+        }
+        #endregion
     }
 }

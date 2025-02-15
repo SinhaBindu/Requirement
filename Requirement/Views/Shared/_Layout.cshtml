@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <link href="~/Content/plugins/datatables/media/css/buttons.dataTables.css" rel="stylesheet">
+    @*<link href="~/Content/plugins/datatables/media/css/buttons.dataTables.css" rel="stylesheet">*@
     <base href="@Requirement.Manager.CommonModel.GetBaseUrl()" />
 </head>
 <body>
@@ -32,8 +32,10 @@
     @*@Scripts.Render("~/bundles/bootstrap")*@
     @**@
     <script src="~/Content/assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
+
     @RenderSection("scripts", required: false)
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/Content/dashboard/plugins/moment/moment.min.js"></script>
+    <script src="~/Content/dashboard/plugins/jqueryui/js/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

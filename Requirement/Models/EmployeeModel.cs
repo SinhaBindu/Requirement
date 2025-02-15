@@ -7,20 +7,20 @@ using System.Web;
 
 namespace Requirement.Models
 {
-    public class Employee
+    public class EmployeeModel
     {
-        public Employee()
+        public EmployeeModel()
         {
-            Emp_Id = Guid.Empty;
+            NewHireId_pk = Guid.Empty;
         }
         [Key]
-        public Guid Emp_Id { get; set; }
+        public Guid NewHireId_pk { get; set; }
         //[Required]
         [Display(Name = PartDisplayName.NewHiredDate)]
         public DateTime NewHiredDate { get; set; }
         //[Required]
-        [Display(Name = PartDisplayName.HiringType_Id)]
-        public int HiringType_Id { get; set; }
+        [Display(Name = PartDisplayName.HiringTypeId)]
+        public int HiringTypeId { get; set; }
         //[Required]
         [Display(Name = PartDisplayName.PositionName)]
         public string PositionName { get; set; }
@@ -28,17 +28,18 @@ namespace Requirement.Models
         [Display(Name = PartDisplayName.ProjectName)]
         public string ProjectName { get; set; }
         //[Required]
-        [Display(Name = PartDisplayName.Location)]
-        public string Location { get; set; }
+        [Display(Name = PartDisplayName.LocationId)]
+        public int LocationId { get; set; }
+        public string OtherLocation { get; set; }
         //[Required]
-        [Display(Name = PartDisplayName.TypeofApplicable_Id)]
-        public int TypeofApplicable_Id { get; set; }
+        [Display(Name = PartDisplayName.TypeofApplicableId)]
+        public int TypeofApplicableId { get; set; }
         //[Required]
-        [Display(Name = PartDisplayName.NoofPositions_Id)]
-        public int NoofPositions_Id { get; set; }
+        [Display(Name = PartDisplayName.NoofPositionsId)]
+        public int NoofPositionsId { get; set; }
         //[Required]
-        [Display(Name = PartDisplayName.jobLocationType_Id)]
-        public int jobLocationType_Id { get; set; }
+        [Display(Name = PartDisplayName.jobLocationTypeId)]
+        public int jobLocationTypeId { get; set; }
         //[Required]
         [Display(Name = PartDisplayName.Remarks)]
         public string Remarks { get; set; }
@@ -65,7 +66,7 @@ namespace Requirement.Models
         public int JD_Availability_Id { get; set; }
         //[Required]
         [Display(Name = PartDisplayName.JD_AvailabilityIfYes_Doc)]
-        public HttpPostedFile JD_AvailabilityIfYes_Doc { get; set; }
+        public HttpPostedFileBase JD_AvailabilityIfYes_Doc { get; set; }
         //[Required]
         [Display(Name = PartDisplayName.Advertisement_Id)]
         public int Advertisement_Id { get; set; }
@@ -111,21 +112,32 @@ namespace Requirement.Models
         [Display(Name = "Deleted On")]
         public DateTime? DeletedOn { get; set; }
 
-        public List<Employee> Employees { get; set; }
+        public List<EmployeeModel> Employees { get; set; }
+        public List<MultipleCostModel> MultipleCostModel { get; set; }
 
-
-
+    }
+    public class MultipleCostModel
+    {
+        public int MultipleCostId_pk { get; set; }
+        public Nullable<System.Guid> NewHireId_fk { get; set; }
+        public string MultipleCostName { get; set; }
+        public string GrantID { get; set; }
+        public string ActivityCode { get; set; }
+        public string BudgetCode { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
     }
     public class PartDisplayName
     {
         public const string NewHiredDate = "New Hired Date";
-        public const string HiringType_Id = "Type of Haring";
+        public const string HiringTypeId = "Type of Haring";
         public const string PositionName = "Position Name";
         public const string ProjectName = "Project Name";
-        public const string Location = "Location";
-        public const string TypeofApplicable_Id = "Applicable Type";
-        public const string NoofPositions_Id = "No of Positions";
-        public const string jobLocationType_Id = "job Location Type";
+        public const string LocationId = "Location";
+        public const string TypeofApplicableId = "Applicable Type";
+        public const string NoofPositionsId = "No of Positions";
+        public const string jobLocationTypeId = "job Location Type";
         public const string Remarks = "Remarks";
         public const string ReportingManager = "Reporting Manager";
         public const string Durationoftheposition_Fdate = "From Date";

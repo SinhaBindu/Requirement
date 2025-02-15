@@ -274,7 +274,10 @@
     <Compile Include="Models\tbl_NewHire.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbl_NewHireMultiple.cs">
+    <Compile Include="Models\tbl_NewHireMultipleCost.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_NewHireMultiple_old.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Signature.cs">
@@ -1134,7 +1137,7 @@
     <Folder Include="Content\dashboard\images\big\" />
     <Folder Include="Content\dashboard\images\users\" />
     <Folder Include="Content\dashboard\images\user\" />
-    <Folder Include="Images\NewHired_Images\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -14,16 +14,16 @@ namespace Requirement.Models
     
     public partial class tbl_NewHire
     {
-        public int Id_pk { get; set; }
-        public System.Guid Emp_Id { get; set; }
+        public System.Guid NewHireId_pk { get; set; }
         public Nullable<System.DateTime> NewHiredDate { get; set; }
-        public Nullable<int> HiringType_Id { get; set; }
+        public Nullable<int> HiringTypeId { get; set; }
         public string PositionName { get; set; }
         public string ProjectName { get; set; }
-        public string Location { get; set; }
-        public Nullable<int> TypeofApplicable_Id { get; set; }
-        public Nullable<int> NoofPositions_Id { get; set; }
-        public Nullable<int> jobLocationType_Id { get; set; }
+        public Nullable<int> LocationId { get; set; }
+        public string OtherLocation { get; set; }
+        public Nullable<int> TypeofApplicableId { get; set; }
+        public Nullable<int> NoofPositionsId { get; set; }
+        public Nullable<int> jobLocationTypeId { get; set; }
         public string Remarks { get; set; }
         public string ReportingManager { get; set; }
         public Nullable<System.DateTime> Durationoftheposition_Fdate { get; set; }

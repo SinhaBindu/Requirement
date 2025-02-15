@@ -12,7 +12,7 @@ namespace Requirement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_NewHireMultiple
+    public partial class tbl_NewHireMultiple_old
     {
         public int Id_pk { get; set; }
         public System.Guid Emp_Id { get; set; }

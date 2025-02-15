@@ -28,6 +28,7 @@ namespace Requirement.Models
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<mst_Advertisement> mst_Advertisement { get; set; }
         public virtual DbSet<mst_Designation> mst_Designation { get; set; }
         public virtual DbSet<mst_District> mst_District { get; set; }
@@ -38,7 +39,8 @@ namespace Requirement.Models
         public virtual DbSet<mst_TypeofInterview> mst_TypeofInterview { get; set; }
         public virtual DbSet<Tbl_JD> Tbl_JD { get; set; }
         public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
-        public virtual DbSet<tbl_NewHireMultiple> tbl_NewHireMultiple { get; set; }
+        public virtual DbSet<tbl_NewHireMultiple_old> tbl_NewHireMultiple_old { get; set; }
+        public virtual DbSet<tbl_NewHireMultipleCost> tbl_NewHireMultipleCost { get; set; }
         public virtual DbSet<tbl_Signature> tbl_Signature { get; set; }
         public virtual DbSet<mst_Applicable> mst_Applicable { get; set; }
         public virtual DbSet<mst_CostCentreCode> mst_CostCentreCode { get; set; }
@@ -49,6 +51,5 @@ namespace Requirement.Models
         public virtual DbSet<mst_Sal> mst_Sal { get; set; }
         public virtual DbSet<mst_SelectionProcess> mst_SelectionProcess { get; set; }
         public virtual DbSet<mst_TypeYesNo> mst_TypeYesNo { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

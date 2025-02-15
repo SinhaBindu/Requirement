@@ -4,6 +4,11 @@ using System;
 using System.IO;
 using System.Web.Mvc;
 using System.Data;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System.Drawing.Drawing2D;
+using static Requirement.Manager.CommonModel;
 
 
 namespace Requirement.Controllers
@@ -11,7 +16,7 @@ namespace Requirement.Controllers
     public class EmployeeController : Controller
     {
         private Recruitment_DBEntities db = new Recruitment_DBEntities();
-
+        int result = 0;
         // GET: Employee
         public ActionResult AddNewHire()
         {
@@ -19,75 +24,108 @@ namespace Requirement.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNewHire(Employee model)
+        public ActionResult AddNewHire(EmployeeModel model)
         {
             try
             {
                 //if (!ModelState.IsValid)
                 //{
-                //    return Json(new { success = false, message = "All fields are required." });
+                //    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
                 //}
 
-                var NewHire = new tbl_NewHire
+                string tblcostdataJson = Request.Form["tblcostdata"];
+                // Deserialize the JSON string into a list of CostData objects
+                var tblcostdata = JsonConvert.DeserializeObject<List<MultipleCostModel>>(tblcostdataJson);
+
+                var tbl = new tbl_NewHire();
+                tbl.NewHireId_pk = Guid.NewGuid();
+                tbl.NewHiredDate = DateTime.Now;
+                tbl.HiringTypeId = model.HiringTypeId;
+                tbl.PositionName = model.PositionName;
+                tbl.ProjectName = model.ProjectName;
+                tbl.LocationId = model.LocationId;
+                tbl.OtherLocation = model.OtherLocation;
+                tbl.TypeofApplicableId = model.TypeofApplicableId;
+                tbl.NoofPositionsId = model.NoofPositionsId;
+                tbl.jobLocationTypeId = model.jobLocationTypeId;
+                tbl.ReportingManager = model.ReportingManager;
+                tbl.Durationoftheposition_Fdate = model.Durationoftheposition_Fdate;
+                tbl.Durationoftheposition_Tdate = model.Durationoftheposition_Tdate;
+                tbl.CostCentreCode_Id = model.CostCentreCode_Id;
+                tbl.BaseSalRangepermonth_Id = model.BaseSalRangepermonth_Id;
+                tbl.Grade_Id = model.Grade_Id;
+                tbl.JD_Availability_Id = model.JD_Availability_Id;
+                tbl.Advertisement_Id = model.Advertisement_Id;
+                tbl.EmpaneledHead_Id = model.EmpaneledHead_Id;
+                tbl.TypeOfInterview = model.TypeOfInterview;
+                tbl.InterviewPanel = model.InterviewPanel;
+                tbl.InterviewPanel2 = model.InterviewPanel2;
+                tbl.SelectionProcess_Id = model.SelectionProcess_Id;
+                tbl.LaptopwithSpecifications_Id = model.LaptopwithSpecifications_Id;
+                tbl.Anyspecificsoftwarewithlicense = model.Anyspecificsoftwarewithlicense;
+                tbl.IsActive = true;
+                tbl.CreatedOn = DateTime.Now;
+                tbl.CreatedBy = User.Identity.Name;
+                if (tblcostdata != null)
                 {
-                    Emp_Id = Guid.NewGuid(),
-                    NewHiredDate = DateTime.Now,
-                    HiringType_Id = model.HiringType_Id,
-                    PositionName = model.PositionName,
-                    ProjectName = model.ProjectName,
-                    Location = model.Location,
-                    TypeofApplicable_Id = model.TypeofApplicable_Id,
-                    NoofPositions_Id = model.NoofPositions_Id,
-                    jobLocationType_Id = model.jobLocationType_Id,
-                    ReportingManager = model.ReportingManager,
-                    Durationoftheposition_Fdate = model.Durationoftheposition_Fdate,
-                    Durationoftheposition_Tdate = model.Durationoftheposition_Tdate,
-                    CostCentreCode_Id = model.CostCentreCode_Id,
-                    BaseSalRangepermonth_Id = model.BaseSalRangepermonth_Id,
-                    Grade_Id = model.Grade_Id,
-                    JD_Availability_Id = model.JD_Availability_Id,
-                    Advertisement_Id = model.Advertisement_Id,
-                    EmpaneledHead_Id = model.EmpaneledHead_Id,
-                    TypeOfInterview = model.TypeOfInterview,
-                    InterviewPanel = model.InterviewPanel,
-                    InterviewPanel2 = model.InterviewPanel2,
-                    SelectionProcess_Id = model.SelectionProcess_Id,
-                    LaptopwithSpecifications_Id = model.LaptopwithSpecifications_Id,
-                    Anyspecificsoftwarewithlicense = model.Anyspecificsoftwarewithlicense,
-                    IsActive = true,
-                    CreatedOn = DateTime.Now
-                };
+                    if (tblcostdata.Count > 0)
+                    {
+                        var tblc = new tbl_NewHireMultipleCost();
+                        var tblclist = new List<tbl_NewHireMultipleCost>();
+                        foreach (var item in tblcostdata.ToList())
+                        {
+                            tblc.NewHireId_fk = tbl.NewHireId_pk;
+                            tblc.MultipleCostName = item.MultipleCostName;
+                            tblc.GrantID = item.GrantID;
+                            tblc.ActivityCode = item.ActivityCode;
+                            tblc.BudgetCode = item.BudgetCode;
+                            tblc.IsActive = true;
+                            tblc.CreatedBy = tbl.CreatedBy;
+                            tblc.CreatedOn = tbl.CreatedOn;
+                            tblclist.Add(tblc);
+                        }
+                        db.tbl_NewHireMultipleCost.AddRange(tblclist);
+                    }
+                }
+
                 if (model.JD_Availability_Id == 1 && model.JD_AvailabilityIfYes_Doc != null && model.JD_AvailabilityIfYes_Doc.ContentLength > 0)
                 {
-                    var fileName = Path.GetFileName(model.JD_AvailabilityIfYes_Doc.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images/NewHired_Images"), fileName);
-                    model.JD_AvailabilityIfYes_Doc.SaveAs(path);
-                    NewHire.JD_AvailabilityIfYes_Doc = fileName;
+                    FileModel modelfile = CommonModel.saveFile(model.JD_AvailabilityIfYes_Doc,"NewHire", "GID" + tbl.NewHireId_pk + (DateTime.Now.ToString("ddMMMyyyyHHss")));
+                    string fileExtension = Path.GetExtension(model.JD_AvailabilityIfYes_Doc.FileName).ToLower();
+                    string URLPath = "";
+                    // Check if the file extension is allowed
+                    if (fileExtension == ".zip" || fileExtension == ".png" || fileExtension == ".jpg" || fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".jpeg")
+                    {
+                        if (modelfile.IsvalidFile)
+                        {
+                            URLPath = modelfile.FilePathFull;
+                        }
+                        else
+                        {
+                            return Json(new { success = false, message = "File size is too large. Only files up to 20MB are allowed." });
+                        }
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = "Invalid file extension. Only zip, png, jpg, pdf, doc, and jpeg files are allowed." });
+                    }
+                    //var fileName = Path.GetFileName(model.JD_AvailabilityIfYes_Doc.FileName);
+                    //var path = Path.Combine(Server.MapPath("~/Images/NewHired_Images"), fileName);
+                    //model.JD_AvailabilityIfYes_Doc.SaveAs(path);
+                    tbl.JD_AvailabilityIfYes_Doc = URLPath;
                 }
-                else if (model.JD_Availability_Id == 1)
-                {
-                    return Json(new { success = false, message = "File upload failed. Please select a file for JD Availability." });
-                }
-                //if (model.JD_AvailabilityIfYes_Doc != null && model.JD_AvailabilityIfYes_Doc.ContentLength > 0)
-                //{
-                //    var fileName = Path.GetFileName(model.JD_AvailabilityIfYes_Doc.FileName);
-                //    var path = Path.Combine(Server.MapPath("~/Images/NewHired_Images"), fileName);
-                //    model.JD_AvailabilityIfYes_Doc.SaveAs(path);
-                //    NewHire.JD_AvailabilityIfYes_Doc = fileName;
-                //}
-                //else
-                //{
-                //    // Log or handle the case where the file is not uploaded
-                //    return Json(new { success = false, message = "File upload failed. Please select a file." });
-                //}
-                db.tbl_NewHire.Add(NewHire);
-                db.SaveChanges();
+                db.tbl_NewHire.Add(tbl);
+                result = db.SaveChanges();
 
-                return Json(new { success = true, message = "New Hired registration successful!" });
+                if (result > 0)
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.Insert) });
+                else
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.NotInsert) });
+
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = $"An error occurred: {ex.Message}" });
+                return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) });
             }
         }
 

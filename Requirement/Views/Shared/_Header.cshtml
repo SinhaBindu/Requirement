@@ -33,7 +33,7 @@
         </span>
     </div>
     <div class="app-header__content">
-        <div class="app-header-left">
+        @*<div class="app-header-left">
             <div class="search-wrapper">
                 <div class="input-holder">
                     <input type="text" class="search-input" placeholder="Type to search">
@@ -42,7 +42,7 @@
                 <button class="close"></button>
             </div>
             
-        </div>
+        </div>*@
         <div class="app-header-right">
             <div class="header-dots">
                 
@@ -392,7 +392,7 @@
                             <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                    class="p-0 btn">
-                                    <img width="42" class="rounded-circle" src="~/Content/assets/images/avatars/1.jpg"
+                                    <img width="42" class="rounded-circle" src="~/Content/dashboard/images/UserLogo.jpg"
                                          alt="">
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
@@ -401,33 +401,32 @@
                                     <div class="dropdown-menu-header">
                                         <div class="dropdown-menu-header-inner bg-info">
                                             <div class="menu-header-image opacity-2"
-                                                 style="background-image: url('~/Content/assets/images/dropdown-header/city3.jpg');">
+                                                 style="background-image: url('~/Content/dashboard/images/UserLogo.jpg');">
                                             </div>
                                             <div class="menu-header-content text-left">
                                                 <div class="widget-content p-0">
                                                     <div class="widget-content-wrapper">
                                                         <div class="widget-content-left mr-3">
                                                             <img width="42" class="rounded-circle"
-                                                                 src="~/Content/assets/images/avatars/1.jpg" alt="">
+                                                                 src="~/Content/dashboard/images/UserLogo.jpg" alt="">
                                                         </div>
                                                         <div class="widget-content-left">
-                                                            <div class="widget-heading">Alina Mcloughlin</div>
-                                                            <div class="widget-subheading opacity-8">
+                                                            <div class="widget-heading">@User.Identity.Name</div>
+                                                            @*<div class="widget-subheading opacity-8">
                                                                 A short
                                                                 profile description
-                                                            </div>
+                                                            </div>*@
                                                         </div>
                                                         <div class="widget-content-right mr-2">
-                                                            <button class="btn-pill btn-shadow btn-shine btn btn-focus">
-                                                                Logout
-                                                            </button>
+                                                            @Html.Partial("_LoginPartial")
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="scroll-area-xs" style="height: 150px;">
+                                    @*<div class="scroll-area-xs" style="height: 150px;">
                                         <div class="scrollbar-container ps">
                                             <ul class="nav flex-column">
                                                 <li class="nav-item-header nav-item">Activity</li>
@@ -491,11 +490,11 @@
                                                 Open Messages
                                             </button>
                                         </li>
-                                    </ul>
+                                    </ul>*@
                                 </div>
                             </div>
                         </div>
-                        <div class="widget-content-left  ml-3 header-user-info">
+                        @*<div class="widget-content-left  ml-3 header-user-info">
                             <div class="widget-heading"> Alina Mclourd </div>
                             <div class="widget-subheading"> VP People Manager </div>
                         </div>
@@ -504,7 +503,7 @@
                                     class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
                                 <i class="fa text-white fa-calendar pr-1 pl-1"></i>
                             </button>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>

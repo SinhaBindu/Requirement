@@ -91,7 +91,9 @@ namespace Requirement.Manager
             [Description("All fields are mandatory !!.")]
             AllFieldsRequired = 7,
             [Description("Please Enable Geolocation Latitude and Longitude !!.")]
-            LatLong = 8
+            LatLong = 8,
+            [Description("Record has been not saved !!.")]
+             NotInsert= 9
         }
 
         public enum eIsStatus
