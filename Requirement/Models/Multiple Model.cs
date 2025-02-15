@@ -120,7 +120,27 @@ namespace Requirement.Models
         [Display(Name = "Deleted On")]
         public DateTime? DeletedOn { get; set; }
 
+        [Display(Name = "Accountant")]
+        public List<string> Accountant { get; set; } // List of Accountants
+
+        [Display(Name = "Grant ID")]
+        public List<string> GrantID { get; set; } // List of Grant IDs
+
+        [Display(Name = "Activity Code")]
+        public List<string> ActivityCode { get; set; } // List of Activity Codes
+
+        [Display(Name = "Budget Code")]
+        public List<string> BudgetCode { get; set; } 
+
         public List<Multiple_Model> Multiple { get; set; }
+
+        public class MultipleCostModel
+    {
+        public string Accountant { get; set; }
+        public string GrantID { get; set; }
+        public string ActivityCode { get; set; }
+        public string BudgetCode { get; set; }
+    }
 
 
     }

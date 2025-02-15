@@ -160,7 +160,71 @@ namespace Requirement.Controllers
             return View();
         }
 
-        private string ConvertViewToString(string viewName, object model)
+        //public ActionResult MultipleHireF(Multiple_Model model)
+        //{
+        //    try
+        //    {
+        //        // Validate the model
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return Json(new { success = false, message = "All fields are required." });
+        //        }
+        //        var Emp_Id = Guid.NewGuid();
+        //        var MultipleHire = new tbl_NewHireMultiple_old
+        //        {
+        //            NewHiredDate = DateTime.Now,
+        //            HiringType_Id = model.HiringType_Id,
+        //            PositionName = model.PositionName,
+        //            Location = model.Location,
+        //            TypeofApplicable_Id = model.TypeofApplicable_Id,
+        //            NoofPositions_Id = model.NoofPositions_Id,
+        //            ReportingManager = model.ReportingManager,
+        //            Durationoftheposition_Fdate = model.Durationoftheposition_Fdate,
+        //            Durationoftheposition_Tdate = model.Durationoftheposition_Tdate,
+        //            CTCSalRangepermonth_Id = model.CTCSalRangepermonth_Id,
+        //            Grade_Id = model.Grade_Id,
+        //            IsActive = true,
+        //            CreatedOn = DateTime.Now
+        //        };
+
+        //        db.tbl_NewHireMultiple_old.Add(MultipleHire);
+        //        db.SaveChanges();
+
+
+        //        var accountants = model.Accountant;
+        //        var grantIDs = model.GrantID;
+        //        var activityCodes = model.ActivityCode;
+        //        var budgetCodes = model.BudgetCode;
+
+        //        for (int i = 0; i < maxLength; i++)
+        //        {
+        //            var multipleCost = new tbl_NewHireMultipleCost
+        //            {
+        //                MultipleCostName = i < accountants.Count ? accountants[i] : null,
+        //                GrantID = i < grantIDs.Count ? grantIDs[i] : null,
+        //                ActivityCode = i < activityCodes.Count ? activityCodes[i] : null,
+        //                BudgetCode = i < budgetCodes.Count ? budgetCodes[i] : null,
+        //                IsActive = true,
+        //                CreatedBy = User.Identity.Name,
+        //                CreatedOn = DateTime.Now
+        //            };
+
+        //            db.tbl_NewHireMultipleCost.Add(multipleCost);
+        //        }
+
+        //        db.SaveChanges();
+
+        //        return Json(new { success = true, message = "New hire and multiple costs saved successfully!" });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { success = false, message = $"An error occurred: {ex.Message}" });
+        //    }
+        //}
+    
+
+
+    private string ConvertViewToString(string viewName, object model)
         {
             ViewData.Model = model;
             using (StringWriter writer = new StringWriter())

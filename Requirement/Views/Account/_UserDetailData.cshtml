@@ -18,6 +18,9 @@
                 <th>Phone Number</th>
                 <th>User Name</th>
                 <th>Role</th>
+                <th>Emp Code</th>
+                <th>Designation</th>
+                <th>Location</th>Designation
             </tr>
         </thead>
         <tbody>
@@ -27,14 +30,17 @@
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                        <tr>
-                            <td class="text-left">@(sno++)</td>
-                            <td class="text-left">@dr["Name"]</td>
-                            <td class="text-left">@dr["Email"]</td>
-                            <td class="text-left">@dr["PhoneNumber"]</td>
-                            <td class="text-left">@dr["UserName"]</td>
-                            <td class="text-left"><strong class="badge bg-warning-500/10 fnsz">@dr["RoleName"]</strong></td> 
-                        </tr>
+            <tr>
+                <td class="text-left">@(sno++)</td>
+                <td class="text-left">@dr["Name"]</td>
+                <td class="text-left">@dr["Email"]</td>
+                <td class="text-left">@dr["PhoneNumber"]</td>
+                <td class="text-left">@dr["UserName"]</td>
+                <td class="text-left"><strong class="badge bg-warning-500/10 fnsz">@dr["RoleName"]</strong></td>
+                <td class="text-left">@dr["Emp_Code"]</td>
+                <td class="text-left">@dr["Designation"]</td>
+                <td class="text-left">@dr["Location"]</td>
+            </tr>
                     }
                 }
                 else

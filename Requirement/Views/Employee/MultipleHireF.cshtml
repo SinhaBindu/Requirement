@@ -22,155 +22,214 @@
                 <h5 class="text-center">(Multiple)</h5>
                 @using (Html.BeginForm("MultipleHireF", "Employee", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
                 {
-                <div class="flex-form">
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.HiringType_Id, htmlAttributes: new { @class = "control-label" })
-                        <span style="color:red;">*</span>
-                        <div class="col-md-10s">
-                            @Html.DropDownListFor(model => model.HiringType_Id, CommonModel.GetALLHyringM(), null, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.HiringType_Id, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="row">
+                    <div class="flex-form">
                         <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Location, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.TypeofApplicable_Id, htmlAttributes: new { @class = "control-label" })
-                        <span style="color:red;">*</span>
-                        <div class="col-md-10s">
-                            @Html.DropDownListFor(model => model.TypeofApplicable_Id, CommonModel.GetALLApplicableM(), null, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.TypeofApplicable_Id, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.NoofPositions_Id, htmlAttributes: new { @class = "control-label" })
-                        <span style="color:red;">*</span>
-                        @Html.TextBoxFor(model => model.NoofPositions_Id, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.NoofPositions_Id, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.ReportingManager, htmlAttributes: new { @class = "control-label" })
-                        <span style="color:red;">*</span>
-                        @Html.TextBoxFor(model => model.ReportingManager, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.ReportingManager, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Durationoftheposition_Fdate, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Durationoftheposition_Fdate, new { @class = "datepicker form-control", id = "FD", name = "FD", autocomplete = "off" })
-                            @Html.ValidationMessageFor(model => model.Durationoftheposition_Fdate, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Durationoftheposition_Tdate, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Durationoftheposition_Tdate, new { @class = "datepicker form-control", id = "TD", name = "TD", autocomplete = "off" })
-                            @Html.ValidationMessageFor(model => model.Durationoftheposition_Tdate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label class="control-label">Cost Centre Code <span style="color:red;">*</span></label>
-                        <table class="table table-bordered" id="costCentreTable">
-                            <thead>
-                                <tr>
-                                    <th>Cost Centre Code</th>
-                                    <th></th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" name="CostCentreCode_Id[]" class="form-control" required />
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger removeRow">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" id="addRow" class="btn btn-success">Add Row</button>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.CTCSalRangepermonth_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.CTCSalRangepermonth_Id, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.CTCSalRangepermonth_Id, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Grade_Id, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.HiringType_Id, htmlAttributes: new { @class = "control-label" })
                             <span style="color:red;">*</span>
                             <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.Grade_Id, CommonModel.GetALLGradeM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Grade_Id, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(model => model.HiringType_Id, CommonModel.GetALLHyringM(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.HiringType_Id, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group col-md-6" id="div_JD_Availability_Id">
-                        @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label " })
-                        <div>
-                            <label>
-                                @Html.RadioButtonFor(model => model.JD_Availability_Id, "1", new { @id = "JD_Yes" }) Yes
-                            </label>
-                            <label>
-                                @Html.RadioButtonFor(model => model.JD_Availability_Id, "2", new { @id = "JD_No" }) No
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
-                        @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
-                            @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Advertisement_Id, htmlAttributes: new { @class = "control-label " })
-                            <div>
-                                <label>
-                                    @Html.RadioButtonFor(model => model.Advertisement_Id, "1", new { @id = "Internal" }) Internal
-                                </label>
-                                <label>
-                                    @Html.RadioButtonFor(model => model.Advertisement_Id, "2", new { @id = "External" }) External
-                                </label>
-                                <label>
-                                    @Html.RadioButtonFor(model => model.Advertisement_Id, "3", new { @id = "All" }) All
-                                </label>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Location, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.EmpaneledHead_Id, htmlAttributes: new { @class = "control-label " })
+                            @Html.LabelFor(model => model.TypeofApplicable_Id, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.DropDownListFor(model => model.TypeofApplicable_Id, CommonModel.GetALLApplicableM(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TypeofApplicable_Id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.NoofPositions_Id, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.NoofPositions_Id, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NoofPositions_Id, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ReportingManager, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.ReportingManager, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReportingManager, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Durationoftheposition_Fdate, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Durationoftheposition_Fdate, new { @class = "datepicker form-control", id = "FD", name = "FD", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Durationoftheposition_Fdate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Durationoftheposition_Tdate, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Durationoftheposition_Tdate, new { @class = "datepicker form-control", id = "TD", name = "TD", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Durationoftheposition_Tdate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.CTCSalRangepermonth_Id, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.CTCSalRangepermonth_Id, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CTCSalRangepermonth_Id, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Grade_Id, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.Grade_Id, CommonModel.GetALLGradeM(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Grade_Id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6" id="div_JD_Availability_Id">
+                            @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label " })
                             <div>
                                 <label>
-                                    @Html.RadioButtonFor(model => model.EmpaneledHead_Id, "1", new { @id = "Yes" }) Yes
+                                    @Html.RadioButtonFor(model => model.JD_Availability_Id, "1", new { @id = "JD_Yes" }) Yes
                                 </label>
                                 <label>
-                                    @Html.RadioButtonFor(model => model.EmpaneledHead_Id, "2", new { @id = "No" }) No
+                                    @Html.RadioButtonFor(model => model.JD_Availability_Id, "2", new { @id = "JD_No" }) No
                                 </label>
                             </div>
+                        </div>
+
+                        <div class="form-group" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
+                            @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
+                                @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Cost Centre & Code <span style="color:red;">*</span></label>
+                            <table class="table table-bordered" id="costCentreTable">
+                                <thead>
+                                    <tr>
+                                        <th>Accountant</th>
+                                        <th>Grant ID</th>
+                                        <th>Activity Code</th>
+                                        <th>Budget Code</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="Accountant[]" class="form-control" required />
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                @*<label class="control-label">Grant ID</label>*@
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Select Grant ID
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="GrantID[]" value="110018"> 110018 till Sep 25
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="GrantID[]" value="110029"> 110029 till Mar 26
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="GrantID[]" value="510013"> 510013 till Mar 26
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                @*<label class="control-label">Activity Code</label>*@
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Select Activity Code
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="ActivityCode[]" value="210105"> 210105
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="ActivityCode[]" value="210121"> 210121
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="ActivityCode[]" value="610030"> 610030
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                @*<label class="control-label">Budget Code</label>*@
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Select Budget Code
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="BudgetCode[]" value="PRSL90 25%"> PRSL90 25%
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="BudgetCode[]" value="PRSL15 55%"> PRSL15 55%
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="checkbox" name="BudgetCode[]" value="PRSL011 (20%/ Rs.9,780/- Per Month)"> PRSL011 (20%/ Rs.9,780/- Per Month)
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger removeRow">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" id="addRow" class="btn btn-success">Add Row</button>
                         </div>
 
                         <div class="row">
@@ -224,8 +283,8 @@
                         </div>
                     </div>
 
+                   
 
-                </div>
                 }
             </div>
         </div>
@@ -282,16 +341,99 @@
             }
             $("#addRow").click(function () {
                 var newRow = `<tr>
-                        <td><input type="text" name="CostCentreCode_Id[]" class="form-control" required /></td>
-                        <td><button type="button" class="btn btn-danger removeRow">Delete</button></td>
-                      </tr>`;
+            <td><input type="text" name="Accountant[]" class="form-control" required /></td>
+            <td>
+            <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Select Grant ID
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <label>
+                                <input type="checkbox" name="GrantID[]" value="110018"> 110018 till Sep 25
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="GrantID[]" value="110029"> 110029 till Mar 26
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="GrantID[]" value="510013"> 510013 till Mar 26
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </td>
+            <td>
+            <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Select Activity Code
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li>
+                            <label>
+                                <input type="checkbox" name="ActivityCode[]" value="210105"> 210105
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="ActivityCode[]" value="210121"> 210121
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="ActivityCode[]" value="610030"> 610030
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </td>
+            <td>
+            <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Select Budget Code
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                        <li>
+                            <label>
+                                <input type="checkbox" name="BudgetCode[]" value="PRSL90 25%"> PRSL90 25%
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="BudgetCode[]" value="PRSL15 55%"> PRSL15 55%
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="BudgetCode[]" value="PRSL011 (20%/ Rs.9,780/- Per Month)"> PRSL011 (20%/ Rs.9,780/- Per Month)
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger removeRow">Delete</button>
+            </td>
+        </tr>`;
                 $("#costCentreTable tbody").append(newRow);
             });
 
             $(document).on("click", ".removeRow", function () {
                 $(this).closest("tr").remove();
             });
-        
+
 
             $("#formid").on("submit", function (event) {
                 event.preventDefault();
@@ -330,14 +472,14 @@
     </script>
 }
 
-    <div class="notes-section" style="margin-top: 20px;">
-        <h5>Notes:</h5>
-        <ul>
-            <li>CEO will be the approving authority for the NHF with recommendation from Senior Director – F&S for all the positions under Unrestricted funds and for Grade G & above (even if the position is 100% budgeted under a project)</li>
-            <li>For shared cost resources under multiple projects, approval from all the respective budget holders will suffice after Finance review by Associate Director (F&S). Further Approval from CEO will not be required for such cases</li>
-            <li>It is mandatory for CEO & SD-F&S to be there in the interview panel for Grade G and above and for Budget Holder positions. CEO will be the deciding authority for final selection of the candidates.</li>
-            <li>For positions where CEO is the Skip Level Supervisor, he will be involved in the Final Selection of the candidates. For rest of the positions, it will be solely his discretion to have an interaction with the candidate before selection.</li>
-            <li>In case of recommended candidates, concerned referee will neither be included in the interview panel nor in the selection process</li>
-            <li>If competent interviewer is not available internally for any critical position, P&C will seek external expertise for assess</li>
-        </ul>
-    </div>
+<div class="notes-section" style="margin-top: 20px;">
+    <h5>Notes:</h5>
+    <ul>
+        <li>CEO will be the approving authority for the NHF with recommendation from Senior Director – F&S for all the positions under Unrestricted funds and for Grade G & above (even if the position is 100% budgeted under a project)</li>
+        <li>For shared cost resources under multiple projects, approval from all the respective budget holders will suffice after Finance review by Associate Director (F&S). Further Approval from CEO will not be required for such cases</li>
+        <li>It is mandatory for CEO & SD-F&S to be there in the interview panel for Grade G and above and for Budget Holder positions. CEO will be the deciding authority for final selection of the candidates.</li>
+        <li>For positions where CEO is the Skip Level Supervisor, he will be involved in the Final Selection of the candidates. For rest of the positions, it will be solely his discretion to have an interaction with the candidate before selection.</li>
+        <li>In case of recommended candidates, concerned referee will neither be included in the interview panel nor in the selection process</li>
+        <li>If competent interviewer is not available internally for any critical position, P&C will seek external expertise for assess</li>
+    </ul>
+</div>

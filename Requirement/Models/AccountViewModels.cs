@@ -72,6 +72,8 @@ namespace Requirement.Models
         [Required]
         [Phone]
         [Display(Name = "Phone Number")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid phone number format.")]
         public string PhoneNumber { get; set; }
 
         [Required]

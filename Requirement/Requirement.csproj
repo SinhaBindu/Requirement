@@ -999,13 +999,6 @@
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.ttf" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.woff" />
-    <EntityDeploy Include="Models\Employee.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Employee.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Employee.edmx.diagram">
-      <DependentUpon>Employee.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.ttf" />
     <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.woff" />
     <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.woff2" />
@@ -1072,6 +1065,13 @@
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.eot" />
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.ttf" />
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.woff" />
+    <EntityDeploy Include="Models\Employee.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Employee.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Employee.edmx.diagram">
+      <DependentUpon>Employee.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
