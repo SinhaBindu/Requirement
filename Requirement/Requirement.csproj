@@ -1130,6 +1130,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UserDetaillist.cshtml" />
     <Content Include="Views\Account\_UserDetailData.cshtml" />
+    <Content Include="Views\JD\JobD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
