@@ -268,9 +268,6 @@
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Multiple Model.cs" />
-    <Compile Include="Models\Tbl_EmpReg.cs">
-      <DependentUpon>Employee.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Tbl_JD.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
@@ -1122,12 +1119,12 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Employee\EmpReg.cshtml" />
+    <Content Include="Views\Employee\AddNewHire.cshtml" />
     <Content Include="Views\Employee\HiredList.cshtml" />
     <Content Include="Views\Employee\_NewHiredData.cshtml" />
     <Content Include="Views\JD\JDForm.cshtml" />
     <Content Include="Views\Employee\MultipleHireF.cshtml" />
-    <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UserDetaillist.cshtml" />
     <Content Include="Views\Account\_UserDetailData.cshtml" />
   </ItemGroup>

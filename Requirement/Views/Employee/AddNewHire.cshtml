@@ -20,7 +20,7 @@
                 <h3 class="text-center">New Hire Approval Form for Full Time Employees</h3>
                 <h5 class="text-center">100% Budgeted position</h5>
 
-                @using (Html.BeginForm("EmpReg", "Employee", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("AddNewHire", "Employee", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="flex-form">
@@ -325,7 +325,7 @@
                 if (confirm('Are you sure you want to submit the form?')) {
                     $.ajax({
                         type: "POST",
-                        url: document.baseURI + "/Employee/EmpReg/",
+                        url: document.baseURI + "/Employee/AddNewHire/",
                         data: formData,
                         processData: false,
                         contentType: false,

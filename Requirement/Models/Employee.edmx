@@ -280,25 +280,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
-        <EntityType Name="Tbl_EmpReg">
-          <Key>
-            <PropertyRef Name="EmpId_pk" />
-          </Key>
-          <Property Name="EmpId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AspUserId_fk" Type="nvarchar" MaxLength="128" />
-          <Property Name="RoleId_fk" Type="nvarchar(max)" />
-          <Property Name="Emp_Code" Type="nvarchar" MaxLength="50" />
-          <Property Name="Name" Type="nvarchar" MaxLength="255" />
-          <Property Name="Designation" Type="nvarchar" MaxLength="255" />
-          <Property Name="OtherDesignation" Type="nvarchar" MaxLength="200" />
-          <Property Name="Location" Type="int" />
-          <Property Name="IsActive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
-          <Property Name="UpdatedOn" Type="datetime" />
-          <Property Name="OrderBy" Type="int" />
-        </EntityType>
         <EntityType Name="Tbl_JD">
           <Key>
             <PropertyRef Name="Id_pk" />
@@ -479,7 +460,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="mst_Name" EntityType="Self.mst_Name" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_State" EntityType="Self.mst_State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_TypeofInterview" EntityType="Self.mst_TypeofInterview" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_EmpReg" EntityType="Self.Tbl_EmpReg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_JD" EntityType="Self.Tbl_JD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHire" EntityType="Self.tbl_NewHire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHireMultiple" EntityType="Self.tbl_NewHireMultiple" Schema="dbo" store:Type="Tables" />
@@ -621,7 +601,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="mst_SelectionProcess" EntityType="Recruitment_DBModel.mst_SelectionProcess" />
           <EntitySet Name="mst_TypeYesNo" EntityType="Recruitment_DBModel.mst_TypeYesNo" />
           <EntitySet Name="AspNetUsers" EntityType="Recruitment_DBModel.AspNetUser" />
-          <EntitySet Name="Tbl_EmpReg" EntityType="Recruitment_DBModel.Tbl_EmpReg" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -999,25 +978,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <NavigationProperty Name="AspNetUserClaims" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="Recruitment_DBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-        </EntityType>
-        <EntityType Name="Tbl_EmpReg">
-          <Key>
-            <PropertyRef Name="EmpId_pk" />
-          </Key>
-          <Property Name="EmpId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AspUserId_fk" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RoleId_fk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Emp_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Designation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="OtherDesignation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderBy" Type="Int32" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -1436,26 +1396,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_EmpReg">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.Tbl_EmpReg">
-              <MappingFragment StoreEntitySet="Tbl_EmpReg">
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="OtherDesignation" ColumnName="OtherDesignation" />
-                <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Emp_Code" ColumnName="Emp_Code" />
-                <ScalarProperty Name="RoleId_fk" ColumnName="RoleId_fk" />
-                <ScalarProperty Name="AspUserId_fk" ColumnName="AspUserId_fk" />
-                <ScalarProperty Name="EmpId_pk" ColumnName="EmpId_pk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -50,6 +50,5 @@ namespace Requirement.Models
         public virtual DbSet<mst_SelectionProcess> mst_SelectionProcess { get; set; }
         public virtual DbSet<mst_TypeYesNo> mst_TypeYesNo { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Tbl_EmpReg> Tbl_EmpReg { get; set; }
     }
 }

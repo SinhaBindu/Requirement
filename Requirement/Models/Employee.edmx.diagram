@@ -30,7 +30,6 @@
         <EntityTypeShape EntityType="Recruitment_DBModel.mst_SelectionProcess" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="Recruitment_DBModel.mst_TypeYesNo" Width="1.5" PointX="14.75" PointY="3.75" />
         <EntityTypeShape EntityType="Recruitment_DBModel.AspNetUser" Width="1.5" PointX="3" PointY="19.625" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_EmpReg" Width="1.5" PointX="9.375" PointY="14.75" />
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Recruitment_DBModel.AspNetUserRoles" />

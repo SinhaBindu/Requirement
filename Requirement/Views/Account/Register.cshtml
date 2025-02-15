@@ -1,0 +1,175 @@
+﻿@model Requirement.Models.RegisterViewModel
+@using Requirement.Manager
+@{
+    ViewBag.Title = "User Registration";
+}
+
+
+<div class="page-bread page-titles">
+    <div class="bread-flex">
+        <h1>Registration</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">@ViewBag.Title</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">@ViewBag.Title</h4>
+                <div class="basic-form">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
+                    {
+                         @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="flex-form">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.DropDownListFor(model => model.RoleId, CommonModel.GetALLRoles(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Emp_Code, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.TextBoxFor(model => model.Emp_Code, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Emp_Code, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.DropDownListFor(model => model.Designation, CommonModel.GetALLDesignation(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 dv-desig" style="display:none;">
+                            @Html.LabelFor(model => model.OtherDesignation, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.OtherDesignation, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OtherDesignation, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            <div class="col-md-10s">
+                                @Html.DropDownListFor(model => model.Location, CommonModel.GetALLLocation(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6 dv-rolu" style="display:none">
+                            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6  dv-rolu" style="display:none">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6  dv-rolu" style="display:none">
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-row pt-1">
+                            <div class="form-group col-md-6 ">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+          //  LoadData();
+            $('#Designation').change(function () {
+                $('.dv-desig').hide(); $('#OtherDesignation').hide(); $('#OtherDesignation').val(''); $('#OtherDesignation').removeAttr('required');
+                if ($(this).val() == "6") {
+                    $('.dv-desig').show(); $('#OtherDesignation').show(); $('#OtherDesignation').attr('required', 'required');
+                }
+            })
+            $('#RoleId').change(function () {
+                $('.dv-rolu').show(); $('#Username').val(''); $('#Password').val(''); $('#ConfirmPassword').val(''); //$('.dv-rolu').removeAttr('disabled');
+                if ($(this).val() == "2") {
+                    var pno = $('#PhoneNumber').val();
+                    $('.dv-rolu').show(); $('#Username').val(pno); $('#Password').val(pno); $('#ConfirmPassword').val(pno);
+                    $('.dv-rolu').attr('disabled', 'disabled');
+                }
+            })
+            $('#PhoneNumber').change(function () {
+                var pno = $(this).val(); $('.dv-rolu').removeAttr('disabled');
+                $('#Username').val(pno); $('#Password').val(pno); $('#ConfirmPassword').val(pno);
+                $('.dv-rolu').attr('disabled', 'disabled');
+            });
+        });
+        function LoadData() {
+            $("#formid").on("submit", function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                if (confirm('Are you sure you want to submit the form?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: document.baseURI + "/Account/Register/",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (resp) {
+                            if (resp.success) {
+                                toastr.success("Success", resp.message);
+                                $("#formid")[0].reset();
+                            } else {
+                                toastr.error("Error", resp.message);
+                            }
+                        },
+                        error: function (req, error) {
+                            var errorMsg = req.statusText ? req.statusText : error;
+                            toastr.error("Error", `There was a communication error: ${errorMsg}`);
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

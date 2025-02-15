@@ -13,13 +13,13 @@ namespace Requirement.Controllers
         private Recruitment_DBEntities db = new Recruitment_DBEntities();
 
         // GET: Employee
-        public ActionResult EmpReg()
+        public ActionResult AddNewHire()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult EmpReg(Employee model)
+        public ActionResult AddNewHire(Employee model)
         {
             try
             {
