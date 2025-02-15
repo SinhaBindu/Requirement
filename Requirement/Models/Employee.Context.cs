@@ -37,6 +37,7 @@ namespace Requirement.Models
         public virtual DbSet<mst_Name> mst_Name { get; set; }
         public virtual DbSet<mst_State> mst_State { get; set; }
         public virtual DbSet<mst_TypeofInterview> mst_TypeofInterview { get; set; }
+        public virtual DbSet<Tbl_JD> Tbl_JD { get; set; }
         public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
         public virtual DbSet<tbl_NewHireMultiple_old> tbl_NewHireMultiple_old { get; set; }
         public virtual DbSet<tbl_NewHireMultipleCost> tbl_NewHireMultipleCost { get; set; }
