@@ -280,32 +280,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
-        <EntityType Name="Tbl_JD">
-          <Key>
-            <PropertyRef Name="Id_pk" />
-          </Key>
-          <Property Name="Id_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Emp_Id_fk" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="JobTittle" Type="varchar" MaxLength="255" />
-          <Property Name="NoofPositions" Type="int" />
-          <Property Name="Location" Type="varchar" MaxLength="50" />
-          <Property Name="Grade" Type="varchar" MaxLength="10" />
-          <Property Name="SalRange" Type="int" />
-          <Property Name="Type" Type="varchar" MaxLength="25" />
-          <Property Name="QualificationReq" Type="nvarchar" MaxLength="500" />
-          <Property Name="ExperiencedReq" Type="nvarchar" MaxLength="500" />
-          <Property Name="SkillsAndAttribute" Type="nvarchar" MaxLength="500" />
-          <Property Name="ApplicationClosureDate" Type="datetime" />
-          <Property Name="KeyRolesAndRes" Type="nvarchar" MaxLength="500" />
-          <Property Name="ReportingTo" Type="nvarchar" MaxLength="125" />
-          <Property Name="AboutProject" Type="nvarchar" MaxLength="500" />
-          <Property Name="IsActive" Type="bit" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
-          <Property Name="UpdatedOn" Type="datetime" />
-          <Property Name="OrderBy" Type="int" />
-        </EntityType>
         <EntityType Name="tbl_NewHire">
           <Key>
             <PropertyRef Name="NewHireId_pk" />
@@ -474,7 +448,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="mst_Name" EntityType="Self.mst_Name" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_State" EntityType="Self.mst_State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_TypeofInterview" EntityType="Self.mst_TypeofInterview" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_JD" EntityType="Self.Tbl_JD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHire" EntityType="Self.tbl_NewHire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHireMultiple_old" EntityType="Self.tbl_NewHireMultiple_old" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHireMultipleCost" EntityType="Self.tbl_NewHireMultipleCost" Schema="dbo" store:Type="Tables" />
@@ -591,6 +564,47 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Recruitment_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+
+        <EntityContainer Name="Recruitment_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Recruitment_DBModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Recruitment_DBModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Recruitment_DBModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Recruitment_DBModel.AspNetUser" />
+          <EntitySet Name="mst_Advertisement" EntityType="Recruitment_DBModel.mst_Advertisement" />
+          <EntitySet Name="mst_Designation" EntityType="Recruitment_DBModel.mst_Designation" />
+          <EntitySet Name="mst_District" EntityType="Recruitment_DBModel.mst_District" />
+          <EntitySet Name="mst_EmpCode" EntityType="Recruitment_DBModel.mst_EmpCode" />
+          <EntitySet Name="mst_Location" EntityType="Recruitment_DBModel.mst_Location" />
+          <EntitySet Name="mst_Name" EntityType="Recruitment_DBModel.mst_Name" />
+          <EntitySet Name="mst_State" EntityType="Recruitment_DBModel.mst_State" />
+          <EntitySet Name="mst_TypeofInterview" EntityType="Recruitment_DBModel.mst_TypeofInterview" />
+          <EntitySet Name="tbl_NewHire" EntityType="Recruitment_DBModel.tbl_NewHire" />
+          <EntitySet Name="tbl_NewHireMultiple_old" EntityType="Recruitment_DBModel.tbl_NewHireMultiple_old" />
+          <EntitySet Name="tbl_NewHireMultipleCost" EntityType="Recruitment_DBModel.tbl_NewHireMultipleCost" />
+          <EntitySet Name="tbl_Signature" EntityType="Recruitment_DBModel.tbl_Signature" />
+          <EntitySet Name="mst_Applicable" EntityType="Recruitment_DBModel.mst_Applicable" />
+          <EntitySet Name="mst_CostCentreCode" EntityType="Recruitment_DBModel.mst_CostCentreCode" />
+          <EntitySet Name="mst_Grade" EntityType="Recruitment_DBModel.mst_Grade" />
+          <EntitySet Name="mst_HiringType" EntityType="Recruitment_DBModel.mst_HiringType" />
+          <EntitySet Name="mst_JobLocation" EntityType="Recruitment_DBModel.mst_JobLocation" />
+          <EntitySet Name="mst_Position" EntityType="Recruitment_DBModel.mst_Position" />
+          <EntitySet Name="mst_Sal" EntityType="Recruitment_DBModel.mst_Sal" />
+          <EntitySet Name="mst_SelectionProcess" EntityType="Recruitment_DBModel.mst_SelectionProcess" />
+          <EntitySet Name="mst_TypeYesNo" EntityType="Recruitment_DBModel.mst_TypeYesNo" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Recruitment_DBModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -745,32 +759,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderBy" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Tbl_JD">
-          <Key>
-            <PropertyRef Name="Id_pk" />
-          </Key>
-          <Property Name="Id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Id_fk" Type="Guid" Nullable="false" />
-          <Property Name="JobTittle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="NoofPositions" Type="Int32" />
-          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="SalRange" Type="Int32" />
-          <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="QualificationReq" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ExperiencedReq" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SkillsAndAttribute" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ApplicationClosureDate" Type="DateTime" Precision="3" />
-          <Property Name="KeyRolesAndRes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ReportingTo" Type="String" MaxLength="125" FixedLength="false" Unicode="true" />
-          <Property Name="AboutProject" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_NewHire">
@@ -1208,6 +1196,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="Tbl_JD">
             <EntityTypeMapping TypeName="Recruitment_DBModel.Tbl_JD">
               <MappingFragment StoreEntitySet="Tbl_JD">
@@ -1235,6 +1224,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+
           <EntitySetMapping Name="tbl_NewHire">
             <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHire">
               <MappingFragment StoreEntitySet="tbl_NewHire">
