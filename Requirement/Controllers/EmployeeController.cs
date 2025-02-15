@@ -129,7 +129,7 @@ namespace Requirement.Controllers
             }
         }
 
-        public ActionResult HiredList()
+        public ActionResult HireList()
         {
             return View();
         }
