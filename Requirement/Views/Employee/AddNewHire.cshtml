@@ -397,6 +397,7 @@
             $("#formid").on("submit", function (event) {
                 event.preventDefault();
                 debugger;
+
                 var tblcostdata = [], objdata = "";
                 $('#dataTable tbody tr').each(function (rowInd) {
                     var MultipleCostName = $(this).find(`#MultipleCostName_${rowInd}`).val();
@@ -411,6 +412,7 @@
                     });
 
                 });
+
                 var formData = new FormData(this);
                 // Append the image file to FormData
                 var imageFile = $('#JD_AvailabilityIfYes_Doc')[0].files[0];
