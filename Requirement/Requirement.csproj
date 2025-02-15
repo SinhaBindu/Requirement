@@ -268,6 +268,9 @@
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Multiple Model.cs" />
+    <Compile Include="Models\Tbl_JD.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_NewHire.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>

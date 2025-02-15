@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="Recruitment_DBModel.mst_Name" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Recruitment_DBModel.mst_State" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Recruitment_DBModel.mst_TypeofInterview" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_JD" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHire" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHireMultiple_old" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHireMultipleCost" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
@@ -34,6 +33,7 @@
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Recruitment_DBModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_JD" Width="1.5" PointX="7.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
