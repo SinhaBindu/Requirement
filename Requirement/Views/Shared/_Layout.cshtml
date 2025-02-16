@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     @*<link href="~/Content/plugins/datatables/media/css/buttons.dataTables.css" rel="stylesheet">*@
     <base href="@Requirement.Manager.CommonModel.GetBaseUrl()" />
+
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
@@ -29,6 +30,7 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
 
+
     @*@Scripts.Render("~/bundles/bootstrap")*@
     @**@
     <script src="~/Content/assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
@@ -44,6 +46,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+
+
+    @*<script>
+    $(document).ready(function () {
+        // Function to check session status
+        function checkSession() {
+            $.ajax({
+                url: '@Url.Action("CheckSession", "Account")', // Endpoint URL
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    if (!response.isValid) {
+                        // Redirect to the login page if the session is invalid
+                        window.location.href = '@Url.Action("Login", "Account")';
+                    }
+                },
+                error: function () {
+                    console.log("Error checking session status.");
+                }
+            });
+        }
+
+        // Check session status every 60 seconds
+       // setInterval(checkSession, 60000); // 60000 milliseconds = 60 seconds
+    });
+    </script>*@
+    <!--@if (HttpContext.Current.Session["CUser"] == null)
+    {
+        <script>
+              $(document).ready(function () {
+              //-->@*var url = '@Url.Action("Login", "Account")';
+                  location.href = url;*@
+                    <!--window.location.href = '@Url.Action("Login", "Account")';
+              });
+        </script>
+    }-->
+
 
 </body>
 </html>

@@ -61,6 +61,8 @@ namespace Requirement.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            Session.Clear();
+            Session.Abandon();
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -460,6 +462,8 @@ namespace Requirement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session.Clear();
+            Session.Abandon();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
@@ -564,5 +568,14 @@ namespace Requirement.Controllers
         }
 
         #endregion
+
+        public JsonResult CheckSession()
+        {
+            // Check if the session is valid (e.g., user is authenticated)
+            bool isSessionValid = Session["CUser"] != null;
+
+            // Return the session status as JSON
+            return Json(new { isValid = isSessionValid }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

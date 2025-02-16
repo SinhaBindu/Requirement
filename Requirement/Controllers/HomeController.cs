@@ -11,6 +11,8 @@ using System.Web.Mvc;
 
 namespace Requirement.Controllers
 {
+    [Authorize]
+    [SessionCheckAttribute]
     public class HomeController : Controller
     {
         private Recruitment_DBEntities db = new Recruitment_DBEntities();

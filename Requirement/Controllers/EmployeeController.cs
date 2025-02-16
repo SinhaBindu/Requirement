@@ -9,11 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing.Drawing2D;
 using static Requirement.Manager.CommonModel;
+using Requirement.Controllers;
 
 
 namespace Requirement.Controllers
 {
-    public class EmployeeController : Controller
+    [Authorize]
+    [SessionCheckAttribute]
+    public class EmployeeController : BaseController
     {
         private Recruitment_DBEntities db = new Recruitment_DBEntities();
         int result = 0;

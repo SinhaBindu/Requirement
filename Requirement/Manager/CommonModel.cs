@@ -349,7 +349,7 @@ namespace Requirement.Manager
         {
             Recruitment_DBEntities _db = new Recruitment_DBEntities();
             List<SelectListItem> list = new List<SelectListItem>();
-            list = _db.mst_Location.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.Id_pk.ToString(), Text = x.Location }).ToList();
+            list = _db.mst_State.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.StateId_pk.ToString(), Text = x.StateName }).ToList();
             if (IsSelect == 0)
             {
                 list.Insert(0, new SelectListItem { Value = "", Text = "Select" });

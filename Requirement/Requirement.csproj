@@ -46,6 +46,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SubSonic.Core">
       <HintPath>E:\proj\nopCommerce_3.60_Source\Presentation\Nop.Web\bin\SubSonic.Core.dll</HintPath>
@@ -172,8 +176,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SessionCheckAttribute.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JDController.cs" />
@@ -181,6 +187,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Alert.cs" />
+    <Compile Include="Helper\Healpers.cs" />
+    <Compile Include="Helper\ImageUpload.cs" />
+    <Compile Include="Helper\MyHelper.cs" />
+    <Compile Include="Manager\Alert.cs" />
     <Compile Include="Manager\CommonModel.cs" />
     <Compile Include="Manager\Enums.cs" />
     <Compile Include="Manager\SPManager.cs" />
