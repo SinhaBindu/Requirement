@@ -15,6 +15,12 @@
     <link href="~/Content/dashboard/css/style.css" rel="stylesheet">
     <base href="@Requirement.Manager.CommonModel.GetBaseUrl()" />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css" rel="stylesheet" />
+
 </head>
 <body>
     <div id="preloader">
@@ -59,9 +65,11 @@
                 </div>
             </div>
         </div>*@
-    @Scripts.Render("~/bundles/jquery")
 
+    @Scripts.Render("~/bundles/jquery")
     <script src="~/Content/dashboard/plugins/common/common.min.js"></script>
+    @RenderSection("scripts", required: false)
+
     <script src="~/Content/dashboard/js/custom.min.js"></script>
     <script src="~/Content/dashboard/js/settings.js"></script>
     <script src="~/Content/dashboard/js/gleek.js"></script>
@@ -74,7 +82,7 @@
     <!-- Datamap -->
     <script src="~/Content/dashboard/plugins/d3v3/index.js"></script>
     <script src="~/Content/dashboard/plugins/topojson/topojson.min.js"></script>
-    <script src="~/Content/dashboard/plugins/datamaps/datamaps.world.min.js"></script>
+    @*<script src="~/Content/dashboard/plugins/datamaps/datamaps.world.min.js"></script>*@
     <!-- Morrisjs -->
     <script src="~/Content/dashboard/plugins/raphael/raphael.min.js"></script>
     <script src="~/Content/dashboard/plugins/morris/morris.min.js"></script>
@@ -85,7 +93,32 @@
     <script src="~/Content/dashboard/plugins/chartist/js/chartist.min.js"></script>
     <script src="~/Content/dashboard/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 
-    <script src="~/Content/dashboard/js/dashboard/dashboard-1.js"></script>
-    @RenderSection("scripts", required: false)
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
+
+    @*<script src="~/Content/dashboard/js/dashboard/dashboard-1.js"></script>*@
+
+    <script>
+        const scrollingElement = (document.scrollingElement || document.body);
+
+        const scrollSmoothToBottom = () => {
+            $(scrollingElement).animate({
+                scrollTop: document.body.scrollHeight,
+            }, 500);
+        }
+
+        const scrollSmoothToTop = () => {
+            $(scrollingElement).animate({
+                scrollTop: 0,
+            }, 500);
+        }
+    </script>
+
 </body>
 </html>

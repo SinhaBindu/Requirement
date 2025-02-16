@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="row dv_multiplecost" style="display:none;">
+                            <div class=" dv_multiplecost" style="display:none;">
                                 <table id="dataTable" border="1" width="90%">
                                     <thead>
                                         <tr>
@@ -64,18 +64,18 @@
                                     </thead>
                                     <tbody>
                                         @*<tr>
-                        <td><input type="text" name="MultipleCostName" id="MultipleCostName_0" value="" /></td>
-                            <td><input type="text" name="GrantID" id="GrantID_0" value="" /></td>
-                            <td><input type="text" name="ActivityCode" id="ActivityCode_0" value="" /></td>
-                            <td><input type="text" name="BudgetCode" id="BudgetCode_0" value="" /></td>
-                        <td><button class="deleteRow">Delete</button></td>
-                    </tr>*@
+                                                <td><input type="text" name="MultipleCostName" id="MultipleCostName_0" value="" /></td>
+                                                    <td><input type="text" name="GrantID" id="GrantID_0" value="" /></td>
+                                                    <td><input type="text" name="ActivityCode" id="ActivityCode_0" value="" /></td>
+                                                    <td><input type="text" name="BudgetCode" id="BudgetCode_0" value="" /></td>
+                                                <td><button class="deleteRow">Delete</button></td>
+                                            </tr>*@
                                     </tbody>
                                 </table>
 
                                 <button id="addRow">Add Row</button>
                             </div>
-                        </div>                        
+                        </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -122,7 +122,7 @@
                                 @Html.ValidationMessageFor(model => model.ReportingManager, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
+
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -145,7 +145,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -245,8 +245,8 @@
                                 @Html.TextAreaFor(model => model.InterviewPanel2, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.InterviewPanel2, "", new { @class = "text-danger" })
                             </div>
-                        </div>                                                           
-                                               
+                        </div>
+
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -280,7 +280,7 @@
                     </div>
                 }
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -377,7 +377,7 @@
                     $('#InterviewPanel2').attr('required', 'required');
                 }
             });
-      
+
             // Event listener for changes in JD_Availability_Id radio buttons
             $('input[name="JD_Availability_Id"]').change(function () {
                 $('#div_JD_AvailabilityIfYes_Doc').hide();
