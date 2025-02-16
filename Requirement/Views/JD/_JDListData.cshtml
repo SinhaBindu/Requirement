@@ -1,0 +1,35 @@
+﻿@using System.Data
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover dt-responsive display tbl small" id="tbl" width="100%">
+        <thead>
+            <tr>
+                <th>Type Of Name</th>
+                <th>Type Of Value</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model.Rows.Count > 0)
+                {
+                    foreach (DataRow row in Model.Rows)
+                    {
+                        <tr>
+                            <td>@row["TypeOfName"]</td>
+                            <td>@row["TypeOfValue"]</td>
+                            <td><button class="btn btn-primary btn-sm edit-btn"data-id="@row["JobId_pk"]"data-name="@row["TypeOfName"]"data-value="@row["TypeOfValue"]">Edit</button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">No data available</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

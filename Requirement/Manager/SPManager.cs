@@ -25,5 +25,11 @@ namespace Requirement.Manager
             DataTable dt = sp.ExecuteDataSet().Tables[0];
             return dt;
         }
+        public static DataTable Get_Usp_GetJDList()
+        {
+            StoredProcedure sp = new StoredProcedure("Usp_GetJDList");
+            DataTable dt = sp.ExecuteDataSet().Tables[0];
+            return dt;
+        }
     }
 }

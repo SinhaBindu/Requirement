@@ -51,5 +51,7 @@ namespace Requirement.Models
         public virtual DbSet<mst_SelectionProcess> mst_SelectionProcess { get; set; }
         public virtual DbSet<mst_TypeYesNo> mst_TypeYesNo { get; set; }
         public virtual DbSet<Tbl_JD> Tbl_JD { get; set; }
+        public virtual DbSet<Tbl_JobD> Tbl_JobD { get; set; }
+        public virtual DbSet<mst_AboutPosition> mst_AboutPosition { get; set; }
     }
 }

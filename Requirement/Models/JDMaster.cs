@@ -6,13 +6,15 @@ using System.Web;
 
 namespace Requirement.Models
 {
-    public class JD_Model
+    public class JDMaster
     {
-        public Nullable<System.Guid> NewHireId_fk { get; set; }
+        public JDMaster()
+        {
+            AboutPositionId_pk = 0;
+        }
+        public int AboutPositionId_pk {get;set;}
+        [Display(Name = "Type of Name")]
         public string TypeOfName { get; set; }
-        public int TypeOfNameId { get; set; }
-        public string TypeOfValue { get; set; }
-        public string Remarks { get; set; }
 
         [Display(Name = "Is Active")]
         public bool IsActive { get; set; }
@@ -34,5 +36,9 @@ namespace Requirement.Models
 
         [Display(Name = "Deleted On")]
         public DateTime? DeletedOn { get; set; }
+
+        public int? OrderBy { get; set; }
+
+
     }
 }

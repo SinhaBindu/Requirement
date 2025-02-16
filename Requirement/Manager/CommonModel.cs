@@ -134,12 +134,27 @@ namespace Requirement.Manager
                 return string.Empty;
         }
         #endregion
-
         public static List<SelectListItem> GetALLHyringM(int IsSelect = 0)
         {
             Recruitment_DBEntities _db = new Recruitment_DBEntities();
             List<SelectListItem> list = new List<SelectListItem>();
             list = _db.mst_HiringType.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.HiringTypeId.ToString(), Text = x.HiringType }).ToList();
+            if (IsSelect == 0)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
+        public static List<SelectListItem> GetAboutPosition(int IsSelect = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list = _db.mst_AboutPosition.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.AboutPositionId_pk.ToString(), Text = x.TypeOfName }).ToList();
             if (IsSelect == 0)
             {
                 list.Insert(0, new SelectListItem { Value = "", Text = "Select" });

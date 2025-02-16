@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Requirement.Models.mst_AboutPosition>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover dt-responsive display tbl small" id="tbl" width="100%">
+        <thead>
+            <tr>
+                <th>Srno.</th>
+                <th>Type Of Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var sno = 0;
+                if (Model.Count() > 0)
+                {
+                    foreach (var row in Model.ToList())
+                    {
+                        <tr>
+                            <td>@(sno++)</td>
+                            <td>@row.TypeOfName</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm edit-btn" data-id="@row.AboutPositionId_pk" data-name="@row.TypeOfName">Edit</button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">No data available</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

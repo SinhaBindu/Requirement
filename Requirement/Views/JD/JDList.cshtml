@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Job Description Data List";
+}
+
+<div class="page-bread page-titles">
+    <div class="bread-flex">
+        <h1>@ViewBag.Title</h1>
+        <ol class="breadcrumb"></ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div id="subdata">
+                <!-- The participant table will be injected here -->
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade animate" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="progressModalLabel">Edit Job Description Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="ti ti-x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm">
+                            <input type="hidden" id="JobId_pk" name="JobId_pk">
+
+                            <div class="form-group">
+                                <label>Type Of Name</label>
+                                @Html.DropDownList("TypeOfNameId", Requirement.Manager.CommonModel.GetAboutPosition(), null, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <label>Type Of Value</label>
+                                <input type="text" class="form-control" id="TypeOfValue" name="TypeOfValue" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            LoadData();
+
+            // Edit button click event
+            $(document).on("click", ".edit-btn", function () {
+                let jobId = $(this).data("id");
+                let name = $(this).data("name");
+                let value = $(this).data("value");
+
+                $("#JobId_pk").val(jobId);
+                $("#TypeOfNameId").val(name).prop("readonly", false);
+                $("#TypeOfValue").val(value).prop("readonly", false);
+
+                $("#progressModal").modal("show"); //
+            });
+
+            // Submit Edit Form
+            $("#editForm").submit(function (e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/JD/UpdateJD",
+                    data: formData,
+                    success: function (resp) {
+                        if (resp.success) {
+                            toastr.success(resp.message);
+                            $("#progressModal").modal("hide"); 
+                            LoadData(); // Refresh table
+                        } else {
+                            toastr.error(resp.message);
+                        }
+                    },
+                    error: function () {
+                        toastr.error("Something went wrong!");
+                    }
+                });
+            });
+        });
+
+        function LoadData() {
+            $.ajax({
+                type: "GET",
+                url: "/JD/GetJDList/",
+                success: function (resp) {
+                    if (resp.IsSuccess) {
+                        $('#subdata').html(resp.Data);
+                        toastr.success("Data loaded successfully."); 
+                    } else {
+                        toastr.error(resp.Data);
+                    }
+                },
+                error: function (req, error) {
+                    toastr.error("Communication error: " + (error === 'error' ? req.statusText : error));
+                }
+            });
+        }
+    </script>
+}

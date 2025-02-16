@@ -1,0 +1,117 @@
+﻿@model Requirement.Models.JDMaster
+@using Requirement.Manager
+@{
+    ViewBag.Title = "JOB Description Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-bread page-titles">
+    <div class="bread-flex">
+        <h1>@ViewBag.title</h1>
+        <ol class="breadcrumb"></ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("JDMaster", "JD", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(m=>m.AboutPositionId_pk)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="flex-form">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.TypeOfName, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextBoxFor(model => model.TypeOfName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TypeOfName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-row pt-1">
+                            <div class="form-group col-md-4 offset-4">
+                                <input type="submit" name="btnsubmit" id="btnsubmit" class="btn btn-primary" value="Submit" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div id="subdata"></div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            LoadData();
+
+            $(document).on("click", ".edit-btn", function () {
+                let AboutPositionId_pk = $(this).data("id");
+                let TypeOfName = $(this).data("name");
+
+                $("#AboutPositionId_pk").val(AboutPositionId_pk);
+                $("#TypeOfName").val(TypeOfName);
+            });
+
+
+            $("#formid").on("submit", function (event) {
+                event.preventDefault();
+
+                var formData = new FormData(this);
+
+                if (confirm('Are you sure you want to submit the form?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/JD/JDMaster/",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (resp) {
+                            if (resp.success) {
+                                toastr.success("Success", resp.message);
+                                $("#formid")[0].reset();
+                                LoadData();
+                            } else {
+                                toastr.error("Error", resp.message);
+                            }
+                        },
+                        error: function (req, error) {
+                            var errorMsg = req.statusText ? req.statusText : error;
+                            toastr.error("Error", `There was a communication error: ${errorMsg}`);
+                        }
+                    });
+                }
+            });
+
+
+
+        });
+
+        function LoadData() {
+            $.ajax({
+                type: "GET",
+                url: "/JD/GetAboutPositionList/",
+                success: function (resp) {
+                    if (resp.IsSuccess) {
+                        debugger;
+                        $('#subdata').html(resp.Data);
+                        toastr.success("Data loaded successfully.");
+                    } else {
+                        toastr.error(resp.Data);
+                    }
+                },
+                error: function (req, error) {
+                    toastr.error("Communication error: " + (error === 'error' ? req.statusText : error));
+                }
+            });
+        }
+    </script>
+}
+
