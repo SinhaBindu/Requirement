@@ -11,7 +11,7 @@
     <title>Log in</title>
     <meta name="robots" content="all">
     <meta name="googlebot" content="index, follow">
-    <link id="Link" href="~/Content/dashboard/images/favicon.png" rel="icon" type="image/x-icon" />
+    <link id="Link" href="~/Content/dashboard/images/icon.png" rel="icon" type="image/x-icon" />
     <link href="~/Content/dashboard/css/login.css" rel="stylesheet" />
 </head>
 
@@ -36,18 +36,9 @@
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Password" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
-                @*<div class="input-box">
-                        <div class="check-box">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>*@
                 <div class="input-box">
                     <input type="submit" value="Log in" class="login-btn" />
                 </div>
-                @*<p>
-                        @Html.ActionLink("Register as a new user", "Register")
-                    </p>*@
             }
         </section>
     </div>

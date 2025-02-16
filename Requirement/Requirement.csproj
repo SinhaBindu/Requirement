@@ -868,22 +868,40 @@
     <Content Include="Content\dashboard\icons\themify-icons\fonts\themify9f249f24.svg" />
     <Content Include="Content\dashboard\icons\themify-icons\themify-icons.css" />
     <Content Include="Content\dashboard\icons\weather-icons\css\weather-icons.min.css" />
+    <Content Include="Content\dashboard\images\avatar\1.jpg" />
+    <Content Include="Content\dashboard\images\avatar\11.png" />
+    <Content Include="Content\dashboard\images\avatar\2.jpg" />
+    <Content Include="Content\dashboard\images\avatar\3.jpg" />
+    <Content Include="Content\dashboard\images\avatar\4.jpg" />
+    <Content Include="Content\dashboard\images\avatar\5.jpg" />
+    <Content Include="Content\dashboard\images\avatar\6.jpg" />
+    <Content Include="Content\dashboard\images\big\card-1.png" />
+    <Content Include="Content\dashboard\images\big\card-2.png" />
+    <Content Include="Content\dashboard\images\big\card-3.png" />
+    <Content Include="Content\dashboard\images\big\card-4.png" />
+    <Content Include="Content\dashboard\images\big\img1.jpg" />
+    <Content Include="Content\dashboard\images\big\img2.jpg" />
+    <Content Include="Content\dashboard\images\big\img3.jpg" />
+    <Content Include="Content\dashboard\images\big\img4.jpg" />
+    <Content Include="Content\dashboard\images\big\img5.jpg" />
+    <Content Include="Content\dashboard\images\big\img6.jpg" />
     <Content Include="Content\dashboard\images\blog\1.html" />
     <Content Include="Content\dashboard\images\blog\2.html" />
     <Content Include="Content\dashboard\images\blog\3.html" />
     <Content Include="Content\dashboard\images\blog\4.html" />
-    <Content Include="Content\dashboard\images\EnterpriseOnboarded.png" />
     <Content Include="Content\dashboard\images\favicon.png" />
-    <Content Include="Content\dashboard\images\GHG reduced.png" />
     <Content Include="Content\dashboard\images\icon.png" />
-    <Content Include="Content\dashboard\images\Installationcapacity.png" />
-    <Content Include="Content\dashboard\images\login-bg.jpg" />
     <Content Include="Content\dashboard\images\logo-compact.png" />
     <Content Include="Content\dashboard\images\logo-text.png" />
     <Content Include="Content\dashboard\images\logo.png" />
     <Content Include="Content\dashboard\images\pci-color-logo.png" />
     <Content Include="Content\dashboard\images\pci-logo.png" />
-    <Content Include="Content\dashboard\images\UserLogo.jpg" />
+    <Content Include="Content\dashboard\images\users\1.jpg" />
+    <Content Include="Content\dashboard\images\users\4.jpg" />
+    <Content Include="Content\dashboard\images\users\5.jpg" />
+    <Content Include="Content\dashboard\images\users\7.jpg" />
+    <Content Include="Content\dashboard\images\users\8.jpg" />
+    <Content Include="Content\dashboard\images\user\1.png" />
     <Content Include="Content\dashboard\js\custom.min.js" />
     <Content Include="Content\dashboard\js\dashboard\dashboard-1.js" />
     <Content Include="Content\dashboard\js\dashboard\dashboard-2.html" />
@@ -1010,6 +1028,13 @@
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.ttf" />
     <Content Include="Content\assets\fonts\Pe-icon-7-stroke.woff" />
+    <EntityDeploy Include="Models\Employee.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Employee.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Employee.edmx.diagram">
+      <DependentUpon>Employee.edmx</DependentUpon>
+    </Content>
     <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.ttf" />
     <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.woff" />
     <Content Include="Content\dashboard\icons\cryptocoins\fonts\cryptocoins.woff2" />
@@ -1068,7 +1093,6 @@
     <Content Include="Content\dashboard\icons\themify-icons\fonts\themifyd41dd41d.eot" />
     <Content Include="Content\dashboard\icons\weather-icons\fonts\weathericons-regular-webfont.eot" />
     <Content Include="Content\dashboard\icons\weather-icons\fonts\weathericons-regular-webfontd41d.eot" />
-    <Content Include="Content\dashboard\images\enterprises solarized.webp" />
     <Content Include="Content\dashboard\plugins\pg-calendar\fonts\pignose.calendarab26.eot" />
     <Content Include="Content\dashboard\plugins\pg-calendar\fonts\pignose.calendarab26.ttf" />
     <Content Include="Content\dashboard\plugins\pg-calendar\fonts\pignose.calendarab26.woff" />
@@ -1076,13 +1100,6 @@
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.eot" />
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.ttf" />
     <Content Include="Content\dashboard\plugins\summernote\dist\font\summernotef534f534.woff" />
-    <EntityDeploy Include="Models\Employee.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Employee.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Employee.edmx.diagram">
-      <DependentUpon>Employee.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1145,10 +1162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\dashboard\images\avatar\" />
-    <Folder Include="Content\dashboard\images\big\" />
-    <Folder Include="Content\dashboard\images\users\" />
-    <Folder Include="Content\dashboard\images\user\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
