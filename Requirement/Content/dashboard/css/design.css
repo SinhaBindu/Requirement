@@ -1,0 +1,48 @@
+﻿.semi-title {
+    color: #b77070;
+    margin-bottom: 15px;
+}
+#dataTable {
+    margin-bottom: 7px
+}
+.dv_multiplecost {
+    margin-bottom: 15px;
+}
+#dataTable th {
+    padding: 6px 8px;
+    background: #F6F6F6;
+}
+#dataTable td {
+    padding: 6px 8px;
+    border: 1px solid #E1E3E9
+}
+#dataTable input {
+    padding: 4px 10px;
+    font-size: 13px;
+    background: #F4FEF5;
+    border: 1px solid #F6F6F6
+}
+.add-btn {
+    border-radius: 20px;
+    background: #3466BB;
+    color: #fff;
+    font-size: 14px;
+    padding: 7px 21px;
+    border: none;
+    cursor: pointer;
+    outline: none
+}
+.deleteRow {
+    border-radius: 20px;
+    background: #DE4D3A;
+    color: #fff;
+    font-size: 13px;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    outline: none
+}
+.check-control {
+    display: flex !important;
+    gap: 20px
+}

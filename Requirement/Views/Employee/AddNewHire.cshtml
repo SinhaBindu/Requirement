@@ -21,7 +21,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">New Hire Approval Form for Full Time Employees</h4>
-            <p>100% Budgeted position</p>
+            <h5 class="semi-title">100% Budgeted position</h5>
 
             <div class="basic-form">
                 @using (Html.BeginForm("AddNewHire", "Employee", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
@@ -50,9 +50,9 @@
                                 @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class=" dv_multiplecost" style="display:none;">
-                                <table id="dataTable" border="1" width="90%">
+                        <div class="form-rows">
+                            <div class="dv_multiplecost" style="display:none;">
+                                <table id="dataTable" width="100%">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -72,8 +72,7 @@
                                             </tr>*@
                                     </tbody>
                                 </table>
-
-                                <button id="addRow">Add Row</button>
+                                <button id="addRow" class="add-btn">Add Row</button>
                             </div>
                         </div>
 
@@ -164,42 +163,42 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <div class="checkbox check-control">
+                                    @foreach (var item in CommonModel.GetALLYesNoMId())
+                                    {
+                                        <div class="input-spacer">
+                                            @Html.RadioButtonFor(model => model.JD_Availability_Id, item.Value, new { id = "JD_Availability_Id" + item.Value }) @item.Text
+                                        </div>
+                                    }
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label col-xs-12 col-lg-4" })
-                            <div class="checkbox">
-                                @foreach (var item in CommonModel.GetALLYesNoMId())
-                                {
-                                    <div class="input-spacer">
-                                        @Html.RadioButtonFor(model => model.JD_Availability_Id, item.Value, new { id = "JD_Availability_Id" + item.Value }) @item.Text
-                                    </div>
-                                }
-
-                                @Html.ValidationMessageFor(model => model.JD_Availability_Id, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.JD_Availability_Id, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mark-devide"></div>
                             </div>
-                            <div class="mark-devide"></div>
-                        </div>
 
-
-                        <div class="form-group" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
-                            @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
-                                @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+                            <div class="form-group col-md-6" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
+                                @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label" })
+                                <div class="col-md-10s">
+                                    @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
+                                    @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
+                        
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.Advertisement_Id, htmlAttributes: new { @class = "control-label col-xs-12 col-lg-4" })
-                                <div class="checkbox">
+                                @Html.LabelFor(model => model.Advertisement_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <div class="checkbox check-control">
                                     @foreach (var item in CommonModel.GetALLAdvertisement())
                                     {
                                         <div class="input-spacer">
                                             @Html.RadioButtonFor(model => model.Advertisement_Id, item.Value, new { id = "GetALLAdvertisement" + item.Value }) @item.Text
                                         </div>
                                     }
-
                                     @Html.ValidationMessageFor(model => model.Advertisement_Id, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="mark-devide"></div>
@@ -207,8 +206,8 @@
 
 
                             <div class="form-group col-md-6">
-                                @Html.LabelFor(model => model.EmpaneledHead_Id, htmlAttributes: new { @class = "control-label col-xs-12 col-lg-4" })
-                                <div class="checkbox">
+                                @Html.LabelFor(model => model.EmpaneledHead_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <div class="checkbox check-control">
                                     @foreach (var item in CommonModel.GetALLYesNoMId().ToList())
                                     {
                                         <div class="input-spacer">
@@ -220,25 +219,24 @@
                                 </div>
                                 <div class="mark-devide"></div>
                             </div>
-
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6" id="div_TypeOfInterview">
+                            <div class="form-group col-md-12" id="div_TypeOfInterview">
                                 @Html.LabelFor(model => model.TypeOfInterview, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
-                                <div class="col-md-10s">
+                                <div class="col-md-12s">
                                     @Html.DropDownListFor(model => model.TypeOfInterview, CommonModel.GetALLIT(), null, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.TypeOfInterview, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="form-row">
                             <div class="form-group col-md-6" id="div_InterviewPanel" style="display: none;">
                                 @Html.LabelFor(model => model.InterviewPanel, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.TextAreaFor(model => model.InterviewPanel, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.InterviewPanel, "", new { @class = "text-danger" })
                             </div>
-
                             <div class="form-group col-md-6" id="div_InterviewPanel2" style="display: none;">
                                 @Html.LabelFor(model => model.InterviewPanel2, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
@@ -272,7 +270,7 @@
                         </div>
 
                         <div class="form-row pt-1">
-                            <div class="form-group col-md-4 offset-4">
+                            <div class="form-group col-md-4">
                                 @*<button type="submit" class="btn btn-primary">Submit</button>*@
                                 <input type="submit" name="btnsubmit" id="btnsubmit" class="btn btn-primary" value="Submit" />
                             </div>
