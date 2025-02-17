@@ -29,55 +29,55 @@ namespace Requirement.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult JobD(JD_Model model)
-        {
-            try
-            {
-                string tblcostdataJson = Request.Form["tblcostdata"];
-                if (string.IsNullOrEmpty(tblcostdataJson))
-                {
-                    return Json(new { success = false, message = "Invalid data submitted." });
-                }
+        //[HttpPost]
+        //public ActionResult JobD(JD_Model model)
+        //{
+        //    try
+        //    {
+        //        string tblcostdataJson = Request.Form["tblcostdata"];
+        //        if (string.IsNullOrEmpty(tblcostdataJson))
+        //        {
+        //            return Json(new { success = false, message = "Invalid data submitted." });
+        //        }
 
-                // Deserialize JSON into a list of JD_Model objects
-                var tblcostdata = JsonConvert.DeserializeObject<List<JD_Model>>(tblcostdataJson);
+        //        // Deserialize JSON into a list of JD_Model objects
+        //        var tblcostdata = JsonConvert.DeserializeObject<List<JD_Model>>(tblcostdataJson);
 
-                if (tblcostdata == null || tblcostdata.Count == 0)
-                {
-                    return Json(new { success = false, message = "No data to insert." });
-                }
+        //        if (tblcostdata == null || tblcostdata.Count == 0)
+        //        {
+        //            return Json(new { success = false, message = "No data to insert." });
+        //        }
 
-                var tblclist = new List<Tbl_JobD>();
+        //        var tblclist = new List<Tbl_JobD>();
 
-                foreach (var item in tblcostdata)
-                {
-                    var JobD = new Tbl_JobD
-                    {
-                        TypeOfNameId = item.TypeOfNameId,
-                        TypeOfValue = item.TypeOfValue,
-                        IsActive = true,
-                        CreatedBy = MvcApplication.CUser.UserId,
-                        CreatedOn = DateTime.Now
-                    };
+        //        foreach (var item in tblcostdata)
+        //        {
+        //            var JobD = new Tbl_JobD
+        //            {
+        //                TypeOfNameId = item.TypeOfNameId,
+        //                TypeOfValue = item.TypeOfValue,
+        //                IsActive = true,
+        //                CreatedBy = MvcApplication.CUser.UserId,
+        //                CreatedOn = DateTime.Now
+        //            };
 
-                    tblclist.Add(JobD);
-                }
+        //            tblclist.Add(JobD);
+        //        }
 
-                db.Tbl_JobD.AddRange(tblclist);
-                int result = db.SaveChanges();
+        //        db.Tbl_JobD.AddRange(tblclist);
+        //        int result = db.SaveChanges();
 
-                if (result > 0)
-                    return Json(new { success = true, message = "Job Description(s) inserted successfully!" });
-                else
-                    return Json(new { success = false, message = "Failed to insert Job Descriptions." });
+        //        if (result > 0)
+        //            return Json(new { success = true, message = "Job Description(s) inserted successfully!" });
+        //        else
+        //            return Json(new { success = false, message = "Failed to insert Job Descriptions." });
 
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, message = "An error occurred while inserting data.", error = ex.Message });
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { success = false, message = "An error occurred while inserting data.", error = ex.Message });
+        //    }
+        //}
 
 
         public ActionResult JDList()
@@ -106,32 +106,32 @@ namespace Requirement.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult UpdateJD(int JobId_pk, int TypeOfNameId, string TypeOfValue)
-        {
-            try
-            {
-                var jobD = db.Tbl_JobD.FirstOrDefault(j => j.JobId_pk == JobId_pk);
-                if (jobD != null)
-                {
-                    jobD.TypeOfNameId = TypeOfNameId;
-                    jobD.TypeOfValue = TypeOfValue;
-                    jobD.UpdatedBy = MvcApplication.CUser.UserId;
-                    jobD.UpdatedOn = DateTime.Now;
+        //[HttpPost]
+        //public ActionResult UpdateJD(int JobId_pk, int TypeOfNameId, string TypeOfValue)
+        //{
+        //    try
+        //    {
+        //        var jobD = db.Tbl_JobD.FirstOrDefault(j => j.JobId_pk == JobId_pk);
+        //        if (jobD != null)
+        //        {
+        //            jobD.TypeOfNameId = TypeOfNameId;
+        //            jobD.TypeOfValue = TypeOfValue;
+        //            jobD.UpdatedBy = MvcApplication.CUser.UserId;
+        //            jobD.UpdatedOn = DateTime.Now;
 
-                    db.SaveChanges();
-                    return Json(new { success = true, message = "Record updated successfully!" });
-                }
-                else
-                {
-                    return Json(new { success = false, message = "Record not found!" });
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, message = "Error: " + ex.Message });
-            }
-        }
+        //            db.SaveChanges();
+        //            return Json(new { success = true, message = "Record updated successfully!" });
+        //        }
+        //        else
+        //        {
+        //            return Json(new { success = false, message = "Record not found!" });
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { success = false, message = "Error: " + ex.Message });
+        //    }
+        //}
       
         private string ConvertViewToString(string viewName, object model)
         {

@@ -259,6 +259,9 @@
     <Compile Include="Models\mst_JobLocation.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\mst_KeyRole.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mst_Location.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
@@ -271,10 +274,16 @@
     <Compile Include="Models\mst_Sal.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\mst_SectionProcessStepOne.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mst_SelectionProcess.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\mst_State.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mst_Theme.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\mst_TypeofInterview.cs">
@@ -284,10 +293,13 @@
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Multiple Model.cs" />
-    <Compile Include="Models\Tbl_JD.cs">
+    <Compile Include="Models\tbl_JobD.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tbl_JobD.cs">
+    <Compile Include="Models\tbl_JobDAbout.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_JobDKeyRole.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_NewHire.cs">
@@ -297,6 +309,9 @@
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_NewHireMultiple_old.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_NewHireStatus.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Signature.cs">

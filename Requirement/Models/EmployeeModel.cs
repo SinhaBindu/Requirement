@@ -80,8 +80,12 @@ namespace Requirement.Models
         [Display(Name = PartDisplayName.InterviewPanel)]
         public string InterviewPanel { get; set; }
         //[Required]
-        [Display(Name = PartDisplayName.SelectionProcess_Id)]
+        [Display(Name = PartDisplayName.SelectionProcessStep1)]
         public int SelectionProcess_Id { get; set; }
+        [Display(Name = PartDisplayName.SelectionProcessStep2)]
+        public int SelectionProcessStep2 { get; set; }
+        [Display(Name = PartDisplayName.SelectionProcessStep3)]
+        public int SelectionProcessStep3 { get; set; }
         //[Required]
         [Display(Name = PartDisplayName.LaptopwithSpecifications_Id)]
         public int LaptopwithSpecifications_Id { get; set; }
