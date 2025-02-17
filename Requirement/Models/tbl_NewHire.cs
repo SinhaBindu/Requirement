@@ -17,6 +17,7 @@ namespace Requirement.Models
         public System.Guid NewHireId_pk { get; set; }
         public Nullable<System.DateTime> NewHiredDate { get; set; }
         public Nullable<int> HiringTypeId { get; set; }
+        public Nullable<int> ThemeId { get; set; }
         public string PositionName { get; set; }
         public string ProjectName { get; set; }
         public Nullable<int> LocationId { get; set; }
@@ -35,8 +36,12 @@ namespace Requirement.Models
         public string JD_AvailabilityIfYes_Doc { get; set; }
         public Nullable<int> Advertisement_Id { get; set; }
         public Nullable<int> EmpaneledHead_Id { get; set; }
+        public Nullable<int> TypeOfInterview { get; set; }
         public string InterviewPanel { get; set; }
+        public string InterviewPanel2 { get; set; }
         public Nullable<int> SelectionProcess_Id { get; set; }
+        public Nullable<int> SelectionProcessStep2 { get; set; }
+        public Nullable<int> SelectionProcessStep3 { get; set; }
         public Nullable<int> LaptopwithSpecifications_Id { get; set; }
         public string Anyspecificsoftwarewithlicense { get; set; }
         public Nullable<bool> IsActive { get; set; }
@@ -47,7 +52,5 @@ namespace Requirement.Models
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> IsDeletedOn { get; set; }
         public Nullable<int> OrderBy { get; set; }
-        public Nullable<int> TypeOfInterview { get; set; }
-        public string InterviewPanel2 { get; set; }
     }
 }

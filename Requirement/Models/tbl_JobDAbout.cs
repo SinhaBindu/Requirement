@@ -12,14 +12,13 @@ namespace Requirement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_JobD
+    public partial class tbl_JobDAbout
     {
-        public int JobId_pk { get; set; }
+        public int JobDAboutId_pk { get; set; }
+        public Nullable<int> JobDId_fk { get; set; }
         public Nullable<System.Guid> NewHireId_fk { get; set; }
-        public string HiringLink { get; set; }
-        public Nullable<System.DateTime> ApplicationClosureDate { get; set; }
-        public string AbouttheProject { get; set; }
-        public string Remarks { get; set; }
+        public Nullable<int> AboutPositionId { get; set; }
+        public string AboutPositionValue { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }

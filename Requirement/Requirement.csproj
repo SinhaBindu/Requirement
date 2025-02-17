@@ -1172,6 +1172,7 @@
     <Content Include="Views\Employee\HireList.cshtml" />
     <Content Include="Views\Master\JDMaster.cshtml" />
     <Content Include="Views\Master\_AboutPositionData.cshtml" />
+    <Content Include="Views\Employee\JDEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

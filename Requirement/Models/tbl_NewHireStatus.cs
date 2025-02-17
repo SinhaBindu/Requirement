@@ -12,18 +12,15 @@ namespace Requirement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_NewHireMultipleCost
+    public partial class tbl_NewHireStatus
     {
-        public int MultipleCostId_pk { get; set; }
+        public int NewHireStatusId_pk { get; set; }
         public Nullable<System.Guid> NewHireId_fk { get; set; }
-        public string MultipleCostName { get; set; }
-        public string GrantID { get; set; }
-        public string ActivityCode { get; set; }
-        public string BudgetCode { get; set; }
-        public Nullable<decimal> AllotmentPercent { get; set; }
-        public Nullable<decimal> MonthlyAmount { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> RoleId { get; set; }
+        public Nullable<int> LevelStatusId { get; set; }
+        public string ApprovedBy { get; set; }
+        public Nullable<bool> ApprovedStatus { get; set; }
+        public string ApprovedRemark { get; set; }
+        public Nullable<System.DateTime> ApprovedOn { get; set; }
     }
 }

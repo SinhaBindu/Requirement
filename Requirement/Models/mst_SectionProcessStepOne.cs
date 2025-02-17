@@ -12,23 +12,10 @@ namespace Requirement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_JD
+    public partial class mst_SectionProcessStepOne
     {
-        public int Id_pk { get; set; }
-        public System.Guid Emp_Id_fk { get; set; }
-        public string JobTittle { get; set; }
-        public Nullable<int> NoofPositions { get; set; }
-        public string Location { get; set; }
-        public string Grade { get; set; }
-        public Nullable<int> SalRange { get; set; }
-        public string Type { get; set; }
-        public string QualificationReq { get; set; }
-        public string ExperiencedReq { get; set; }
-        public string SkillsAndAttribute { get; set; }
-        public Nullable<System.DateTime> ApplicationClosureDate { get; set; }
-        public string KeyRolesAndRes { get; set; }
-        public string ReportingTo { get; set; }
-        public string AboutProject { get; set; }
+        public int SectionProceStepOneId_pk { get; set; }
+        public string SectionProceStepOneName { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }

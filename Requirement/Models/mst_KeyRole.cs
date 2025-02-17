@@ -12,19 +12,15 @@ namespace Requirement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_JobD
+    public partial class mst_KeyRole
     {
-        public int JobId_pk { get; set; }
-        public Nullable<System.Guid> NewHireId_fk { get; set; }
-        public string HiringLink { get; set; }
-        public Nullable<System.DateTime> ApplicationClosureDate { get; set; }
-        public string AbouttheProject { get; set; }
-        public string Remarks { get; set; }
+        public int KeyRoleId_pk { get; set; }
+        public string KeyRoleName { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
-        public Nullable<int> OrderBy { get; set; }
+        public int OrderBy { get; set; }
     }
 }

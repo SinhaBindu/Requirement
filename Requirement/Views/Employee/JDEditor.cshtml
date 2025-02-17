@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "JDEditor";
+}
+
+<h2>JDEditor</h2>
+
+<!-- Include Quill stylesheet -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet" />
+
+<link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.bubble.css"
+      rel="stylesheet" />
+
+<!-- Core build with no theme, formatting, non-essential modules -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.core.css"
+      rel="stylesheet" />
+
+
+
+<!-- Create the editor container -->
+<div id="editor">
+    Job Description
+    About PCI India
+    PCI India, a registered Indian society, has been working in India for the past 26 years. We drive interventions to transform the lives of communities at scale by solving complex development problems. In the past year, PCI India reached more than 1.7 crore, i.e. 17 million people in 202 Districts of 15 States.
+    Our Vision and Mission
+    Vision – A happy, healthy, safe and a sustainable world for all.
+    Mission – Rooted in community realities, we co create and scale sustainable solutions to complex development problems.
+
+    Our Values
+    •	Excellence – Quality in everything no matter how small, is paramount.
+    •	Respect – There is inherent value in all people for who they are and what they contribute.
+    •	Collaboration – Only through collaboration we can address complex development problems.
+    •	Boldness – Boldness requires disruptive thinking backed up by courage and conviction.
+    •	Creativity – Creativity ensures dynamic responsiveness, relevance and impact.
+    •	Integrity – Integrity is non-negotiable in both personal and professional domains.
+
+    PCI is an Equal Opportunity Employer
+    PCI is committed to providing equal opportunity to all working for it and in creating an inclusive work environment. We respect the diversity of our people and follow a fair, non-discriminatory approach in terms of gender, age, nationality race, caste, religion, community, marital status, physical challenge, and sexual orientation.
+    We promote diversity in the workplace and ensure a culture of zero tolerance to any form of discrimination, abuse, or harassment whether sexual, physical or psychological.
+    PCI provides equal opportunity in recruitment, appraisals, promotion, and career progression. Our people policies are fair, objective, and non-discriminatory and everyone is expected to adhere to them.
+    About the Position
+    •	Job Title:
+    •	Number of positions:
+    •	Location:
+    •	Grade:
+    •	Salary Range: Competitive salary commensurate with experience
+    •	Type:  Project Based/Permanent
+    •	Qualification required:
+    •	Experience required:
+
+    •	Skills and Attributes: Optional
+    How to apply: Interested candidates can apply for the Position by using the following link:
+    Application closure date:
+    About the Role
+    Key Roles and Responsibilities:
+
+    •	Reporting to:- Technical Support Unit (TSU)Lead
+
+    About the Project : Optional
+
+    What can you expect in PCI
+    •	A warm, inclusive and happy work environment.
+    •	Performance driven reward mechanism.
+    •	Best of class benefits with competitive remunerations.
+    •	Health Insurance coverage for self, spouse & Children.
+    •	Group Terms Life Insurance and Group Accident Insurance for Self.
+    •	 All other statutory benefits.
+    •	Regular Recognition of performance and PCI Value display in work
+    •	An empowering organisation structure which values individual’s skills, competencies and potential.
+    •	Opportunities to operate in cross functional role.
+    •	Higher responsibilities and larger roles are merit based.
+    •	Young Talent Programs for developing future leaders.
+    •	 Leadership roles for women is encouraged and given preference in selection and training.
+    Recruitment Process
+    1.	Applications will be shortlisted based on the specified criteria mentioned in the Job Description.
+    2.	The process could also include presentation of the assignment.
+    3.	Shortlisted candidates will be invited to attend one or more rounds of panel interview/s.
+    The complete process usually takes 2 to 3 weeks. Those moving to the final round of interviews will be hearing from the People & Culture team. We prefer in person meetings but in case of location distances, we are happy to meet you virtually.
+    After the final round, if you are not selected for the position advertised, we will inform you over a mail. However, we invite you to apply to other open positions. We always look forward to engaging with talent that add value to our endeavours in various capacities.
+    PCI is committed to prevent any type of unwanted behaviour at work including sexual harassment, exploitation and abuse, lack of integrity and financial misconduct.
+
+
+</div>
+
+<form id="editor-form">
+    <div id="editor" style="height: 300px;"></div>
+    <button type="submit">Save</button>
+</form>
+
+<!-- Include the Quill library -->
+<!-- Main Quill library -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+
+
+
+@*<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.core.js"></script>*@
+<!-- Initialize Quill editor -->
+<script>
+    document.getElementById('editor-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+        const htmlContent = quill.root.innerHTML;
+        console.log('Content to save:', htmlContent);
+        // Send content to a server or save it locally
+    });
+</script>
+<script>
+    const quill = new Quill("#editor", {
+        theme: "snow",
+    });
+</script>

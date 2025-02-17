@@ -131,11 +131,11 @@ namespace Requirement.Models
     public class PartDisplayName
     {
         public const string NewHiredDate = "New Hired Date";
-        public const string HiringTypeId = "Type of Haring";
+        public const string HiringTypeId = "Type of Hiring";
         public const string PositionName = "Position Name";
         public const string ProjectName = "Project Name";
         public const string LocationId = "Location";
-        public const string TypeofApplicableId = "Applicable Type";
+        public const string TypeofApplicableId = "Type of Recruitment";
         public const string NoofPositionsId = "No of Positions";
         public const string jobLocationTypeId = "job Location Type";
         public const string Remarks = "Remarks";
@@ -147,13 +147,27 @@ namespace Requirement.Models
         public const string Grade_Id = "Grade";
         public const string JD_Availability_Id = "JD Availability";
         public const string JD_AvailabilityIfYes_Doc = "Attach File";
+
+        public const string Section_SourcingChannel = "Sourcing Channel:";//Section
         public const string Advertisement_Id = "Advertisement";
+        public const string Note_Advertisement = "*Average cost for advertising on Devnet is INR 5k per position";
+
         public const string EmpaneledHead_Id = "Empaneled Head- Hunting Agency";
-        public const string InterviewPanel = "Interview Panel(1st Round)";
-        public const string SelectionProcess_Id = "Selection Process";
+        public const string NoteLable_EmpaneledHead = "If yes, additional cost max @12% of CTO+GST will be applicable";//Yes Note
+
+        public const string Section_Interview = "Interview Panel (Suggestions):";//Section
+        public const string TypeOfInterview = "Type Of Interview";
+        public const string InterviewPanel = "Interview panel(1st Round)";
+        public const string InterviewPanel2 = "Interview panel(2nd Round)";
+
+        public const string Section_Selection = "Selection Process";////Section
+        public const string SelectionProcessStep1 = "Written test/PPT/Or both written test & PPT/Any other/None ";//Dropdown list
+        public const string SelectionProcessStep2 = "Virtual Interview / Face to Face Interview";//Redio
+        public const string SelectionProcessStep3 = "Next Level Interview required with Skip Level Supervisor /Budget Holder";//Redio Yes/No
+
+        public const string Section_Infrastructure = "Infrastructure Requirement :";
         public const string LaptopwithSpecifications_Id = "Laptop with Specifications";
         public const string Anyspecificsoftwarewithlicense = "Any specific software with license";
-        public const string TypeOfInterview = "Type Of Interview";
-        public const string InterviewPanel2 = "Interview panel(2nd Round)";
+    
     }
 }

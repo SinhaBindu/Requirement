@@ -192,6 +192,19 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_JobLocation' does not have 
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
+        <EntityType Name="mst_KeyRole">
+          <Key>
+            <PropertyRef Name="KeyRoleId_pk" />
+          </Key>
+          <Property Name="KeyRoleId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KeyRoleName" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="mst_Location">
           <Key>
             <PropertyRef Name="Id_pk" />
@@ -244,6 +257,19 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_Sal' does not have a primar
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
+        <EntityType Name="mst_SectionProcessStepOne">
+          <Key>
+            <PropertyRef Name="SectionProceStepOneId_pk" />
+          </Key>
+          <Property Name="SectionProceStepOneId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionProceStepOneName" Type="varchar" MaxLength="255" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Recruitment_DB.dbo.mst_SelectionProcess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="mst_SelectionProcess">
@@ -267,6 +293,20 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_SelectionProcess' does not 
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
+        <EntityType Name="mst_Theme">
+          <Key>
+            <PropertyRef Name="ThemeId_pk" />
+          </Key>
+          <Property Name="ThemeId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThemeCode" Type="varchar" MaxLength="255" />
+          <Property Name="ThemeName" Type="varchar" MaxLength="255" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
         <EntityType Name="mst_TypeofInterview">
@@ -293,25 +333,16 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
-        <EntityType Name="Tbl_JD">
+        <EntityType Name="tbl_JobD">
           <Key>
-            <PropertyRef Name="Id_pk" />
+            <PropertyRef Name="JobId_pk" />
           </Key>
-          <Property Name="Id_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Emp_Id_fk" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="JobTittle" Type="varchar" MaxLength="255" />
-          <Property Name="NoofPositions" Type="int" />
-          <Property Name="Location" Type="varchar" MaxLength="50" />
-          <Property Name="Grade" Type="varchar" MaxLength="10" />
-          <Property Name="SalRange" Type="int" />
-          <Property Name="Type" Type="varchar" MaxLength="25" />
-          <Property Name="QualificationReq" Type="nvarchar" MaxLength="500" />
-          <Property Name="ExperiencedReq" Type="nvarchar" MaxLength="500" />
-          <Property Name="SkillsAndAttribute" Type="nvarchar" MaxLength="500" />
-          <Property Name="ApplicationClosureDate" Type="datetime" />
-          <Property Name="KeyRolesAndRes" Type="nvarchar" MaxLength="500" />
-          <Property Name="ReportingTo" Type="nvarchar" MaxLength="125" />
-          <Property Name="AboutProject" Type="nvarchar" MaxLength="500" />
+          <Property Name="JobId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewHireId_fk" Type="uniqueidentifier" />
+          <Property Name="HiringLink" Type="nvarchar(max)" />
+          <Property Name="ApplicationClosureDate" Type="date" />
+          <Property Name="AbouttheProject" Type="nvarchar(max)" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -319,15 +350,31 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
-        <EntityType Name="Tbl_JobD">
+        <EntityType Name="tbl_JobDAbout">
           <Key>
-            <PropertyRef Name="JobId_pk" />
+            <PropertyRef Name="JobDAboutId_pk" />
           </Key>
-          <Property Name="JobId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobDAboutId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobDId_fk" Type="int" />
           <Property Name="NewHireId_fk" Type="uniqueidentifier" />
-          <Property Name="TypeOfNameId" Type="int" />
-          <Property Name="TypeOfValue" Type="nvarchar" MaxLength="255" />
-          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="AboutPositionId" Type="int" />
+          <Property Name="AboutPositionValue" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_JobDKeyRole">
+          <Key>
+            <PropertyRef Name="JobDKeyRoleId_pk" />
+          </Key>
+          <Property Name="JobDKeyRoleId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobDId_fk" Type="int" />
+          <Property Name="NewHireId_fk" Type="uniqueidentifier" />
+          <Property Name="KeyRoleId" Type="int" />
+          <Property Name="KeyValue" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -342,6 +389,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="NewHireId_pk" Type="uniqueidentifier" Nullable="false" />
           <Property Name="NewHiredDate" Type="datetime" />
           <Property Name="HiringTypeId" Type="int" />
+          <Property Name="ThemeId" Type="int" />
           <Property Name="PositionName" Type="varchar" MaxLength="255" />
           <Property Name="ProjectName" Type="nvarchar" MaxLength="255" />
           <Property Name="LocationId" Type="int" />
@@ -357,11 +405,15 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="BaseSalRangepermonth_Id" Type="int" />
           <Property Name="Grade_Id" Type="int" />
           <Property Name="JD_Availability_Id" Type="int" />
-          <Property Name="JD_AvailabilityIfYes_Doc" Type="varchar(max)" />
+          <Property Name="JD_AvailabilityIfYes_Doc" Type="nvarchar(max)" />
           <Property Name="Advertisement_Id" Type="int" />
           <Property Name="EmpaneledHead_Id" Type="int" />
+          <Property Name="TypeOfInterview" Type="int" />
           <Property Name="InterviewPanel" Type="nvarchar(max)" />
+          <Property Name="InterviewPanel2" Type="nvarchar(max)" />
           <Property Name="SelectionProcess_Id" Type="int" />
+          <Property Name="SelectionProcessStep2" Type="int" />
+          <Property Name="SelectionProcessStep3" Type="int" />
           <Property Name="LaptopwithSpecifications_Id" Type="int" />
           <Property Name="Anyspecificsoftwarewithlicense" Type="nvarchar" MaxLength="500" />
           <Property Name="IsActive" Type="bit" />
@@ -372,8 +424,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="IsDeletedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
-          <Property Name="TypeOfInterview" Type="int" />
-          <Property Name="InterviewPanel2" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tbl_NewHireMultiple_old">
           <Key>
@@ -421,9 +471,24 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="GrantID" Type="nvarchar" MaxLength="500" />
           <Property Name="ActivityCode" Type="nvarchar" MaxLength="200" />
           <Property Name="BudgetCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="AllotmentPercent" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="MonthlyAmount" Type="decimal" Precision="10" Scale="2" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_NewHireStatus">
+          <Key>
+            <PropertyRef Name="NewHireStatusId_pk" />
+          </Key>
+          <Property Name="NewHireStatusId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewHireId_fk" Type="uniqueidentifier" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="LevelStatusId" Type="int" />
+          <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApprovedStatus" Type="bit" />
+          <Property Name="ApprovedRemark" Type="nvarchar(max)" />
+          <Property Name="ApprovedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="tbl_Signature">
           <Key>
@@ -500,15 +565,20 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="mst_Designation" EntityType="Self.mst_Designation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_District" EntityType="Self.mst_District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_EmpCode" EntityType="Self.mst_EmpCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mst_KeyRole" EntityType="Self.mst_KeyRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Location" EntityType="Self.mst_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Name" EntityType="Self.mst_Name" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mst_SectionProcessStepOne" EntityType="Self.mst_SectionProcessStepOne" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_State" EntityType="Self.mst_State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mst_Theme" EntityType="Self.mst_Theme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_TypeofInterview" EntityType="Self.mst_TypeofInterview" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_JD" EntityType="Self.Tbl_JD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_JobD" EntityType="Self.Tbl_JobD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_JobD" EntityType="Self.tbl_JobD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_JobDAbout" EntityType="Self.tbl_JobDAbout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_JobDKeyRole" EntityType="Self.Tbl_JobDKeyRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHire" EntityType="Self.tbl_NewHire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHireMultiple_old" EntityType="Self.tbl_NewHireMultiple_old" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_NewHireMultipleCost" EntityType="Self.tbl_NewHireMultipleCost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_NewHireStatus" EntityType="Self.tbl_NewHireStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Signature" EntityType="Self.tbl_Signature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Applicable" EntityType="Self.mst_Applicable" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -621,23 +691,70 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Recruitment_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Recruitment_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Recruitment_DBModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Recruitment_DBModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Recruitment_DBModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Recruitment_DBModel.AspNetUser" />
+          <EntitySet Name="mst_AboutPosition" EntityType="Recruitment_DBModel.mst_AboutPosition" />
+          <EntitySet Name="mst_Advertisement" EntityType="Recruitment_DBModel.mst_Advertisement" />
+          <EntitySet Name="mst_Designation" EntityType="Recruitment_DBModel.mst_Designation" />
+          <EntitySet Name="mst_District" EntityType="Recruitment_DBModel.mst_District" />
+          <EntitySet Name="mst_EmpCode" EntityType="Recruitment_DBModel.mst_EmpCode" />
+          <EntitySet Name="mst_KeyRole" EntityType="Recruitment_DBModel.mst_KeyRole" />
+          <EntitySet Name="mst_Location" EntityType="Recruitment_DBModel.mst_Location" />
+          <EntitySet Name="mst_Name" EntityType="Recruitment_DBModel.mst_Name" />
+          <EntitySet Name="mst_SectionProcessStepOne" EntityType="Recruitment_DBModel.mst_SectionProcessStepOne" />
+          <EntitySet Name="mst_State" EntityType="Recruitment_DBModel.mst_State" />
+          <EntitySet Name="mst_Theme" EntityType="Recruitment_DBModel.mst_Theme" />
+          <EntitySet Name="mst_TypeofInterview" EntityType="Recruitment_DBModel.mst_TypeofInterview" />
+          <EntitySet Name="tbl_JobD" EntityType="Recruitment_DBModel.tbl_JobD" />
+          <EntitySet Name="tbl_JobDAbout" EntityType="Recruitment_DBModel.tbl_JobDAbout" />
+          <EntitySet Name="Tbl_JobDKeyRole" EntityType="Recruitment_DBModel.Tbl_JobDKeyRole" />
+          <EntitySet Name="tbl_NewHire" EntityType="Recruitment_DBModel.tbl_NewHire" />
+          <EntitySet Name="tbl_NewHireMultiple_old" EntityType="Recruitment_DBModel.tbl_NewHireMultiple_old" />
+          <EntitySet Name="tbl_NewHireMultipleCost" EntityType="Recruitment_DBModel.tbl_NewHireMultipleCost" />
+          <EntitySet Name="tbl_NewHireStatus" EntityType="Recruitment_DBModel.tbl_NewHireStatus" />
+          <EntitySet Name="tbl_Signature" EntityType="Recruitment_DBModel.tbl_Signature" />
+          <EntitySet Name="mst_Applicable" EntityType="Recruitment_DBModel.mst_Applicable" />
+          <EntitySet Name="mst_CostCentreCode" EntityType="Recruitment_DBModel.mst_CostCentreCode" />
+          <EntitySet Name="mst_Grade" EntityType="Recruitment_DBModel.mst_Grade" />
+          <EntitySet Name="mst_HiringType" EntityType="Recruitment_DBModel.mst_HiringType" />
+          <EntitySet Name="mst_JobLocation" EntityType="Recruitment_DBModel.mst_JobLocation" />
+          <EntitySet Name="mst_Position" EntityType="Recruitment_DBModel.mst_Position" />
+          <EntitySet Name="mst_Sal" EntityType="Recruitment_DBModel.mst_Sal" />
+          <EntitySet Name="mst_SelectionProcess" EntityType="Recruitment_DBModel.mst_SelectionProcess" />
+          <EntitySet Name="mst_TypeYesNo" EntityType="Recruitment_DBModel.mst_TypeYesNo" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Recruitment_DBModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Recruitment_DBModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -645,16 +762,16 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -665,7 +782,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Emp_Code" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Designation" Type="Int32" />
@@ -674,9 +791,22 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Recruitment_DBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="mst_AboutPosition">
+          <Key>
+            <PropertyRef Name="AboutPositionId_pk" />
+          </Key>
+          <Property Name="AboutPositionId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeOfName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="mst_Advertisement">
           <Key>
@@ -728,6 +858,19 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
+        <EntityType Name="mst_KeyRole">
+          <Key>
+            <PropertyRef Name="KeyRoleId_pk" />
+          </Key>
+          <Property Name="KeyRoleId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyRoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="mst_Location">
           <Key>
             <PropertyRef Name="Id_pk" />
@@ -754,6 +897,19 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
+        <EntityType Name="mst_SectionProcessStepOne">
+          <Key>
+            <PropertyRef Name="SectionProceStepOneId_pk" />
+          </Key>
+          <Property Name="SectionProceStepOneId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionProceStepOneName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
         <EntityType Name="mst_State">
           <Key>
             <PropertyRef Name="StateId_pk" />
@@ -764,6 +920,20 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="mst_Theme">
+          <Key>
+            <PropertyRef Name="ThemeId_pk" />
+          </Key>
+          <Property Name="ThemeId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThemeCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ThemeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
         <EntityType Name="mst_TypeofInterview">
@@ -777,6 +947,55 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
+        <EntityType Name="tbl_JobD">
+          <Key>
+            <PropertyRef Name="JobId_pk" />
+          </Key>
+          <Property Name="JobId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewHireId_fk" Type="Guid" />
+          <Property Name="HiringLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationClosureDate" Type="DateTime" Precision="0" />
+          <Property Name="AbouttheProject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_JobDAbout">
+          <Key>
+            <PropertyRef Name="JobDAboutId_pk" />
+          </Key>
+          <Property Name="JobDAboutId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobDId_fk" Type="Int32" />
+          <Property Name="NewHireId_fk" Type="Guid" />
+          <Property Name="AboutPositionId" Type="Int32" />
+          <Property Name="AboutPositionValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_JobDKeyRole">
+          <Key>
+            <PropertyRef Name="JobDKeyRoleId_pk" />
+          </Key>
+          <Property Name="JobDKeyRoleId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobDId_fk" Type="Int32" />
+          <Property Name="NewHireId_fk" Type="Guid" />
+          <Property Name="KeyRoleId" Type="Int32" />
+          <Property Name="KeyValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
         <EntityType Name="tbl_NewHire">
           <Key>
             <PropertyRef Name="NewHireId_pk" />
@@ -784,6 +1003,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="NewHireId_pk" Type="Guid" Nullable="false" />
           <Property Name="NewHiredDate" Type="DateTime" Precision="3" />
           <Property Name="HiringTypeId" Type="Int32" />
+          <Property Name="ThemeId" Type="Int32" />
           <Property Name="PositionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ProjectName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LocationId" Type="Int32" />
@@ -799,11 +1019,15 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="BaseSalRangepermonth_Id" Type="Int32" />
           <Property Name="Grade_Id" Type="Int32" />
           <Property Name="JD_Availability_Id" Type="Int32" />
-          <Property Name="JD_AvailabilityIfYes_Doc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JD_AvailabilityIfYes_Doc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Advertisement_Id" Type="Int32" />
           <Property Name="EmpaneledHead_Id" Type="Int32" />
+          <Property Name="TypeOfInterview" Type="Int32" />
           <Property Name="InterviewPanel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InterviewPanel2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SelectionProcess_Id" Type="Int32" />
+          <Property Name="SelectionProcessStep2" Type="Int32" />
+          <Property Name="SelectionProcessStep3" Type="Int32" />
           <Property Name="LaptopwithSpecifications_Id" Type="Int32" />
           <Property Name="Anyspecificsoftwarewithlicense" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
@@ -814,8 +1038,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="IsDeletedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
-          <Property Name="TypeOfInterview" Type="Int32" />
-          <Property Name="InterviewPanel2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_NewHireMultiple_old">
           <Key>
@@ -863,9 +1085,24 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="GrantID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ActivityCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="BudgetCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AllotmentPercent" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="MonthlyAmount" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_NewHireStatus">
+          <Key>
+            <PropertyRef Name="NewHireStatusId_pk" />
+          </Key>
+          <Property Name="NewHireStatusId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewHireId_fk" Type="Guid" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="LevelStatusId" Type="Int32" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedStatus" Type="Boolean" />
+          <Property Name="ApprovedRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tbl_Signature">
           <Key>
@@ -975,135 +1212,38 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Type="Recruitment_DBModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
+            <Dependent Role="AspNetUserClaim">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Type="Recruitment_DBModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogins">
+            <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+          <End Type="Recruitment_DBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Recruitment_DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="mst_Advertisement" EntityType="Self.mst_Advertisement" />
-          <EntitySet Name="mst_Designation" EntityType="Self.mst_Designation" />
-          <EntitySet Name="mst_District" EntityType="Self.mst_District" />
-          <EntitySet Name="mst_EmpCode" EntityType="Self.mst_EmpCode" />
-          <EntitySet Name="mst_Location" EntityType="Self.mst_Location" />
-          <EntitySet Name="mst_Name" EntityType="Self.mst_Name" />
-          <EntitySet Name="mst_State" EntityType="Self.mst_State" />
-          <EntitySet Name="mst_TypeofInterview" EntityType="Self.mst_TypeofInterview" />
-          <EntitySet Name="tbl_NewHire" EntityType="Self.tbl_NewHire" />
-          <EntitySet Name="tbl_NewHireMultiple_old" EntityType="Self.tbl_NewHireMultiple_old" />
-          <EntitySet Name="tbl_NewHireMultipleCost" EntityType="Self.tbl_NewHireMultipleCost" />
-          <EntitySet Name="tbl_Signature" EntityType="Self.tbl_Signature" />
-          <EntitySet Name="mst_Applicable" EntityType="Self.mst_Applicable" />
-          <EntitySet Name="mst_CostCentreCode" EntityType="Self.mst_CostCentreCode" />
-          <EntitySet Name="mst_Grade" EntityType="Self.mst_Grade" />
-          <EntitySet Name="mst_HiringType" EntityType="Self.mst_HiringType" />
-          <EntitySet Name="mst_JobLocation" EntityType="Self.mst_JobLocation" />
-          <EntitySet Name="mst_Position" EntityType="Self.mst_Position" />
-          <EntitySet Name="mst_Sal" EntityType="Self.mst_Sal" />
-          <EntitySet Name="mst_SelectionProcess" EntityType="Self.mst_SelectionProcess" />
-          <EntitySet Name="mst_TypeYesNo" EntityType="Self.mst_TypeYesNo" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Tbl_JD" EntityType="Recruitment_DBModel.Tbl_JD" />
-          <EntitySet Name="Tbl_JobD" EntityType="Recruitment_DBModel.Tbl_JobD" />
-          <EntitySet Name="mst_AboutPosition" EntityType="Recruitment_DBModel.mst_AboutPosition" />
-        </EntityContainer>
-        <EntityType Name="Tbl_JD">
-          <Key>
-            <PropertyRef Name="Id_pk" />
-          </Key>
-          <Property Name="Id_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Id_fk" Type="Guid" Nullable="false" />
-          <Property Name="JobTittle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="NoofPositions" Type="Int32" />
-          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="SalRange" Type="Int32" />
-          <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="QualificationReq" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ExperiencedReq" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SkillsAndAttribute" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ApplicationClosureDate" Type="DateTime" Precision="3" />
-          <Property Name="KeyRolesAndRes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ReportingTo" Type="String" MaxLength="125" FixedLength="false" Unicode="true" />
-          <Property Name="AboutProject" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderBy" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Tbl_JobD">
-          <Key>
-            <PropertyRef Name="JobId_pk" />
-          </Key>
-          <Property Name="JobId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NewHireId_fk" Type="Guid" />
-          <Property Name="TypeOfNameId" Type="Int32" />
-          <Property Name="TypeOfValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderBy" Type="Int32" />
-        </EntityType>
-        <EntityType Name="mst_AboutPosition">
-          <Key>
-            <PropertyRef Name="AboutPositionId_pk" />
-          </Key>
-          <Property Name="AboutPositionId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeOfName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderBy" Type="Int32" Nullable="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1112,422 +1252,53 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="Recruitment_DBModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="Recruitment_DBModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="Recruitment_DBModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Recruitment_DBModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Emp_Code" ColumnName="Emp_Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="OtherDesignation" ColumnName="OtherDesignation" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Advertisement">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Advertisement">
-              <MappingFragment StoreEntitySet="mst_Advertisement">
-                <ScalarProperty Name="AdvertisementId" ColumnName="AdvertisementId" />
-                <ScalarProperty Name="AdvertisementType" ColumnName="AdvertisementType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Designation">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Designation">
-              <MappingFragment StoreEntitySet="mst_Designation">
-                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_District">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_District">
-              <MappingFragment StoreEntitySet="mst_District">
-                <ScalarProperty Name="DistrictId_pk" ColumnName="DistrictId_pk" />
-                <ScalarProperty Name="StateId_fk" ColumnName="StateId_fk" />
-                <ScalarProperty Name="DistrictCode" ColumnName="DistrictCode" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_EmpCode">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_EmpCode">
-              <MappingFragment StoreEntitySet="mst_EmpCode">
-                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
-                <ScalarProperty Name="Emp_Code" ColumnName="Emp_Code" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Location">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Location">
-              <MappingFragment StoreEntitySet="mst_Location">
-                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Name">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Name">
-              <MappingFragment StoreEntitySet="mst_Name">
-                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_State">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_State">
-              <MappingFragment StoreEntitySet="mst_State">
-                <ScalarProperty Name="StateId_pk" ColumnName="StateId_pk" />
-                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
-                <ScalarProperty Name="StateName" ColumnName="StateName" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_TypeofInterview">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_TypeofInterview">
-              <MappingFragment StoreEntitySet="mst_TypeofInterview">
-                <ScalarProperty Name="InterviewId" ColumnName="InterviewId" />
-                <ScalarProperty Name="InterviewType" ColumnName="InterviewType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_NewHire">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHire">
-              <MappingFragment StoreEntitySet="tbl_NewHire">
-                <ScalarProperty Name="NewHireId_pk" ColumnName="NewHireId_pk" />
-                <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
-                <ScalarProperty Name="HiringTypeId" ColumnName="HiringTypeId" />
-                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="OtherLocation" ColumnName="OtherLocation" />
-                <ScalarProperty Name="TypeofApplicableId" ColumnName="TypeofApplicableId" />
-                <ScalarProperty Name="NoofPositionsId" ColumnName="NoofPositionsId" />
-                <ScalarProperty Name="jobLocationTypeId" ColumnName="jobLocationTypeId" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
-                <ScalarProperty Name="Durationoftheposition_Fdate" ColumnName="Durationoftheposition_Fdate" />
-                <ScalarProperty Name="Durationoftheposition_Tdate" ColumnName="Durationoftheposition_Tdate" />
-                <ScalarProperty Name="CostCentreCode_Id" ColumnName="CostCentreCode_Id" />
-                <ScalarProperty Name="BaseSalRangepermonth_Id" ColumnName="BaseSalRangepermonth_Id" />
-                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
-                <ScalarProperty Name="JD_Availability_Id" ColumnName="JD_Availability_Id" />
-                <ScalarProperty Name="JD_AvailabilityIfYes_Doc" ColumnName="JD_AvailabilityIfYes_Doc" />
-                <ScalarProperty Name="Advertisement_Id" ColumnName="Advertisement_Id" />
-                <ScalarProperty Name="EmpaneledHead_Id" ColumnName="EmpaneledHead_Id" />
-                <ScalarProperty Name="InterviewPanel" ColumnName="InterviewPanel" />
-                <ScalarProperty Name="SelectionProcess_Id" ColumnName="SelectionProcess_Id" />
-                <ScalarProperty Name="LaptopwithSpecifications_Id" ColumnName="LaptopwithSpecifications_Id" />
-                <ScalarProperty Name="Anyspecificsoftwarewithlicense" ColumnName="Anyspecificsoftwarewithlicense" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsDeletedOn" ColumnName="IsDeletedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="TypeOfInterview" ColumnName="TypeOfInterview" />
-                <ScalarProperty Name="InterviewPanel2" ColumnName="InterviewPanel2" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_NewHireMultiple_old">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHireMultiple_old">
-              <MappingFragment StoreEntitySet="tbl_NewHireMultiple_old">
-                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
-                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-                <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
-                <ScalarProperty Name="HiringType_Id" ColumnName="HiringType_Id" />
-                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="TypeofApplicable_Id" ColumnName="TypeofApplicable_Id" />
-                <ScalarProperty Name="NoofPositions_Id" ColumnName="NoofPositions_Id" />
-                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
-                <ScalarProperty Name="Durationoftheposition_Fdate" ColumnName="Durationoftheposition_Fdate" />
-                <ScalarProperty Name="Durationoftheposition_Tdate" ColumnName="Durationoftheposition_Tdate" />
-                <ScalarProperty Name="CostCentreCode_Id" ColumnName="CostCentreCode_Id" />
-                <ScalarProperty Name="CTCSalRangepermonth_Id" ColumnName="CTCSalRangepermonth_Id" />
-                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
-                <ScalarProperty Name="JD_Availability_Id" ColumnName="JD_Availability_Id" />
-                <ScalarProperty Name="JD_AvailabilityIfYes_Doc" ColumnName="JD_AvailabilityIfYes_Doc" />
-                <ScalarProperty Name="Advertisement_Id" ColumnName="Advertisement_Id" />
-                <ScalarProperty Name="EmpaneledHead_Id" ColumnName="EmpaneledHead_Id" />
-                <ScalarProperty Name="InterviewPanel1" ColumnName="InterviewPanel1" />
-                <ScalarProperty Name="InterviewPanel2" ColumnName="InterviewPanel2" />
-                <ScalarProperty Name="SelectionProcess_Id" ColumnName="SelectionProcess_Id" />
-                <ScalarProperty Name="LaptopwithSpecifications_Id" ColumnName="LaptopwithSpecifications_Id" />
-                <ScalarProperty Name="Anyspecificsoftwarewithlicense" ColumnName="Anyspecificsoftwarewithlicense" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsDeletedOn" ColumnName="IsDeletedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_NewHireMultipleCost">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHireMultipleCost">
-              <MappingFragment StoreEntitySet="tbl_NewHireMultipleCost">
-                <ScalarProperty Name="MultipleCostId_pk" ColumnName="MultipleCostId_pk" />
-                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
-                <ScalarProperty Name="MultipleCostName" ColumnName="MultipleCostName" />
-                <ScalarProperty Name="GrantID" ColumnName="GrantID" />
-                <ScalarProperty Name="ActivityCode" ColumnName="ActivityCode" />
-                <ScalarProperty Name="BudgetCode" ColumnName="BudgetCode" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_Signature">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_Signature">
-              <MappingFragment StoreEntitySet="tbl_Signature">
+                <ScalarProperty Name="Emp_Code" ColumnName="Emp_Code" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SignatureData" ColumnName="SignatureData" />
-                <ScalarProperty Name="SignedDate" ColumnName="SignedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Applicable">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Applicable">
-              <MappingFragment StoreEntitySet="mst_Applicable">
-                <ScalarProperty Name="ApplicableId" ColumnName="ApplicableId" />
-                <ScalarProperty Name="ApplicableType" ColumnName="ApplicableType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_CostCentreCode">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_CostCentreCode">
-              <MappingFragment StoreEntitySet="mst_CostCentreCode">
-                <ScalarProperty Name="CostCentreCodeId" ColumnName="CostCentreCodeId" />
-                <ScalarProperty Name="CostCentreCodeType" ColumnName="CostCentreCodeType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Grade">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Grade">
-              <MappingFragment StoreEntitySet="mst_Grade">
-                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
-                <ScalarProperty Name="GradeType" ColumnName="GradeType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_HiringType">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_HiringType">
-              <MappingFragment StoreEntitySet="mst_HiringType">
-                <ScalarProperty Name="HiringTypeId" ColumnName="HiringTypeId" />
-                <ScalarProperty Name="HiringType" ColumnName="HiringType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_JobLocation">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_JobLocation">
-              <MappingFragment StoreEntitySet="mst_JobLocation">
-                <ScalarProperty Name="JobLocationId" ColumnName="JobLocationId" />
-                <ScalarProperty Name="JobLocationType" ColumnName="JobLocationType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Position">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Position">
-              <MappingFragment StoreEntitySet="mst_Position">
-                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
-                <ScalarProperty Name="PositionType" ColumnName="PositionType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_Sal">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Sal">
-              <MappingFragment StoreEntitySet="mst_Sal">
-                <ScalarProperty Name="SalId" ColumnName="SalId" />
-                <ScalarProperty Name="Sal" ColumnName="Sal" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_SelectionProcess">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_SelectionProcess">
-              <MappingFragment StoreEntitySet="mst_SelectionProcess">
-                <ScalarProperty Name="SelectionProcessId" ColumnName="SelectionProcessId" />
-                <ScalarProperty Name="SelectionProcessType" ColumnName="SelectionProcessType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mst_TypeYesNo">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_TypeYesNo">
-              <MappingFragment StoreEntitySet="mst_TypeYesNo">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Recruitment_DBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="Tbl_JD">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.Tbl_JD">
-              <MappingFragment StoreEntitySet="Tbl_JD">
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="AboutProject" ColumnName="AboutProject" />
-                <ScalarProperty Name="ReportingTo" ColumnName="ReportingTo" />
-                <ScalarProperty Name="KeyRolesAndRes" ColumnName="KeyRolesAndRes" />
-                <ScalarProperty Name="ApplicationClosureDate" ColumnName="ApplicationClosureDate" />
-                <ScalarProperty Name="SkillsAndAttribute" ColumnName="SkillsAndAttribute" />
-                <ScalarProperty Name="ExperiencedReq" ColumnName="ExperiencedReq" />
-                <ScalarProperty Name="QualificationReq" ColumnName="QualificationReq" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="SalRange" ColumnName="SalRange" />
-                <ScalarProperty Name="Grade" ColumnName="Grade" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="NoofPositions" ColumnName="NoofPositions" />
-                <ScalarProperty Name="JobTittle" ColumnName="JobTittle" />
-                <ScalarProperty Name="Emp_Id_fk" ColumnName="Emp_Id_fk" />
-                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_JobD">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.Tbl_JobD">
-              <MappingFragment StoreEntitySet="Tbl_JobD">
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="TypeOfValue" ColumnName="TypeOfValue" />
-                <ScalarProperty Name="TypeOfNameId" ColumnName="TypeOfNameId" />
-                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
-                <ScalarProperty Name="JobId_pk" ColumnName="JobId_pk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1545,6 +1316,445 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="mst_Advertisement">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Advertisement">
+              <MappingFragment StoreEntitySet="mst_Advertisement">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AdvertisementType" ColumnName="AdvertisementType" />
+                <ScalarProperty Name="AdvertisementId" ColumnName="AdvertisementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Designation">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Designation">
+              <MappingFragment StoreEntitySet="mst_Designation">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_District">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_District">
+              <MappingFragment StoreEntitySet="mst_District">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="DistrictCode" ColumnName="DistrictCode" />
+                <ScalarProperty Name="StateId_fk" ColumnName="StateId_fk" />
+                <ScalarProperty Name="DistrictId_pk" ColumnName="DistrictId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_EmpCode">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_EmpCode">
+              <MappingFragment StoreEntitySet="mst_EmpCode">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Emp_Code" ColumnName="Emp_Code" />
+                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_KeyRole">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_KeyRole">
+              <MappingFragment StoreEntitySet="mst_KeyRole">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="KeyRoleName" ColumnName="KeyRoleName" />
+                <ScalarProperty Name="KeyRoleId_pk" ColumnName="KeyRoleId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Location">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Location">
+              <MappingFragment StoreEntitySet="mst_Location">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Name">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Name">
+              <MappingFragment StoreEntitySet="mst_Name">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_SectionProcessStepOne">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_SectionProcessStepOne">
+              <MappingFragment StoreEntitySet="mst_SectionProcessStepOne">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SectionProceStepOneName" ColumnName="SectionProceStepOneName" />
+                <ScalarProperty Name="SectionProceStepOneId_pk" ColumnName="SectionProceStepOneId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_State">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_State">
+              <MappingFragment StoreEntitySet="mst_State">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="StateId_pk" ColumnName="StateId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Theme">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Theme">
+              <MappingFragment StoreEntitySet="mst_Theme">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ThemeName" ColumnName="ThemeName" />
+                <ScalarProperty Name="ThemeCode" ColumnName="ThemeCode" />
+                <ScalarProperty Name="ThemeId_pk" ColumnName="ThemeId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_TypeofInterview">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_TypeofInterview">
+              <MappingFragment StoreEntitySet="mst_TypeofInterview">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InterviewType" ColumnName="InterviewType" />
+                <ScalarProperty Name="InterviewId" ColumnName="InterviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_JobD">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_JobD">
+              <MappingFragment StoreEntitySet="tbl_JobD">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="AbouttheProject" ColumnName="AbouttheProject" />
+                <ScalarProperty Name="ApplicationClosureDate" ColumnName="ApplicationClosureDate" />
+                <ScalarProperty Name="HiringLink" ColumnName="HiringLink" />
+                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
+                <ScalarProperty Name="JobId_pk" ColumnName="JobId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_JobDAbout">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_JobDAbout">
+              <MappingFragment StoreEntitySet="tbl_JobDAbout">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AboutPositionValue" ColumnName="AboutPositionValue" />
+                <ScalarProperty Name="AboutPositionId" ColumnName="AboutPositionId" />
+                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
+                <ScalarProperty Name="JobDId_fk" ColumnName="JobDId_fk" />
+                <ScalarProperty Name="JobDAboutId_pk" ColumnName="JobDAboutId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_JobDKeyRole">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.Tbl_JobDKeyRole">
+              <MappingFragment StoreEntitySet="Tbl_JobDKeyRole">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="KeyValue" ColumnName="KeyValue" />
+                <ScalarProperty Name="KeyRoleId" ColumnName="KeyRoleId" />
+                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
+                <ScalarProperty Name="JobDId_fk" ColumnName="JobDId_fk" />
+                <ScalarProperty Name="JobDKeyRoleId_pk" ColumnName="JobDKeyRoleId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_NewHire">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHire">
+              <MappingFragment StoreEntitySet="tbl_NewHire">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="IsDeletedOn" ColumnName="IsDeletedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Anyspecificsoftwarewithlicense" ColumnName="Anyspecificsoftwarewithlicense" />
+                <ScalarProperty Name="LaptopwithSpecifications_Id" ColumnName="LaptopwithSpecifications_Id" />
+                <ScalarProperty Name="SelectionProcessStep3" ColumnName="SelectionProcessStep3" />
+                <ScalarProperty Name="SelectionProcessStep2" ColumnName="SelectionProcessStep2" />
+                <ScalarProperty Name="SelectionProcess_Id" ColumnName="SelectionProcess_Id" />
+                <ScalarProperty Name="InterviewPanel2" ColumnName="InterviewPanel2" />
+                <ScalarProperty Name="InterviewPanel" ColumnName="InterviewPanel" />
+                <ScalarProperty Name="TypeOfInterview" ColumnName="TypeOfInterview" />
+                <ScalarProperty Name="EmpaneledHead_Id" ColumnName="EmpaneledHead_Id" />
+                <ScalarProperty Name="Advertisement_Id" ColumnName="Advertisement_Id" />
+                <ScalarProperty Name="JD_AvailabilityIfYes_Doc" ColumnName="JD_AvailabilityIfYes_Doc" />
+                <ScalarProperty Name="JD_Availability_Id" ColumnName="JD_Availability_Id" />
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="BaseSalRangepermonth_Id" ColumnName="BaseSalRangepermonth_Id" />
+                <ScalarProperty Name="CostCentreCode_Id" ColumnName="CostCentreCode_Id" />
+                <ScalarProperty Name="Durationoftheposition_Tdate" ColumnName="Durationoftheposition_Tdate" />
+                <ScalarProperty Name="Durationoftheposition_Fdate" ColumnName="Durationoftheposition_Fdate" />
+                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="jobLocationTypeId" ColumnName="jobLocationTypeId" />
+                <ScalarProperty Name="NoofPositionsId" ColumnName="NoofPositionsId" />
+                <ScalarProperty Name="TypeofApplicableId" ColumnName="TypeofApplicableId" />
+                <ScalarProperty Name="OtherLocation" ColumnName="OtherLocation" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="ThemeId" ColumnName="ThemeId" />
+                <ScalarProperty Name="HiringTypeId" ColumnName="HiringTypeId" />
+                <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
+                <ScalarProperty Name="NewHireId_pk" ColumnName="NewHireId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_NewHireMultiple_old">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHireMultiple_old">
+              <MappingFragment StoreEntitySet="tbl_NewHireMultiple_old">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="IsDeletedOn" ColumnName="IsDeletedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Anyspecificsoftwarewithlicense" ColumnName="Anyspecificsoftwarewithlicense" />
+                <ScalarProperty Name="LaptopwithSpecifications_Id" ColumnName="LaptopwithSpecifications_Id" />
+                <ScalarProperty Name="SelectionProcess_Id" ColumnName="SelectionProcess_Id" />
+                <ScalarProperty Name="InterviewPanel2" ColumnName="InterviewPanel2" />
+                <ScalarProperty Name="InterviewPanel1" ColumnName="InterviewPanel1" />
+                <ScalarProperty Name="EmpaneledHead_Id" ColumnName="EmpaneledHead_Id" />
+                <ScalarProperty Name="Advertisement_Id" ColumnName="Advertisement_Id" />
+                <ScalarProperty Name="JD_AvailabilityIfYes_Doc" ColumnName="JD_AvailabilityIfYes_Doc" />
+                <ScalarProperty Name="JD_Availability_Id" ColumnName="JD_Availability_Id" />
+                <ScalarProperty Name="Grade_Id" ColumnName="Grade_Id" />
+                <ScalarProperty Name="CTCSalRangepermonth_Id" ColumnName="CTCSalRangepermonth_Id" />
+                <ScalarProperty Name="CostCentreCode_Id" ColumnName="CostCentreCode_Id" />
+                <ScalarProperty Name="Durationoftheposition_Tdate" ColumnName="Durationoftheposition_Tdate" />
+                <ScalarProperty Name="Durationoftheposition_Fdate" ColumnName="Durationoftheposition_Fdate" />
+                <ScalarProperty Name="ReportingManager" ColumnName="ReportingManager" />
+                <ScalarProperty Name="NoofPositions_Id" ColumnName="NoofPositions_Id" />
+                <ScalarProperty Name="TypeofApplicable_Id" ColumnName="TypeofApplicable_Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="HiringType_Id" ColumnName="HiringType_Id" />
+                <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Id_pk" ColumnName="Id_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_NewHireMultipleCost">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHireMultipleCost">
+              <MappingFragment StoreEntitySet="tbl_NewHireMultipleCost">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MonthlyAmount" ColumnName="MonthlyAmount" />
+                <ScalarProperty Name="AllotmentPercent" ColumnName="AllotmentPercent" />
+                <ScalarProperty Name="BudgetCode" ColumnName="BudgetCode" />
+                <ScalarProperty Name="ActivityCode" ColumnName="ActivityCode" />
+                <ScalarProperty Name="GrantID" ColumnName="GrantID" />
+                <ScalarProperty Name="MultipleCostName" ColumnName="MultipleCostName" />
+                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
+                <ScalarProperty Name="MultipleCostId_pk" ColumnName="MultipleCostId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_NewHireStatus">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHireStatus">
+              <MappingFragment StoreEntitySet="tbl_NewHireStatus">
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="ApprovedRemark" ColumnName="ApprovedRemark" />
+                <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="LevelStatusId" ColumnName="LevelStatusId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
+                <ScalarProperty Name="NewHireStatusId_pk" ColumnName="NewHireStatusId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Signature">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_Signature">
+              <MappingFragment StoreEntitySet="tbl_Signature">
+                <ScalarProperty Name="SignedDate" ColumnName="SignedDate" />
+                <ScalarProperty Name="SignatureData" ColumnName="SignatureData" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Applicable">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Applicable">
+              <MappingFragment StoreEntitySet="mst_Applicable">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ApplicableType" ColumnName="ApplicableType" />
+                <ScalarProperty Name="ApplicableId" ColumnName="ApplicableId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_CostCentreCode">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_CostCentreCode">
+              <MappingFragment StoreEntitySet="mst_CostCentreCode">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CostCentreCodeType" ColumnName="CostCentreCodeType" />
+                <ScalarProperty Name="CostCentreCodeId" ColumnName="CostCentreCodeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Grade">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Grade">
+              <MappingFragment StoreEntitySet="mst_Grade">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GradeType" ColumnName="GradeType" />
+                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_HiringType">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_HiringType">
+              <MappingFragment StoreEntitySet="mst_HiringType">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="HiringType" ColumnName="HiringType" />
+                <ScalarProperty Name="HiringTypeId" ColumnName="HiringTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_JobLocation">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_JobLocation">
+              <MappingFragment StoreEntitySet="mst_JobLocation">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="JobLocationType" ColumnName="JobLocationType" />
+                <ScalarProperty Name="JobLocationId" ColumnName="JobLocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Position">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Position">
+              <MappingFragment StoreEntitySet="mst_Position">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PositionType" ColumnName="PositionType" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_Sal">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_Sal">
+              <MappingFragment StoreEntitySet="mst_Sal">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Sal" ColumnName="Sal" />
+                <ScalarProperty Name="SalId" ColumnName="SalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_SelectionProcess">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_SelectionProcess">
+              <MappingFragment StoreEntitySet="mst_SelectionProcess">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SelectionProcessType" ColumnName="SelectionProcessType" />
+                <ScalarProperty Name="SelectionProcessId" ColumnName="SelectionProcessId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_TypeYesNo">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_TypeYesNo">
+              <MappingFragment StoreEntitySet="mst_TypeYesNo">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Recruitment_DBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
