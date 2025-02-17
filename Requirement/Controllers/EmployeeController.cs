@@ -21,6 +21,12 @@ namespace Requirement.Controllers
         private Recruitment_DBEntities db = new Recruitment_DBEntities();
         int result = 0;
         // GET: Employee
+
+        public ActionResult JDEditor()
+        {
+            return View();
+        }
+
         public ActionResult AddNewHire()
         {
             return View();
