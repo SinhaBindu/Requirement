@@ -13,7 +13,7 @@ namespace Requirement.Models
             AboutPositionId_pk = 0;
         }
         public int AboutPositionId_pk {get;set;}
-        [Display(Name = "Type of Name")]
+        [Display(Name = "About Position Name")]
         public string TypeOfName { get; set; }
 
         [Display(Name = "Is Active")]

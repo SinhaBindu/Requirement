@@ -5,13 +5,13 @@
         <thead>
             <tr>
                 <th>Srno.</th>
-                <th>Type Of Name</th>
+                <th>About Position Name</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @{
-                var sno = 0;
+                var sno = 1;
                 if (Model.Count() > 0)
                 {
                     foreach (var row in Model.ToList())

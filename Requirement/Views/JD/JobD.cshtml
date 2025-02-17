@@ -51,6 +51,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @*<script src="~/Scripts/JS/Master.js"></script>*@
+
     <script>
         $(document).ready(function () {
             let rowIndex = 0;
@@ -58,7 +60,7 @@
             // Function to fetch dropdown data
             function loadTypeOfNameDropdown(callback) {
                 $.ajax({
-                    url: "/JD/GetTypeOfNames", // Controller method
+                    url: "/Master/GetTypeOfNames", // Controller method
                     type: "GET",
                     success: function (data) {
                         let dropdownHtml = `<option value="">Select Type</option>`;
@@ -72,25 +74,24 @@
                     }
                 });
             }
-
             // Function to add a new row
             function addNewRow() {
                 rowIndex++;
                 loadTypeOfNameDropdown(function (dropdownOptions) {
                     let newRow = `
-                                <tr>
-                                    <td>
-                                        <select class="TypeOfName form-control" name="TypeOfName[]" id="TypeOfName_${rowIndex}">
-                                            ${dropdownOptions}
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="TypeOfValue form-control" name="TypeOfValue[]" id="TypeOfValue_${rowIndex}" placeholder="Type Of Value">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="deleteRow btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>`;
+                                    <tr>
+                                        <td>
+                                            <select class="TypeOfName form-control" name="TypeOfName[]" id="TypeOfName_${rowIndex}">
+                                                ${dropdownOptions}
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="TypeOfValue form-control" name="TypeOfValue[]" id="TypeOfValue_${rowIndex}" placeholder="Type Of Value">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="deleteRow btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>`;
                     $('#dataTable tbody').append(newRow);
                 });
             }

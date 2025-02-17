@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,7 +21,19 @@ namespace Requirement.Controllers
         Recruitment_DBEntities db = new Recruitment_DBEntities();
 
         // GET: Base
-        public void Success(string message, bool dismissable = false)
+
+        public string ConvertViewToStringHtml(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (StringWriter writer = new StringWriter())
+            {
+                ViewEngineResult vResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                ViewContext vContext = new ViewContext(this.ControllerContext, vResult.View, ViewData, new TempDataDictionary(), writer);
+                vResult.View.Render(vContext, writer);
+                return writer.ToString();
+            }
+        }
+    public void Success(string message, bool dismissable = false)
         {
             AddAlert(AlertStyles.Success, message, dismissable);
         }

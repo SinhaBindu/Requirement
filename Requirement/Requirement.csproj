@@ -184,6 +184,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JDController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1118,6 +1119,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JS\Master.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1168,8 +1170,8 @@
     <Content Include="Views\JD\JDList.cshtml" />
     <Content Include="Views\JD\_JDListData.cshtml" />
     <Content Include="Views\Employee\HireList.cshtml" />
-    <Content Include="Views\JD\JDMaster.cshtml" />
-    <Content Include="Views\JD\_AbboutPositionData.cshtml" />
+    <Content Include="Views\Master\JDMaster.cshtml" />
+    <Content Include="Views\Master\_AboutPositionData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

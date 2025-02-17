@@ -23,11 +23,6 @@ namespace Requirement.Controllers
         {
             return View();
         }
-        public JsonResult GetTypeOfNames()
-        {
-            var typeOfNames = db.mst_AboutPosition.Where(j => j.IsActive == true).OrderBy(j => j.OrderBy).Select(j => new { Value = j.AboutPositionId_pk, Text = j.TypeOfName }).ToList();
-            return Json(typeOfNames, JsonRequestBehavior.AllowGet);
-        }
 
         public ActionResult JobD()
         {
@@ -137,77 +132,7 @@ namespace Requirement.Controllers
                 return Json(new { success = false, message = "Error: " + ex.Message });
             }
         }
-
-        public ActionResult JDMaster()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult JDMaster(JDMaster model)
-        {
-            Recruitment_DBEntities db_ = new Recruitment_DBEntities();
-            var tbl = model.AboutPositionId_pk > 0 ? db_.mst_AboutPosition.Find(model.AboutPositionId_pk) : new mst_AboutPosition();
-            int res = 0;
-            try
-            {
-                if (string.IsNullOrEmpty(model.TypeOfName))
-                {
-                    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
-                }
-                int maxOrderBy = db.mst_AboutPosition.Select(j => (int?)j.OrderBy).DefaultIfEmpty(0).Max() ?? 0;
-                if (model.AboutPositionId_pk == 0)
-                {
-                    tbl.TypeOfName = model.TypeOfName.Trim();
-                    tbl.IsActive = true;
-                    tbl.CreatedBy = MvcApplication.CUser.UserId;
-                    tbl.CreatedOn = DateTime.Now;
-                    tbl.OrderBy = maxOrderBy + 1;
-                    db.mst_AboutPosition.Add(tbl);
-                    res = db.SaveChanges();
-                }
-                else if (model.AboutPositionId_pk > 0)
-                {
-                    tbl.AboutPositionId_pk = model.AboutPositionId_pk;
-                    tbl.TypeOfName = model.TypeOfName.Trim();
-                    tbl.IsActive = true;
-                    tbl.UpdatedBy = MvcApplication.CUser.UserId;
-                    tbl.UpdatedOn = DateTime.Now;
-                    res = db_.SaveChanges();
-                }
-               
-                if (res > 0)
-                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.Insert) });
-                else
-                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.NotInsert) });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) });
-            }
-        }
-
-        public ActionResult GetAboutPositionList()
-        {
-            Recruitment_DBEntities db_ = new Recruitment_DBEntities();
-            var tbl = db.mst_AboutPosition.ToList();
-            try
-            {
-                if (tbl.Count > 0)
-                {
-                    //var tbldata = JsonConvert.SerializeObject(tbl);
-                    var html = ConvertViewToString("_AbboutPositionData", tbl);
-                    return Json(new { IsSuccess = true, Data = html }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new { IsSuccess = false, Data = "No records found." }, JsonRequestBehavior.AllowGet);
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(new { IsSuccess = false, Data = "An error occurred: " + ex.Message }, JsonRequestBehavior.AllowGet);
-            }
-        }
+      
         private string ConvertViewToString(string viewName, object model)
         {
             ViewData.Model = model;
