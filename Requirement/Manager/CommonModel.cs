@@ -312,6 +312,22 @@ namespace Requirement.Manager
 
             return list;
         }
+        public static List<SelectListItem> GetSelectionInterview(int IsSelect = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list = _db.mst_SelectionInterview.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.InterviewId_pk.ToString(), Text = x.InterviewName }).ToList();
+            if (IsSelect == 0)
+            {
+                //list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
         public static List<SelectListItem> GetALLYesNoM(int IsSelect = 0)
         {
             Recruitment_DBEntities _db = new Recruitment_DBEntities();

@@ -58,5 +58,6 @@ namespace Requirement.Models
         public virtual DbSet<mst_Sal> mst_Sal { get; set; }
         public virtual DbSet<mst_SelectionProcess> mst_SelectionProcess { get; set; }
         public virtual DbSet<mst_TypeYesNo> mst_TypeYesNo { get; set; }
+        public virtual DbSet<mst_SelectionInterview> mst_SelectionInterview { get; set; }
     }
 }

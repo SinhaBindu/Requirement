@@ -277,6 +277,9 @@
     <Compile Include="Models\mst_SectionProcessStepOne.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\mst_SelectionInterview.cs">
+      <DependentUpon>Employee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mst_SelectionProcess.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>

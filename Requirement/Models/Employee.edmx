@@ -270,6 +270,17 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_Sal' does not have a primar
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
+        <EntityType Name="mst_SelectionInterview">
+          <Key>
+            <PropertyRef Name="InterviewId_pk" />
+          </Key>
+          <Property Name="InterviewId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InterviewName" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Recruitment_DB.dbo.mst_SelectionProcess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="mst_SelectionProcess">
@@ -569,6 +580,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="mst_Location" EntityType="Self.mst_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Name" EntityType="Self.mst_Name" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_SectionProcessStepOne" EntityType="Self.mst_SectionProcessStepOne" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mst_SelectionInterview" EntityType="Self.mst_SelectionInterview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_State" EntityType="Self.mst_State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Theme" EntityType="Self.mst_Theme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_TypeofInterview" EntityType="Self.mst_TypeofInterview" Schema="dbo" store:Type="Tables" />
@@ -737,6 +749,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="mst_SelectionInterview" EntityType="Recruitment_DBModel.mst_SelectionInterview" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1243,6 +1256,17 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <End Type="Recruitment_DBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="Recruitment_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="mst_SelectionInterview">
+          <Key>
+            <PropertyRef Name="InterviewId_pk" />
+          </Key>
+          <Property Name="InterviewId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InterviewName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1755,6 +1779,18 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="mst_SelectionInterview">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_SelectionInterview">
+              <MappingFragment StoreEntitySet="mst_SelectionInterview">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InterviewName" ColumnName="InterviewName" />
+                <ScalarProperty Name="InterviewId_pk" ColumnName="InterviewId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

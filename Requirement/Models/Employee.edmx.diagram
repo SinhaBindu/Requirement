@@ -41,6 +41,7 @@
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Recruitment_DBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="Recruitment_DBModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_SelectionInterview" Width="1.5" PointX="0.75" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
