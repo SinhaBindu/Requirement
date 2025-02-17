@@ -37,6 +37,8 @@
                     if (resp.IsSuccess) {
                         debugger;
                         $('#subdata').html(resp.Data);
+                        // Initialize DataTable after loading the HTML
+                        $('#tbl').DataTable(); // Ensure you have included DataTables library
                         toastr.success("Success", "Data loaded successfully.");
 
                         // Initialize DataTable after loading the HTML

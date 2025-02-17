@@ -1162,7 +1162,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Employee\AddNewHire.cshtml" />
     <Content Include="Views\Employee\_NewHiredData.cshtml" />
-    <Content Include="Views\Employee\MultipleHireF.cshtml" />
+    <Content Include="Views\Employee\MultipleHireF_old.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UserDetaillist.cshtml" />
     <Content Include="Views\Account\_UserDetailData.cshtml" />
