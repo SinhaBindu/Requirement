@@ -12,6 +12,7 @@ namespace Requirement.Models
         public EmployeeModel()
         {
             NewHireId_pk = Guid.Empty;
+            JobDModel = new JobDModel();
         }
         [Key]
         public Guid NewHireId_pk { get; set; }
@@ -119,6 +120,11 @@ namespace Requirement.Models
         public List<EmployeeModel> Employees { get; set; }
         public List<MultipleCostModel> MultipleCostModel { get; set; }
 
+        //JD Model Start
+        public JobDModel JobDModel { get; set; }
+        public List<JobDAboutModel> JobDAboutModel { get; set; }
+        public List<JobDKeyRoleModel> JobDKeyRoleModel { get; set; }
+
     }
     public class MultipleCostModel
     {
@@ -128,9 +134,58 @@ namespace Requirement.Models
         public string GrantID { get; set; }
         public string ActivityCode { get; set; }
         public string BudgetCode { get; set; }
+        public Nullable<decimal> AllotmentPercent { get; set; }
+        public Nullable<decimal> MonthlyAmount { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
+    }
+    public class JobDModel
+    {
+        public JobDModel()
+        {
+            JobId_pk = Guid.Empty;
+        }
+        public Guid JobId_pk { get; set; }
+        public Nullable<System.Guid> NewHireId_fk { get; set; }
+        public string HiringLink { get; set; }
+        public Nullable<System.DateTime> ApplicationClosureDate { get; set; }
+        public string AbouttheProject { get; set; }
+        public string Remarks { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public Nullable<int> OrderBy { get; set; }
+    }
+    public class JobDAboutModel
+    {
+        public int JobDAboutId_pk { get; set; }
+        public Nullable<System.Guid> JobDId_fk { get; set; }
+        public Nullable<System.Guid> NewHireId_fk { get; set; }
+        public Nullable<int> AboutPositionId { get; set; }
+        public string AboutPositionValue { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public Nullable<int> OrderBy { get; set; }
+    }
+    public class JobDKeyRoleModel
+    {
+        public int JobDKeyRoleId_pk { get; set; }
+        public Nullable<System.Guid> JobDId_fk { get; set; }
+        public Nullable<System.Guid> NewHireId_fk { get; set; }
+        public Nullable<int> KeyRoleId { get; set; }
+        public string KeyValue { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public Nullable<int> OrderBy { get; set; }
     }
     public class PartDisplayName
     {
@@ -141,7 +196,7 @@ namespace Requirement.Models
         public const string LocationId = "Location";
         public const string TypeofApplicableId = "Type of Recruitment";
         public const string NoofPositionsId = "No of Positions";
-        public const string jobLocationTypeId = "job Location Type";
+        public const string jobLocationTypeId = "Job Location";
         public const string Remarks = "Remarks";
         public const string ReportingManager = "Reporting Manager";
         public const string Durationoftheposition_Fdate = "From Date";
@@ -172,6 +227,15 @@ namespace Requirement.Models
         public const string Section_Infrastructure = "Infrastructure Requirement :";
         public const string LaptopwithSpecifications_Id = "Laptop with Specifications";
         public const string Anyspecificsoftwarewithlicense = "Any specific software with license";
-    
+
+        public const string Section_JDHeader = "JOB DESCRIPTION";
+        public const string Section_JDAbout = "About Position Detiails";
+        public const string Section_JDKeyRole = "JD Key Role Details";
+        public const string Section_JDOther = "JD Other Details";
+        public const string HiringLink = "How to apply: Interested candidates can apply for the Position by using the following link: ";
+        public const string ApplicationClosureDate = "Application closure date";
+        public const string AbouttheProject = "About the Project";
+        public const string JDRemarks = "Remarks";
+
     }
 }

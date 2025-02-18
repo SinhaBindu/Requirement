@@ -41,8 +41,14 @@ namespace Requirement.Controllers
         #endregion
 
 
-        #region About Position
-        public JsonResult GetTypeOfNames()
+        #region For JOBD About Position and Key Role
+
+        public JsonResult GetKeyRole()
+        {
+            var typeOfNames = db.mst_KeyRole.Where(j => j.IsActive == true).OrderBy(j => j.OrderBy).Select(j => new { Value = j.KeyRoleId_pk, Text = j.KeyRoleName }).ToList();
+            return Json(typeOfNames, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetTypeOfNames()//About Master
         {
             var typeOfNames = db.mst_AboutPosition.Where(j => j.IsActive == true).OrderBy(j => j.OrderBy).Select(j => new { Value = j.AboutPositionId_pk, Text = j.TypeOfName }).ToList();
             return Json(typeOfNames, JsonRequestBehavior.AllowGet);

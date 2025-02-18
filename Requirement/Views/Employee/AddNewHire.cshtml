@@ -27,288 +27,394 @@
                 @using (Html.BeginForm("AddNewHire", "Employee", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="basic-formss">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.HiringTypeId, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.HiringTypeId, CommonModel.GetALLHyringM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.HiringTypeId, "", new { @class = "text-danger" })
+                    <div class="basic-formss">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.HiringTypeId, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.HiringTypeId, CommonModel.GetALLHyringM(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.HiringTypeId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-rows">
-                        <div class="dv_multiplecost" style="display:none;">
-                            <table id="dataTable" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Grant ID</th>
-                                        <th>Activity Code</th>
-                                        <th>Budget Code</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @*<tr>
-                            <td><input type="text" name="MultipleCostName" id="MultipleCostName_0" value="" /></td>
-                                <td><input type="text" name="GrantID" id="GrantID_0" value="" /></td>
-                                <td><input type="text" name="ActivityCode" id="ActivityCode_0" value="" /></td>
-                                <td><input type="text" name="BudgetCode" id="BudgetCode_0" value="" /></td>
-                            <td><button class="deleteRow">Delete</button></td>
-                        </tr>*@
-                                </tbody>
-                            </table>
-                            <button id="addRow" class="add-btn">Add Row</button>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.DropDownListFor(model => model.LocationId, CommonModel.GetALLLocation(), null, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-4 dv_otherlocation" style="display:none;">
-                            @Html.LabelFor(model => model.OtherLocation, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.OtherLocation, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.OtherLocation, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.TypeofApplicableId, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.TypeofApplicableId, CommonModel.GetALLApplicableM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.TypeofApplicableId, "", new { @class = "text-danger" })
+                        <div class="form-rows">
+                            <div class="dv_multiplecost" style="display:none;">
+                                <table id="dataTable" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Grant ID</th>
+                                            <th>Activity Code</th>
+                                            <th>Budget Code</th>
+                                            <th>Allotment Percent</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*<tr>
+                                                <td><input type="text" name="MultipleCostName" id="MultipleCostName_0" value="" /></td>
+                                                    <td><input type="text" name="GrantID" id="GrantID_0" value="" /></td>
+                                                    <td><input type="text" name="ActivityCode" id="ActivityCode_0" value="" /></td>
+                                                    <td><input type="text" name="BudgetCode" id="BudgetCode_0" value="" /></td>
+                                                <td><button class="deleteRow">Delete</button></td>
+                                            </tr>*@
+                                    </tbody>
+                                </table>
+                                <button id="addRow" class="add-btn">Add Row</button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.NoofPositionsId, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.NoofPositionsId, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.NoofPositionsId, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.jobLocationTypeId, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.jobLocationTypeId, CommonModel.GetALLJobLocationM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.jobLocationTypeId, "", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.DropDownListFor(model => model.LocationId, CommonModel.GetALLLocation(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4 dv_otherlocation" style="display:none;">
+                                @Html.LabelFor(model => model.OtherLocation, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.OtherLocation, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.OtherLocation, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.TypeofApplicableId, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.TypeofApplicableId, CommonModel.GetALLApplicableM(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TypeofApplicableId, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.ReportingManager, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.ReportingManager, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ReportingManager, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
 
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.Durationoftheposition_Fdate, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Durationoftheposition_Fdate, new { @class = "datepicker form-control", autocomplete = "off" })
-                            @Html.ValidationMessageFor(model => model.Durationoftheposition_Fdate, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.Durationoftheposition_Tdate, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Durationoftheposition_Tdate, new { @class = "datepicker form-control", autocomplete = "off" })
-                            @Html.ValidationMessageFor(model => model.Durationoftheposition_Tdate, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-4 dv_CostCentreCode_Id" style="display:none;">
-                            @Html.LabelFor(model => model.CostCentreCode_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.CostCentreCode_Id, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.CostCentreCode_Id, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.BaseSalRangepermonth_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.BaseSalRangepermonth_Id, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.BaseSalRangepermonth_Id, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Grade_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.Grade_Id, CommonModel.GetALLGradeM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Grade_Id, "", new { @class = "text-danger" })
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.NoofPositionsId, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.NoofPositionsId, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NoofPositionsId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.jobLocationTypeId, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.jobLocationTypeId, CommonModel.GetALLJobLocationM(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.jobLocationTypeId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.ReportingManager, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.ReportingManager, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ReportingManager, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
-                            <div class="checkbox check-control">
-                                @foreach (var item in CommonModel.GetALLYesNoMId())
-                                {
-                                    <div class="input-spacer">
-                                        @Html.RadioButtonFor(model => model.JD_Availability_Id, item.Value, new { id = "JD_Availability_Id" + item.Value }) @item.Text
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.Durationoftheposition_Fdate, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Durationoftheposition_Fdate, new { @class = "datepicker form-control", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Durationoftheposition_Fdate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.Durationoftheposition_Tdate, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Durationoftheposition_Tdate, new { @class = "datepicker form-control", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Durationoftheposition_Tdate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4 dv_CostCentreCode_Id" style="display:none;">
+                                @Html.LabelFor(model => model.CostCentreCode_Id, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.CostCentreCode_Id, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CostCentreCode_Id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.BaseSalRangepermonth_Id, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.BaseSalRangepermonth_Id, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.BaseSalRangepermonth_Id, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Grade_Id, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.Grade_Id, CommonModel.GetALLGradeM(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Grade_Id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.JD_Availability_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <div class="checkbox check-control">
+                                    @foreach (var item in CommonModel.GetALLYesNoMId())
+                                    {
+                                        <div class="input-spacer">
+                                            @Html.RadioButtonFor(model => model.JD_Availability_Id, item.Value, new { id = "JD_Availability_Id" + item.Value }) @item.Text
+                                        </div>
+                                    }
+
+                                    @Html.ValidationMessageFor(model => model.JD_Availability_Id, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mark-devide"></div>
+                            </div>
+
+                            <div class="form-group col-md-6" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
+                                @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label" })
+                                <div class="col-md-10s">
+                                    @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
+                                    @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_SourcingChannel</h5></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Advertisement_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <div class="checkbox check-control">
+                                    @foreach (var item in CommonModel.GetALLAdvertisement())
+                                    {
+                                        <div class="input-spacer">
+                                            @Html.RadioButtonFor(model => model.Advertisement_Id, item.Value, new { id = "GetALLAdvertisement" + item.Value }) @item.Text
+                                        </div>
+                                    }
+                                    @Html.ValidationMessageFor(model => model.Advertisement_Id, "", new { @class = "text-danger" })
+                                </div>
+                                <strong>@Requirement.Models.PartDisplayName.Note_Advertisement</strong>
+                                <div class="mark-devide"></div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.EmpaneledHead_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <div class="checkbox check-control">
+                                    @foreach (var item in CommonModel.GetALLYesNoMId().ToList())
+                                    {
+                                        <div class="input-spacer">
+                                            @Html.RadioButtonFor(model => model.EmpaneledHead_Id, item.Value, new { id = "EmpaneledHead_Id" + item.Value }) @item.Text
+                                        </div>
+                                    }
+
+                                    @Html.ValidationMessageFor(model => model.EmpaneledHead_Id, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mark-devide"></div>
+                                <strong>@Requirement.Models.PartDisplayName.NoteLable_EmpaneledHead</strong>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12" id="div_TypeOfInterview">
+                                @Html.LabelFor(model => model.TypeOfInterview, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-12s">
+                                    @Html.DropDownListFor(model => model.TypeOfInterview, CommonModel.GetALLIT(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TypeOfInterview, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_Interview</h5></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6" id="div_InterviewPanel" style="display: none;">
+                                @Html.LabelFor(model => model.InterviewPanel, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextAreaFor(model => model.InterviewPanel, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.InterviewPanel, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6" id="div_InterviewPanel2" style="display: none;">
+                                @Html.LabelFor(model => model.InterviewPanel2, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextAreaFor(model => model.InterviewPanel2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.InterviewPanel2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_SourcingChannel</h5></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.SelectionProcess_Id, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                <div class="col-md-10s">
+                                    @Html.DropDownListFor(model => model.SelectionProcess_Id, CommonModel.GetALLSPM(), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SelectionProcess_Id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.SelectionProcessStep2, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <span style="color:red;">*</span>
+                                <div class="checkbox check-control">
+                                    @foreach (var item in CommonModel.GetSelectionInterview().ToList())
+                                    {
+                                        <div class="input-spacer">
+                                            @Html.RadioButtonFor(model => model.SelectionProcessStep2, item.Value, new { id = "SelectionProcessStep2" + item.Value }) @item.Text
+                                        </div>
+                                    }
+
+                                    @Html.ValidationMessageFor(model => model.SelectionProcessStep2, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mark-devide"></div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.SelectionProcessStep3, htmlAttributes: new { @class = "control-label col-xs-12" })
+                                <span style="color:red;">*</span>
+                                <div class="checkbox check-control">
+                                    @foreach (var item in CommonModel.GetALLYesNoMId().ToList())
+                                    {
+                                        <div class="input-spacer">
+                                            @Html.RadioButtonFor(model => model.SelectionProcessStep3, item.Value, new { id = "SelectionProcessStep3" + item.Value }) @item.Text
+                                        </div>
+                                    }
+
+                                    @Html.ValidationMessageFor(model => model.SelectionProcessStep3, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mark-devide"></div>
+                            </div>
+                        </div>
+                        <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_Infrastructure</h5></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.LaptopwithSpecifications_Id, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.LaptopwithSpecifications_Id, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LaptopwithSpecifications_Id, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.Anyspecificsoftwarewithlicense, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.TextBoxFor(model => model.Anyspecificsoftwarewithlicense, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Anyspecificsoftwarewithlicense, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    @*<h4 class="card-title">@Requirement.Models.PartDisplayName.Section_JDHeader</h4>*@
+                                    <p class="text-muted">
+                                        <code></code>
+                                    </p>
+                                    <div id="accordion-three" class="accordion">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="false" aria-controls="collapseOne4"><i class="fa" aria-hidden="true"></i> @Requirement.Models.PartDisplayName.Section_JDHeader</h5>
+                                            </div>
+                                            <div id="collapseOne4" class="collapse" data-parent="#accordion-three" style="">
+                                                <div class="card-body">
+                                                    @Html.HiddenFor(m => m.JobDModel.JobId_pk)
+                                                    @Html.HiddenFor(m => m.JobDModel.NewHireId_fk)
+                                                    <!--1st About Position Start-->
+                                                    <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDAbout</h5>
+
+                                                    @*@using (Html.BeginForm("JobD", "JD", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
+                                                        {
+                                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+                                                    <div class="row">
+                                                        <table id="dataTableabout" class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>About Position</th>
+                                                                    <th>About Position Value</th>
+                                                                    <th>Order By</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+
+                                                        <button id="addRowabout" class="btn btn-success">Add Row</button>
+                                                    </div>
+
+                                                    @*<div class="form-row pt-3">
+                                                            <div class="form-group col-md-4 offset-4">
+                                                                <input type="submit" id="btnsubmit" class="btn btn-primary" value="Submit" />
+                                                            </div>
+                                                        </div>*@
+                                                    @*}*@
+
+                                                    <!--1st About Position end-->
+                                                    <!--2nd Key Role start-->
+                                                    <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDKeyRole</h5>
+
+                                                    <div class="row">
+                                                        <table id="dataTablekeyrole" class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Key Role</th>
+                                                                    <th>Key Role Value</th>
+                                                                    <th>Order By</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+
+                                                        <button id="addRowkeyrole" class="btn btn-success">Add Row</button>
+                                                    </div>
+                                                    <!--2nd Key Role end-->
+                                                    <!--Other Details-->
+                                                    <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDOther</h5>
+
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            @Html.LabelFor(model => model.JobDModel.ApplicationClosureDate, htmlAttributes: new { @class = "control-label" })
+                                                            <span style="color:red;">*</span>
+                                                            @Html.TextBoxFor(model => model.JobDModel.ApplicationClosureDate, new { @class = "form-control datepicker" })
+                                                            @Html.ValidationMessageFor(model => model.JobDModel.ApplicationClosureDate, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            @Html.LabelFor(model => model.JobDModel.HiringLink, htmlAttributes: new { @class = "control-label" })
+                                                            <span style="color:red;">*</span>
+                                                            @Html.TextAreaFor(model => model.JobDModel.HiringLink, new { @class = "form-control", row = "5", col = "12" })
+                                                            @Html.ValidationMessageFor(model => model.JobDModel.HiringLink, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            @Html.LabelFor(model => model.JobDModel.AbouttheProject, htmlAttributes: new { @class = "control-label" })
+                                                            <span style="color:red;">*</span>
+                                                            @Html.TextAreaFor(model => model.JobDModel.AbouttheProject, new { @class = "form-control", row = "5", col = "12" })
+                                                            @Html.ValidationMessageFor(model => model.JobDModel.AbouttheProject, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <!--Other Details End-->
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+
+
                                     </div>
-                                }
-
-                                @Html.ValidationMessageFor(model => model.JD_Availability_Id, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                            <div class="mark-devide"></div>
                         </div>
 
-                        <div class="form-group col-md-6" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
-                            @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label" })
-                            <div class="col-md-10s">
-                                @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
-                                @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+
+                        <div class="form-row pt-1">
+                            <div class="form-group col-md-4">
+                                @*<button type="submit" class="btn btn-primary">Submit</button>*@
+                                <input type="submit" name="btnsubmit" id="btnsubmit" class="btn btn-primary" value="Submit" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_SourcingChannel</h5></div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.Advertisement_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
-                            <div class="checkbox check-control">
-                                @foreach (var item in CommonModel.GetALLAdvertisement())
-                                {
-                                    <div class="input-spacer">
-                                        @Html.RadioButtonFor(model => model.Advertisement_Id, item.Value, new { id = "GetALLAdvertisement" + item.Value }) @item.Text
-                                    </div>
-                                }
-                                @Html.ValidationMessageFor(model => model.Advertisement_Id, "", new { @class = "text-danger" })
-                            </div>
-                            <strong>@Requirement.Models.PartDisplayName.Note_Advertisement</strong>
-                            <div class="mark-devide"></div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.EmpaneledHead_Id, htmlAttributes: new { @class = "control-label col-xs-12" })
-                            <div class="checkbox check-control">
-                                @foreach (var item in CommonModel.GetALLYesNoMId().ToList())
-                                {
-                                    <div class="input-spacer">
-                                        @Html.RadioButtonFor(model => model.EmpaneledHead_Id, item.Value, new { id = "EmpaneledHead_Id" + item.Value }) @item.Text
-                                    </div>
-                                }
-
-                                @Html.ValidationMessageFor(model => model.EmpaneledHead_Id, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mark-devide"></div>
-                            <strong>@Requirement.Models.PartDisplayName.NoteLable_EmpaneledHead</strong>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12" id="div_TypeOfInterview">
-                            @Html.LabelFor(model => model.TypeOfInterview, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-12s">
-                                @Html.DropDownListFor(model => model.TypeOfInterview, CommonModel.GetALLIT(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.TypeOfInterview, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_Interview</h5></div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6" id="div_InterviewPanel" style="display: none;">
-                            @Html.LabelFor(model => model.InterviewPanel, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextAreaFor(model => model.InterviewPanel, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.InterviewPanel, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-6" id="div_InterviewPanel2" style="display: none;">
-                            @Html.LabelFor(model => model.InterviewPanel2, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextAreaFor(model => model.InterviewPanel2, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.InterviewPanel2, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_SourcingChannel</h5></div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.SelectionProcess_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            <div class="col-md-10s">
-                                @Html.DropDownListFor(model => model.SelectionProcess_Id, CommonModel.GetALLSPM(), null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.SelectionProcess_Id, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.SelectionProcessStep2, htmlAttributes: new { @class = "control-label col-xs-12" })
-                            <span style="color:red;">*</span>
-                            <div class="checkbox check-control">
-                                @foreach (var item in CommonModel.GetSelectionInterview().ToList())
-                                {
-                                    <div class="input-spacer">
-                                        @Html.RadioButtonFor(model => model.SelectionProcessStep2, item.Value, new { id = "SelectionProcessStep2" + item.Value }) @item.Text
-                                    </div>
-                                }
-
-                                @Html.ValidationMessageFor(model => model.SelectionProcessStep2, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mark-devide"></div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.SelectionProcessStep3, htmlAttributes: new { @class = "control-label col-xs-12" })
-                            <span style="color:red;">*</span>
-                            <div class="checkbox check-control">
-                                @foreach (var item in CommonModel.GetALLYesNoMId().ToList())
-                                {
-                                    <div class="input-spacer">
-                                        @Html.RadioButtonFor(model => model.SelectionProcessStep3, item.Value, new { id = "SelectionProcessStep3" + item.Value }) @item.Text
-                                    </div>
-                                }
-
-                                @Html.ValidationMessageFor(model => model.SelectionProcessStep3, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="mark-devide"></div>
-                        </div>
-                    </div>
-                    <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_Infrastructure</h5></div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.LaptopwithSpecifications_Id, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.LaptopwithSpecifications_Id, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.LaptopwithSpecifications_Id, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.Anyspecificsoftwarewithlicense, htmlAttributes: new { @class = "control-label" })
-                            <span style="color:red;">*</span>
-                            @Html.TextBoxFor(model => model.Anyspecificsoftwarewithlicense, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Anyspecificsoftwarewithlicense, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-row pt-1">
-                        <div class="form-group col-md-4">
-                            @*<button type="submit" class="btn btn-primary">Submit</button>*@
-                            <input type="submit" name="btnsubmit" id="btnsubmit" class="btn btn-primary" value="Submit" />
-                        </div>
-                    </div>
-                </div>
                 }
             </div>
 
@@ -336,6 +442,7 @@
                     '<td><input type="text" class="GrantID" name="GrantID" id="GrantID_' + rowIndex + '" placeholder="Grant ID"></td>' +
                     '<td><input type="text" class="ActivityCode" name="ActivityCode" id="ActivityCode_' + rowIndex + '" placeholder="Activity Code"></td>' +
                     '<td><input type="text" class="BudgetCode" name="BudgetCode" id="BudgetCode_' + rowIndex + '" placeholder="Budget Code"></td>' +
+                    '<td><input type="text" class="BudgetCode" name="AllotmentPercent" id="AllotmentPercent_' + rowIndex + '" placeholder="Allotment Percentages"></td>' +
                     '<td><button class="deleteRow">Delete</button></td>' +
                     '</tr>';
                 $('#dataTable tbody').append(newRow);
@@ -459,7 +566,7 @@
                 //        formData.append('JD_AvailabilityIfYes_Doc', imageFile);
                 //    }
                 //}
-             
+
                 formData.append('tblcostdata', JSON.stringify(tblcostdata));
                 if (confirm('Are you sure you want to submit the form?')) {
                     $.ajax({
@@ -492,6 +599,212 @@
                 }
             });
 
+        });
+    </script>
+
+    <!--JD Details-->
+    <script>
+        $(document).ready(function () {
+
+            $(".datepicker").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                dateFormat: 'dd-M-yy',
+
+            })
+
+
+            // Function to fetch dropdown data
+            function loadTypeOfNameDropdownabout(callback) {
+                $.ajax({
+                    url: "/Master/GetTypeOfNames", // Controller method
+                    type: "GET",
+                    success: function (data) {
+                        let dropdownHtml = `<option value="">Select Type</option>`;
+                        $.each(data, function (index, item) {
+                            dropdownHtml += `<option value="${item.Value}">${item.Text}</option>`; // ✅ Using Text instead of ID
+                        });
+                        callback(dropdownHtml);
+                    },
+                    error: function () {
+                        toastr.error("Error fetching About Position data.");
+                    }
+                });
+            }
+            // Function to add a new row
+            function addNewRowabout() {
+                var rowCount = $('#dataTableabout tbody').find('tr').length;
+                if (rowCount == 0)
+                    rowIndex = 0;
+                else
+                    rowIndex++;
+                loadTypeOfNameDropdownabout(function (dropdownOptions) {
+                    let newRow = `
+                                                                               <tr>
+                                                                                   <td>
+                                                                                       <select class="AboutPositionId form-control" name="AboutPositionId[]" id="AboutPositionId_${rowIndex}">
+                                                                                           ${dropdownOptions}
+                                                                                       </select>
+                                                                                   </td>
+                                                                                   <td>
+                                                                                       <input type="text" class="AboutPositionValue form-control" name="AboutPositionValue[]" id="AboutPositionValue_${rowIndex}" placeholder="About Position Value">
+                                                                                   </td>
+                                                                                    <td>
+                                                                                         <input type="number" class="OrderBy form-control" name="OrderBy[]" id="OrderBy_${rowIndex}" placeholder="Order By">
+                                                                                     </td>
+                                                                                   <td>
+                                                                                       <button type="button" class="deleteRowabout btn btn-danger">Delete</button>
+                                                                                   </td>
+                                                                               </tr>`;
+                    $('#dataTableabout tbody').append(newRow);
+                });
+            }
+
+            // Add first row on page load
+            addNewRowabout();
+
+            // Add row on button click
+            $('#addRowabout').click(function (e) {
+                e.preventDefault();
+                addNewRowabout();
+            });
+
+            // Delete row
+            $(document).on('click', '.deleteRowabout', function () {
+                $(this).closest('tr').remove();
+                updateRowIndexesJDtbl("dataTableabout");
+            });
+
+            //Key Role Add Row
+
+            // Function to fetch dropdown data
+            function loadTypeOfNameDropdownKeyrole(callback) {
+                $.ajax({
+                    url: "/Master/GetKeyRole", // Controller method
+                    type: "GET",
+                    success: function (data) {
+                        let dropdownHtml = `<option value="">Select Type</option>`;
+                        $.each(data, function (index, item) {
+                            dropdownHtml += `<option value="${item.Value}">${item.Text}</option>`; // ✅ Using Text instead of ID
+                        });
+                        callback(dropdownHtml);
+                    },
+                    error: function () {
+                        toastr.error("Error fetching TypeOfName data.");
+                    }
+                });
+            }
+            // Function to add a new row
+            function addNewRowKeyrole() {
+                var rowCount = $('#dataTablekeyrole tbody').find('tr').length;
+                if (rowCount == 0)
+                    rowIndex = 0;
+                else
+                    rowIndex++;
+                loadTypeOfNameDropdownKeyrole(function (dropdownOptions) {
+                    let newRow = `
+                                                                    <tr>
+                                                                        <td>
+                                                                            <select class="KeyRoleId form-control" name="KeyRoleId[]" id="KeyRoleId_${rowIndex}">
+                                                                                ${dropdownOptions}
+                                                                            </select>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="text" class="KeyValue form-control" name="KeyValue[]" id="KeyValue_${rowIndex}" placeholder="Key Value">
+                                                                        </td>
+                                                                         <td>
+                                                                              <input type="number" class="OrderBy form-control" name="OrderBy[]" id="OrderBy_${rowIndex}" placeholder="Order By">
+                                                                         </td>
+                                                                        <td>
+                                                                            <button type="button" class="deleteRowKeyrole btn btn-danger">Delete</button>
+                                                                        </td>
+                                                                    </tr>`;
+                    $('#dataTablekeyrole tbody').append(newRow);
+                });
+            }
+
+            // Add first row on page load
+            addNewRowKeyrole();
+
+            // Add row on button click
+            $('#addRowkeyrole').click(function (e) {
+                e.preventDefault();
+                addNewRowKeyrole();
+            });
+
+            // Delete row
+            $(document).on('click', '.deleteRowKeyrole', function () {
+                $(this).closest('tr').remove();
+                updateRowIndexesJDtbl("dataTablekeyrole");
+            });
+
+            // Function to update row indexes after deletion
+            function updateRowIndexesJDtbl(tbl) {
+                rowIndex = 0; // Reset row index counter
+                $('#' + tbl + ' tbody tr').each(function (index) {
+                    //var rowCount = $('#dataTable tbody').find('tr').length;
+                    rowIndex = index;
+                    // Increment row index
+                    $(this).find('input[type="text"]').each(function () {
+                        var inputId = $(this).attr('id').split('_')[0]; // Get the input type (name or age)
+                        $(this).attr('id', inputId + '_' + rowIndex); // Update the input ID
+                    });
+                });
+            }
+
+            //// Form Submission
+            //$("#formid").on("submit", function (event) {
+            //    event.preventDefault();
+
+            //    var tblcostdata = [];
+            //    $('#dataTable tbody tr').each(function () {
+            //        // var TypeOfName = $(this).find("select.TypeOfName option:selected").text().trim(); // ✅ Correct way to get text
+            //        var TypeOfName = $(this).find("select.TypeOfName").val(); // ✅ Correct way to get text
+            //        var TypeOfValue = $(this).find("input.TypeOfValue").val().trim();
+
+            //        // Validate empty values
+            //        if (TypeOfName !== "" && TypeOfName !== "Select Type" && TypeOfValue !== "") {
+            //            tblcostdata.push({
+            //                TypeOfNameId: TypeOfName,
+            //                TypeOfValue: TypeOfValue
+            //            });
+            //        }
+            //    });
+
+            //    if (tblcostdata.length === 0) {
+            //        toastr.error("Please add at least one row with valid data.");
+            //        return;
+            //    }
+
+            //    var formData = new FormData(this);
+            //    formData.append('tblcostdata', JSON.stringify(tblcostdata));
+
+            //    if (confirm('Are you sure you want to submit the form?')) {
+            //        $.ajax({
+            //            type: "POST",
+            //            url: "/JD/JobD/",
+            //            data: formData,
+            //            processData: false,
+            //            contentType: false,
+            //            success: function (resp) {
+            //                if (resp.success) {
+            //                    toastr.success("Success", resp.message);
+            //                    $("#formid")[0].reset();
+            //                    $('#dataTable tbody').empty();
+            //                    addNewRow(); // Re-add first row
+            //                } else {
+            //                    toastr.error("Error", resp.message);
+            //                }
+            //            },
+            //            error: function (req, error) {
+            //                var errorMsg = req.statusText ? req.statusText : error;
+            //                toastr.error(`There was a communication error: ${errorMsg}`);
+            //            }
+            //        });
+            //    }
+            //});
         });
     </script>
 }

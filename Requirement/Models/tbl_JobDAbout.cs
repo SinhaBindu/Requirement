@@ -15,7 +15,7 @@ namespace Requirement.Models
     public partial class tbl_JobDAbout
     {
         public int JobDAboutId_pk { get; set; }
-        public Nullable<int> JobDId_fk { get; set; }
+        public Nullable<System.Guid> JobDId_fk { get; set; }
         public Nullable<System.Guid> NewHireId_fk { get; set; }
         public Nullable<int> AboutPositionId { get; set; }
         public string AboutPositionValue { get; set; }

@@ -15,7 +15,7 @@ namespace Requirement.Models
     public partial class Tbl_JobDKeyRole
     {
         public int JobDKeyRoleId_pk { get; set; }
-        public Nullable<int> JobDId_fk { get; set; }
+        public Nullable<System.Guid> JobDId_fk { get; set; }
         public Nullable<System.Guid> NewHireId_fk { get; set; }
         public Nullable<int> KeyRoleId { get; set; }
         public string KeyValue { get; set; }

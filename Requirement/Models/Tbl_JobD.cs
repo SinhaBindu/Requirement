@@ -14,7 +14,7 @@ namespace Requirement.Models
     
     public partial class tbl_JobD
     {
-        public int JobId_pk { get; set; }
+        public System.Guid JobId_pk { get; set; }
         public Nullable<System.Guid> NewHireId_fk { get; set; }
         public string HiringLink { get; set; }
         public Nullable<System.DateTime> ApplicationClosureDate { get; set; }

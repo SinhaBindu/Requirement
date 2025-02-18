@@ -10,6 +10,7 @@ using System.Linq;
 using System.Drawing.Drawing2D;
 using static Requirement.Manager.CommonModel;
 using Requirement.Controllers;
+using Microsoft.Ajax.Utilities;
 
 
 namespace Requirement.Controllers
@@ -42,9 +43,7 @@ namespace Requirement.Controllers
                 //    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
                 //}
 
-                string tblcostdataJson = Request.Form["tblcostdata"];
-                // Deserialize the JSON string into a list of CostData objects
-                var tblcostdata = JsonConvert.DeserializeObject<List<MultipleCostModel>>(tblcostdataJson);
+
 
                 var tbl = new tbl_NewHire();
                 tbl.NewHireId_pk = Guid.NewGuid();
@@ -75,31 +74,117 @@ namespace Requirement.Controllers
                 tbl.IsActive = true;
                 tbl.CreatedOn = DateTime.Now;
                 tbl.CreatedBy = User.Identity.Name;
-                if (tblcostdata != null)
+
+                //Multiple Mode
+                string tblcostdataJson = Request.Form["tblcostdata"];
+                if (!string.IsNullOrWhiteSpace(tblcostdataJson))
                 {
-                    if (tblcostdata.Count > 0)
+                    // Deserialize the JSON string into a list of CostData objects
+                    var tblcostdata = JsonConvert.DeserializeObject<List<MultipleCostModel>>(tblcostdataJson);
+                    if (tblcostdata != null)
                     {
-                        var tblc = new tbl_NewHireMultipleCost();
-                        var tblclist = new List<tbl_NewHireMultipleCost>();
-                        foreach (var item in tblcostdata.ToList())
+                        if (tblcostdata.Count > 0)
                         {
-                            tblc.NewHireId_fk = tbl.NewHireId_pk;
-                            tblc.MultipleCostName = item.MultipleCostName;
-                            tblc.GrantID = item.GrantID;
-                            tblc.ActivityCode = item.ActivityCode;
-                            tblc.BudgetCode = item.BudgetCode;
-                            tblc.IsActive = true;
-                            tblc.CreatedBy = tbl.CreatedBy;
-                            tblc.CreatedOn = tbl.CreatedOn;
-                            tblclist.Add(tblc);
+                            var tblc = new tbl_NewHireMultipleCost();
+                            var tblclist = new List<tbl_NewHireMultipleCost>();
+                            foreach (var item in tblcostdata.ToList())
+                            {
+                                tblc.NewHireId_fk = tbl.NewHireId_pk;
+                                tblc.MultipleCostName = item.MultipleCostName;
+                                tblc.GrantID = item.GrantID;
+                                tblc.ActivityCode = item.ActivityCode;
+                                tblc.BudgetCode = item.BudgetCode;
+                                tblc.AllotmentPercent = item.AllotmentPercent;
+                                tblc.IsActive = true;
+                                tblc.CreatedBy = tbl.CreatedBy;
+                                tblc.CreatedOn = tbl.CreatedOn;
+                                tblclist.Add(tblc);
+                            }
+                            db.tbl_NewHireMultipleCost.AddRange(tblclist);
                         }
-                        db.tbl_NewHireMultipleCost.AddRange(tblclist);
+                    }
+                }
+
+                //JD Details Save
+                var tbljd = model.JobDModel.JobId_pk != Guid.Empty ? db.tbl_JobD.Find(model.JobDModel.JobId_pk) : new tbl_JobD();
+                var tbljdaboutist = new List<tbl_JobDAbout>();
+                var tbljdkeyroleist = new List<Tbl_JobDKeyRole>();
+                if (tbljd != null)
+                {
+                    tbljd.ApplicationClosureDate = model.JobDModel.ApplicationClosureDate;
+                    tbljd.AbouttheProject = !(string.IsNullOrWhiteSpace(model.JobDModel.AbouttheProject)) ? model.JobDModel.AbouttheProject.Trim() : null;
+                    tbljd.Remarks = !(string.IsNullOrWhiteSpace(model.JobDModel.Remarks)) ? model.JobDModel.Remarks.Trim() : null;
+                    tbljd.IsActive = true;
+                    if (tbljd.JobId_pk == Guid.Empty)
+                    {
+                        tbljd.JobId_pk = Guid.NewGuid();
+                        tbljd.NewHireId_fk = tbl.NewHireId_pk;
+                        tbljd.CreatedBy = MvcApplication.CUser.UserId;
+                        tbljd.CreatedOn = DateTime.Now;
+
+                    }
+                    else if (tbljd.JobId_pk != Guid.Empty)
+                    {
+                        tbljd.UpdatedBy = MvcApplication.CUser.UserId;
+                        tbljd.UpdatedOn = DateTime.Now;
+                    }
+                }
+                string JobDAboutModelJson = Request.Form["JobDAboutModel"];
+                if (!string.IsNullOrWhiteSpace(JobDAboutModelJson))
+                {
+                    var jdaboutlist = JsonConvert.DeserializeObject<List<JobDAboutModel>>(JobDAboutModelJson);
+                   
+                    if (jdaboutlist != null)
+                    {
+                        if (jdaboutlist.Count > 0)
+                        {
+                            var tblabout = new tbl_JobDAbout();
+                            foreach (var item in jdaboutlist.ToList())
+                            {
+                                tblabout.JobDId_fk = tbljd.JobId_pk;
+                                tblabout.NewHireId_fk = tbl.NewHireId_pk;
+                                tblabout.AboutPositionId = item.AboutPositionId;
+                                tblabout.AboutPositionValue = item.AboutPositionValue;
+                                tblabout.OrderBy = item.OrderBy;
+                                tblabout.IsActive = true;
+                                tblabout.CreatedBy = tbl.CreatedBy;
+                                tblabout.CreatedOn = tbl.CreatedOn;
+                                tbljdaboutist.Add(tblabout);
+                            }
+                            db.tbl_JobDAbout.AddRange(tbljdaboutist);
+                        }
+                    }
+                }
+                string JobDKeyRoleModelJson = Request.Form["JobDKeyRoleModel"];
+                if (!string.IsNullOrWhiteSpace(JobDKeyRoleModelJson))
+                {
+                    var jdkeyrolelist = JsonConvert.DeserializeObject<List<JobDKeyRoleModel>>(JobDAboutModelJson);
+                   
+                    if (jdkeyrolelist != null)
+                    {
+                        if (jdkeyrolelist.Count > 0)
+                        {
+                            var tblkeyrole = new Tbl_JobDKeyRole();
+                            foreach (var item in jdkeyrolelist.ToList())
+                            {
+                                tblkeyrole.JobDId_fk = tbljd.JobId_pk;
+                                tblkeyrole.NewHireId_fk = tbl.NewHireId_pk;
+                                tblkeyrole.KeyRoleId = item.KeyRoleId;
+                                tblkeyrole.KeyValue = item.KeyValue;
+                                tblkeyrole.OrderBy = item.OrderBy;
+                                tblkeyrole.IsActive = true;
+                                tblkeyrole.CreatedBy = tbl.CreatedBy;
+                                tblkeyrole.CreatedOn = tbl.CreatedOn;
+                                tbljdkeyroleist.Add(tblkeyrole);
+                            }
+                            db.Tbl_JobDKeyRole.AddRange(tbljdkeyroleist);
+                        }
                     }
                 }
 
                 if (model.JD_Availability_Id == 1 && model.JD_AvailabilityIfYes_Doc != null && model.JD_AvailabilityIfYes_Doc.ContentLength > 0)
                 {
-                    FileModel modelfile = CommonModel.saveFile(model.JD_AvailabilityIfYes_Doc,"NewHire", "GID" + tbl.NewHireId_pk + (DateTime.Now.ToString("ddMMMyyyyHHss")));
+                    FileModel modelfile = CommonModel.saveFile(model.JD_AvailabilityIfYes_Doc, "NewHire", "GID" + tbl.NewHireId_pk + (DateTime.Now.ToString("ddMMMyyyyHHss")));
                     string fileExtension = Path.GetExtension(model.JD_AvailabilityIfYes_Doc.FileName).ToLower();
                     string URLPath = "";
                     // Check if the file extension is allowed
@@ -230,10 +315,10 @@ namespace Requirement.Controllers
         //        return Json(new { success = false, message = $"An error occurred: {ex.Message}" });
         //    }
         //}
-    
 
 
-    private string ConvertViewToString(string viewName, object model)
+
+        private string ConvertViewToString(string viewName, object model)
         {
             ViewData.Model = model;
             using (StringWriter writer = new StringWriter())
