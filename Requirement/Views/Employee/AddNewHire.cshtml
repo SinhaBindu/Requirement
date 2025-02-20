@@ -47,7 +47,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="basic-formss">
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.HiringTypeId, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 <div class="col-md-10s">
@@ -55,19 +55,22 @@
                                     @Html.ValidationMessageFor(model => model.HiringTypeId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.PositionName, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.TextBoxFor(model => model.PositionName, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-md-4">
+                            
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.ThemeId, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.DropDownListFor(model => model.ThemeId, CommonModel.GetThemeMaster(), null, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.ThemeId, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.DropDownListFor(model => model.ProjectId, CommonModel.GetProjectMaster(), null, new { @class = "form-control" })
@@ -102,19 +105,19 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.DropDownListFor(model => model.LocationId, CommonModel.GetALLLocation(), null, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-md-4 dv_otherlocation" style="display:none;">
+                            @*<div class="form-group col-md-4 dv_otherlocation" style="display:none;">
                                 @Html.LabelFor(model => model.OtherLocation, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.TextBoxFor(model => model.OtherLocation, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.OtherLocation, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-md-4">
+                            </div>*@
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.TypeofApplicableId, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 <div class="col-md-10s">
@@ -358,23 +361,23 @@
                             </div>
                         </div>
                         <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_Interview</h5></div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6" id="div_InterviewPanel" style="display: none;">
-                                @Html.LabelFor(model => model.InterviewPanel, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextAreaFor(model => model.InterviewPanel, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.InterviewPanel, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-md-6" id="div_InterviewPanel2" style="display: none;">
-                                @Html.LabelFor(model => model.InterviewPanel2, htmlAttributes: new { @class = "control-label" })
-                                <span style="color:red;">*</span>
-                                @Html.TextAreaFor(model => model.InterviewPanel2, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.InterviewPanel2, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6" id="div_InterviewPanel" style="display: none;">
+                            @Html.LabelFor(model => model.InterviewPanel, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextAreaFor(model => model.InterviewPanel, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.InterviewPanel, "", new { @class = "text-danger" })
                         </div>
+                        <div class="form-group col-md-6" id="div_InterviewPanel2" style="display: none;">
+                            @Html.LabelFor(model => model.InterviewPanel2, htmlAttributes: new { @class = "control-label" })
+                            <span style="color:red;">*</span>
+                            @Html.TextAreaFor(model => model.InterviewPanel2, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.InterviewPanel2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                         <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_SourcingChannel</h5></div>
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.SelectionProcess_Id, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 <div class="col-md-10s">
@@ -415,13 +418,13 @@
                         </div>
                         <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_Infrastructure</h5></div>
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.LaptopwithSpecifications_Id, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.TextBoxFor(model => model.LaptopwithSpecifications_Id, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.LaptopwithSpecifications_Id, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.Anyspecificsoftwarewithlicense, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
                                 @Html.TextBoxFor(model => model.Anyspecificsoftwarewithlicense, new { @class = "form-control" })
