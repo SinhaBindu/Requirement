@@ -12,16 +12,13 @@
     }
 </style>
 
-<div class="page-header">
-    <div class="page-block">
-        <div class="page-header-title">
-            <h2 class="mb-0">@ViewBag.Title</h2>
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                @*<li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>*@
-                <li class="breadcrumb-item" aria-current="page">@ViewBag.title</li>
-            </ul>
-        </div>
+<div class="page-bread page-titles">
+    <div class="bread-flex">
+        <h1>@ViewBag.Title</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home/">Dashboard</a></li>
+            <li class="breadcrumb-item active">@ViewBag.Title</li>
+        </ol>
     </div>
 </div>
 <div id="page-content" class="mr-up">

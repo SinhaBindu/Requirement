@@ -29,7 +29,7 @@
     <div class="bread-flex">
         <h1>@ViewBag.Title</h1>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/home/">Dashboard</a></li>
             <li class="breadcrumb-item active">@ViewBag.Title</li>
         </ol>
     </div>
@@ -451,7 +451,18 @@
 
         </div>
     </div>
+    <div class="notes-section" style="margin-top: 20px;">
+        <h5>Notes:</h5>
+        <ul>
+            <li>Requestor must be the Hiring Manager/ Reporting Manager. In case Budget Holder is the Hiring Manager, signature at one place should suffice as an Approver.</li>
+            <li>Finance Review and P&C review will be done by the state leads of the respective functions assigned to the Budget Holder.</li>
+            <li>If the position is in anticipation of a Project, approval will be given by CEO for the purpose of advertisement & interview only. No formal offer will be made unless the project is awarded and written approval is received from the assigned Budget holder.</li>
+        </ul>
+    </div>
 </div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -899,11 +910,3 @@
 }
 
 
-<div class="notes-section" style="margin-top: 20px;">
-    <h5>Notes:</h5>
-    <ul>
-        <li>Requestor must be the Hiring Manager/ Reporting Manager. In case Budget Holder is the Hiring Manager, signature at one place should suffice as an Approver.</li>
-        <li>Finance Review and P&C review will be done by the state leads of the respective functions assigned to the Budget Holder.</li>
-        <li>If the position is in anticipation of a Project, approval will be given by CEO for the purpose of advertisement & interview only. No formal offer will be made unless the project is awarded and written approval is received from the assigned Budget holder.</li>
-    </ul>
-</div>
