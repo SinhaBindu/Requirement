@@ -240,7 +240,7 @@ th {
 
 label {
   display: inline-block;
-  margin-bottom: 0.5rem; }
+  margin-bottom: 3px; }
 
 button {
   border-radius: 0; }
@@ -542,8 +542,8 @@ pre {
   position: relative;
   width: 100%;
   min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px; }
+  padding-right: 5px;
+  padding-left: 5px; }
 
 .col {
   flex-basis: 0;
@@ -1409,7 +1409,7 @@ pre {
   display: block;
   width: 100%;
   height: calc(2.0625rem + 2px);
-  padding: 0.375rem 0.75rem;
+  padding: 0.275rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
   color: #495057;
@@ -1501,7 +1501,7 @@ textarea.form-control {
   height: auto; }
 
 .form-group {
-  margin-bottom: 1rem; }
+  margin-bottom: 10px; }
 
 .form-text {
   display: block;
@@ -7569,7 +7569,7 @@ sub {
   left: auto; }
 
 .nav-header {
-  height: 5rem;
+  height: 4rem;
   width: 15.1875rem;
   display: inline-block;
   text-align: left;
@@ -7589,7 +7589,7 @@ sub {
   .nav-header .brand-logo {
     z-index: 999; }
     .nav-header .brand-logo a {
-        padding: 0.8rem 1.8125rem 1.607rem;
+        padding: 0.2rem 1.8125rem 1.607rem;
         display: block;
     }
       .nav-header .brand-logo a i {
@@ -7663,7 +7663,7 @@ sub {
   display: block; }
 
 .header {
-  height: 5rem;
+  height: 4rem;
   z-index: 1;
   position: relative;
   padding: 0 0.9375rem;
@@ -8131,7 +8131,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   padding-bottom: 112px;
   height: 100%;
   position: absolute;
-  top: 5rem;
+  top: 4rem;
   padding-top: 0;
   z-index: 99;
   background: #fff;
@@ -8283,7 +8283,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       padding: 1.607rem 1.0625rem;
       text-align: center; }
       [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nav-header .brand-logo a b img {
-        margin-top: 0.4375rem; }
+        margin-top: 0; }
   [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nav-header .nav-control .hamburger .line {
     background-color: #464a53 !important; }
 
@@ -9860,7 +9860,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 Input Style
 ------------------------*/
 .form-group {
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
 
 .form-control {
   border-radius: 0;
@@ -11303,7 +11303,7 @@ table.dataTable thead .sorting::after {
     border-color: #1295bf; }
 
 .card {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   border: 0px;
   border-radius: 0.625rem;
   box-shadow: 6px 11px 41px -28px #a99de7; }
@@ -11317,7 +11317,7 @@ table.dataTable thead .sorting::after {
     .card-header:first-child {
       border-radius: 0; }
   .card .card-body {
-    padding: 1.88rem 1.81rem; }
+    padding: 1rem 1rem; }
   .card-action a {
     display: inline-block;
     color: #fff;
@@ -14698,7 +14698,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 }
 
 .page-bread {
-    margin: -25px -10px -10px !important
+    margin: -25px -20px -10px !important
 }
 
     .page-bread h1 {
