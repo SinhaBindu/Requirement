@@ -42,16 +42,20 @@ namespace Requirement.Manager
             No = 2,
             //Other = 3,
         }
-        public enum eTempCallStatus
+        public enum ERoles
         {
-            [Description("Call")]
-            CallNot = 0,
-            [Description("Call Done")]
-            CallDone = 1,
-            [Description("Participant Not Available")]
-            CallNotPick = 2,
-            [Description("Call In Progress")]
-            CallOnProgress = 3,
+            [Description("Admin")]
+            Admin = 1,
+            [Description("SuperAdmin")]
+            SuperAdmin = 2,
+            [Description("Creator")]
+            Creator = 3,
+            [Description("FINANCE")]
+            FINANCE = 4, 
+            [Description("GCLEAD")]
+            GCLEAD = 5,
+            [Description("PCLead")]
+            PCLead = 6,
         }
         public enum eEnumExtension
         {

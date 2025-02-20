@@ -26,8 +26,11 @@ namespace Requirement.Models
         [Display(Name = PartDisplayName.PositionName)]
         public string PositionName { get; set; }
         //[Required]
+        [Display(Name = PartDisplayName.ThemeId)]
+        public int ThemeId { get; set; }
+        //[Required]
         [Display(Name = PartDisplayName.ProjectName)]
-        public string ProjectName { get; set; }
+        public int ProjectId { get; set; }
         //[Required]
         [Display(Name = PartDisplayName.LocationId)]
         public int LocationId { get; set; }
@@ -96,6 +99,8 @@ namespace Requirement.Models
         //[Required]
         [Display(Name = PartDisplayName.InterviewPanel2)]
         public string InterviewPanel2 { get; set; }
+        [Display(Name = PartDisplayName.ApprovedBy)]
+        public List<string> ApprovedBy { get; set; }
         [Display(Name = "Is Active")]
         public bool IsActive { get; set; }
 
@@ -148,9 +153,13 @@ namespace Requirement.Models
         }
         public Guid JobId_pk { get; set; }
         public Nullable<System.Guid> NewHireId_fk { get; set; }
+        [Display(Name = PartDisplayName.HiringLink)]
         public string HiringLink { get; set; }
+        [Display(Name = PartDisplayName.ApplicationClosureDate)]
         public Nullable<System.DateTime> ApplicationClosureDate { get; set; }
+        [Display(Name = PartDisplayName.AbouttheProject)]
         public string AbouttheProject { get; set; }
+        [Display(Name = PartDisplayName.Remarks)]
         public string Remarks { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string CreatedBy { get; set; }
@@ -192,6 +201,7 @@ namespace Requirement.Models
         public const string NewHiredDate = "New Hired Date";
         public const string HiringTypeId = "Type of Hiring";
         public const string PositionName = "Position Name";
+        public const string ThemeId = "Theme";
         public const string ProjectName = "Project Name";
         public const string LocationId = "Location";
         public const string TypeofApplicableId = "Type of Recruitment";
@@ -236,6 +246,9 @@ namespace Requirement.Models
         public const string ApplicationClosureDate = "Application closure date";
         public const string AbouttheProject = "About the Project";
         public const string JDRemarks = "Remarks";
+
+        public const string Section_Approval = "Requirement Approval By";
+        public const string ApprovedBy = "Approved By";
 
     }
 }

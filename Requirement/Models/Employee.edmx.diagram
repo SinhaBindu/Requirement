@@ -39,8 +39,9 @@
         <EntityTypeShape EntityType="Recruitment_DBModel.mst_TypeofInterview" Width="1.5" PointX="4.75" PointY="11.75" />
         <EntityTypeShape EntityType="Recruitment_DBModel.tbl_JobDAbout" Width="1.5" PointX="9.75" PointY="12.75" />
         <EntityTypeShape EntityType="Recruitment_DBModel.Tbl_JobDKeyRole" Width="1.5" PointX="0.75" PointY="15.75" />
-        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHire" Width="1.5" PointX="9.75" PointY="16.75" />
         <EntityTypeShape EntityType="Recruitment_DBModel.tbl_JobD" Width="1.5" PointX="12.375" PointY="17.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.mst_ProjectMaster" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Recruitment_DBModel.tbl_NewHire" Width="1.5" PointX="7.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

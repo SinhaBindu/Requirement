@@ -6,6 +6,24 @@
     var startDate = new DateTime(now.Year, now.Month, 1);
     var endDate = startDate.AddMonths(1).AddDays(-1);
 }
+<style>
+    .multiselect-container {
+        background: #f3f3f9 !important;
+    }
+
+        .multiselect-container > li > a > label > input[type=checkbox] {
+            margin-bottom: 5px;
+            margin-right: 6px;
+        }
+
+        .multiselect-container > li > a > label {
+            margin: 0;
+            height: 100%;
+            cursor: pointer;
+            font-weight: 400;
+            padding: 3px 10px 0px 10px;
+        }
+</style>
 
 <div class="page-bread page-titles">
     <div class="bread-flex">
@@ -44,15 +62,21 @@
                                 @Html.ValidationMessageFor(model => model.PositionName, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-md-4">
-                                @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.ThemeId, htmlAttributes: new { @class = "control-label" })
                                 <span style="color:red;">*</span>
-                                @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(model => model.ThemeId, CommonModel.GetThemeMaster(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ThemeId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @Html.DropDownListFor(model => model.ProjectId, CommonModel.GetProjectMaster(), null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-rows">
                             <div class="dv_multiplecost" style="display:none;">
-                                <table id="dataTable" width="100%">
+                                <table id="dataTable" width="100%" class="small">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -179,14 +203,116 @@
                                 </div>
                                 <div class="mark-devide"></div>
                             </div>
+                            <div class="col-lg-12" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @*<h4 class="card-title">@Requirement.Models.PartDisplayName.Section_JDHeader</h4>*@
+                                        <p class="text-muted">
+                                            <code></code>
+                                        </p>
+                                        <div id="accordion-three" class="accordion">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="false" aria-controls="collapseOne4"><i class="fa" aria-hidden="true"></i> @Requirement.Models.PartDisplayName.Section_JDHeader</h5>
+                                                </div>
+                                                <div id="collapseOne4" class="collapse" data-parent="#accordion-three" style="">
+                                                    <div class="card-body">
+                                                        @Html.HiddenFor(m => m.JobDModel.JobId_pk)
+                                                        @Html.HiddenFor(m => m.JobDModel.NewHireId_fk)
+                                                        <!--1st About Position Start-->
+                                                        <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDAbout</h5>
 
-                            <div class="form-group col-md-6" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
-                                @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label" })
-                                <div class="col-md-10s">
-                                    @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
-                                    @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+                                                        @*@using (Html.BeginForm("JobD", "JD", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
+                                                            {
+                                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+                                                        <div class="row">
+                                                            <table id="dataTableabout" class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>About Position</th>
+                                                                        <th>About Position Value</th>
+                                                                        <th>Order By</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+
+                                                            <button id="addRowabout" class="btn btn-success">Add Row</button>
+                                                        </div>
+
+                                                        @*<div class="form-row pt-3">
+                                                                <div class="form-group col-md-4 offset-4">
+                                                                    <input type="submit" id="btnsubmit" class="btn btn-primary" value="Submit" />
+                                                                </div>
+                                                            </div>*@
+                                                        @*}*@
+
+                                                        <!--1st About Position end-->
+                                                        <!--2nd Key Role start-->
+                                                        <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDKeyRole</h5>
+
+                                                        <div class="row">
+                                                            <table id="dataTablekeyrole" class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Key Role</th>
+                                                                        <th>Key Role Value</th>
+                                                                        <th>Order By</th>
+                                                                        <th>Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+
+                                                            <button id="addRowkeyrole" class="btn btn-success">Add Row</button>
+                                                        </div>
+                                                        <!--2nd Key Role end-->
+                                                        <!--Other Details-->
+                                                        <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDOther</h5>
+
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-6">
+                                                                @Html.LabelFor(model => model.JobDModel.ApplicationClosureDate, htmlAttributes: new { @class = "control-label" })
+                                                                <span style="color:red;">*</span>
+                                                                @Html.TextBoxFor(model => model.JobDModel.ApplicationClosureDate, new { @class = "form-control datepicker" })
+                                                                @Html.ValidationMessageFor(model => model.JobDModel.ApplicationClosureDate, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                @Html.LabelFor(model => model.JobDModel.HiringLink, htmlAttributes: new { @class = "control-label" })
+                                                                <span style="color:red;">*</span>
+                                                                @Html.TextAreaFor(model => model.JobDModel.HiringLink, new { @class = "form-control", row = "5", col = "12" })
+                                                                @Html.ValidationMessageFor(model => model.JobDModel.HiringLink, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="form-group col-md-12">
+                                                                @Html.LabelFor(model => model.JobDModel.AbouttheProject, htmlAttributes: new { @class = "control-label" })
+                                                                <span style="color:red;">*</span>
+                                                                @Html.TextAreaFor(model => model.JobDModel.AbouttheProject, new { @class = "form-control", row = "5", col = "12" })
+                                                                @Html.ValidationMessageFor(model => model.JobDModel.AbouttheProject, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <!--Other Details End-->
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            @*<div class="form-group col-md-6" id="div_JD_AvailabilityIfYes_Doc" style="display: none;">
+                                    @Html.LabelFor(model => model.JD_AvailabilityIfYes_Doc, htmlAttributes: new { @class = "control-label" })
+                                    <div class="col-md-10s">
+                                        @Html.TextBoxFor(model => model.JD_AvailabilityIfYes_Doc, new { @class = "form-control-input-2", type = "file" })
+                                        @Html.ValidationMessageFor(model => model.JD_AvailabilityIfYes_Doc, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
                         </div>
                         <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_SourcingChannel</h5></div>
                         <div class="form-row">
@@ -302,114 +428,19 @@
                                 @Html.ValidationMessageFor(model => model.Anyspecificsoftwarewithlicense, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    @*<h4 class="card-title">@Requirement.Models.PartDisplayName.Section_JDHeader</h4>*@
-                                    <p class="text-muted">
-                                        <code></code>
-                                    </p>
-                                    <div id="accordion-three" class="accordion">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="false" aria-controls="collapseOne4"><i class="fa" aria-hidden="true"></i> @Requirement.Models.PartDisplayName.Section_JDHeader</h5>
-                                            </div>
-                                            <div id="collapseOne4" class="collapse" data-parent="#accordion-three" style="">
-                                                <div class="card-body">
-                                                    @Html.HiddenFor(m => m.JobDModel.JobId_pk)
-                                                    @Html.HiddenFor(m => m.JobDModel.NewHireId_fk)
-                                                    <!--1st About Position Start-->
-                                                    <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDAbout</h5>
-
-                                                    @*@using (Html.BeginForm("JobD", "JD", FormMethod.Post, new { @id = "formid", @class = "", role = "form", autocomplete = "off", enctype = "multipart/form-data" }))
-                                                        {
-                                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-
-                                                    <div class="row">
-                                                        <table id="dataTableabout" class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>About Position</th>
-                                                                    <th>About Position Value</th>
-                                                                    <th>Order By</th>
-                                                                    <th>Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody></tbody>
-                                                        </table>
-
-                                                        <button id="addRowabout" class="btn btn-success">Add Row</button>
-                                                    </div>
-
-                                                    @*<div class="form-row pt-3">
-                                                            <div class="form-group col-md-4 offset-4">
-                                                                <input type="submit" id="btnsubmit" class="btn btn-primary" value="Submit" />
-                                                            </div>
-                                                        </div>*@
-                                                    @*}*@
-
-                                                    <!--1st About Position end-->
-                                                    <!--2nd Key Role start-->
-                                                    <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDKeyRole</h5>
-
-                                                    <div class="row">
-                                                        <table id="dataTablekeyrole" class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Key Role</th>
-                                                                    <th>Key Role Value</th>
-                                                                    <th>Order By</th>
-                                                                    <th>Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody></tbody>
-                                                        </table>
-
-                                                        <button id="addRowkeyrole" class="btn btn-success">Add Row</button>
-                                                    </div>
-                                                    <!--2nd Key Role end-->
-                                                    <!--Other Details-->
-                                                    <h5 class="text-center">@Requirement.Models.PartDisplayName.Section_JDOther</h5>
-
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            @Html.LabelFor(model => model.JobDModel.ApplicationClosureDate, htmlAttributes: new { @class = "control-label" })
-                                                            <span style="color:red;">*</span>
-                                                            @Html.TextBoxFor(model => model.JobDModel.ApplicationClosureDate, new { @class = "form-control datepicker" })
-                                                            @Html.ValidationMessageFor(model => model.JobDModel.ApplicationClosureDate, "", new { @class = "text-danger" })
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            @Html.LabelFor(model => model.JobDModel.HiringLink, htmlAttributes: new { @class = "control-label" })
-                                                            <span style="color:red;">*</span>
-                                                            @Html.TextAreaFor(model => model.JobDModel.HiringLink, new { @class = "form-control", row = "5", col = "12" })
-                                                            @Html.ValidationMessageFor(model => model.JobDModel.HiringLink, "", new { @class = "text-danger" })
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            @Html.LabelFor(model => model.JobDModel.AbouttheProject, htmlAttributes: new { @class = "control-label" })
-                                                            <span style="color:red;">*</span>
-                                                            @Html.TextAreaFor(model => model.JobDModel.AbouttheProject, new { @class = "form-control", row = "5", col = "12" })
-                                                            @Html.ValidationMessageFor(model => model.JobDModel.AbouttheProject, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
-                                                    <!--Other Details End-->
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-
-
-
-                                    </div>
-                                </div>
+                        <div class="form-row"><h5>@Requirement.Models.PartDisplayName.Section_Approval</h5></div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.ApprovedBy, htmlAttributes: new { @class = "control-label" })
+                                <span style="color:red;">*</span>
+                                @*@Html.DropDownListFor(model => model.ApprovedBy, CommonModel.GetUserAll(), null, new { @class = "form-control select2 CreateMultiCheckBox" })*@
+                                @Html.DropDownListFor(model => model.ApprovedBy, new List<SelectListItem>(), null, new { @class = "form-control CreateMultiCheckBox", multiple = "multiple" })
+                                @Html.ValidationMessageFor(model => model.ApprovedBy, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-
                         <div class="form-row pt-1">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-4 offset-8">
                                 @*<button type="submit" class="btn btn-primary">Submit</button>*@
                                 <input type="submit" name="btnsubmit" id="btnsubmit" class="btn btn-primary" value="Submit" />
                             </div>
@@ -424,9 +455,31 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    <script src="~/Scripts/JS/Master.js"></script>
     <script>
         $(document).ready(function () {
+
+            BindGetAllUserist("ApprovedBy", "", 1);
+            $('#ApprovedBy').multiselect({
+                includeSelectAllOption: true, // Adds "Select All" checkbox
+                enableFiltering: true, // Enables search box
+                enableCaseInsensitiveFiltering: true, // Case insensitive search
+                buttonWidth: '100%', // Adjusts button width
+                maxHeight: 250, // Limits dropdown height
+                nonSelectedText: 'Select Below', // Default text when nothing is selected
+                selectAllText: 'Select All', // "Select All" text
+                allSelectedText: 'All Selected', // Text when all options are selected
+                numberDisplayed: 2 // Shows limited selected options in the button
+            });
+            //$('.select2').select2();
+            //$("#ApprovedBy").CreateMultiCheckBox({
+            //    width: '500px',
+            //    defaultText: 'Select Below', height: '250px'
+            //});
+            //setTimeout(function () {
+            //}, 500)
+
+
             let rowIndex = 0; // Counter to track row index
             // Add Row
             $('#addRow').click(function (e) {
@@ -514,13 +567,13 @@
             });
 
             // Event listener for changes in JD_Availability_Id radio buttons
-            //$('input[name="JD_Availability_Id"]').change(function () {
-            //    $('#div_JD_AvailabilityIfYes_Doc').hide();
-            //    $('#JD_AvailabilityIfYes_Doc').val('');
-            //    if ($(this).val() == "1") {
-            //        $('#div_JD_AvailabilityIfYes_Doc').show();
-            //    }
-            //});
+            $('input[name="JD_Availability_Id"]').change(function () {
+                $('#div_JD_AvailabilityIfYes_Doc').hide();
+                // $('#JD_AvailabilityIfYes_Doc').val('');
+                if ($(this).val() == "1") {
+                    $('#div_JD_AvailabilityIfYes_Doc').show();
+                }
+            });
 
             $('#HiringTypeId').change(function () {
                 $('.dv_multiplecost,.dv_CostCentreCode_Id').hide(); $('#CostCentreCode_Id').val(''); $('#dataTable tbody').empty(); $('#CostCentreCode_Id').removeAttr('required');
@@ -543,20 +596,49 @@
                 event.preventDefault();
                 debugger;
 
-                var tblcostdata = [], objdata = "";
-                $('#dataTable tbody tr').each(function (rowInd) {
-                    var MultipleCostName = $(this).find(`#MultipleCostName_${rowInd}`).val();
-                    var GrantID = $(this).find(`#GrantID_${rowInd}`).val();
-                    var ActivityCode = $(this).find(`#ActivityCode_${rowInd}`).val();
-                    var BudgetCode = $(this).find(`#BudgetCode_${rowInd}`).val();
-                    tblcostdata.push({
-                        MultipleCostName: MultipleCostName,
-                        GrantID: GrantID,
-                        ActivityCode: ActivityCode,
-                        BudgetCode: BudgetCode,
+
+                var tblcostdata = [], objdata = ""; tbldataabout = []; tbldatakeyrole = [];
+                if ($('#HiringTypeId').val() == "2") {
+                    $('#dataTable tbody tr').each(function (rowInd) {
+                        var MultipleCostName = $(this).find(`#MultipleCostName_${rowInd}`).val();
+                        var GrantID = $(this).find(`#GrantID_${rowInd}`).val();
+                        var ActivityCode = $(this).find(`#ActivityCode_${rowInd}`).val();
+                        var BudgetCode = $(this).find(`#BudgetCode_${rowInd}`).val();
+                        var AllotmentPercent = $(this).find(`#AllotmentPercent_${rowInd}`).val();
+                        tblcostdata.push({
+                            MultipleCostName: MultipleCostName,
+                            GrantID: GrantID,
+                            ActivityCode: ActivityCode,
+                            AllotmentPercent: AllotmentPercent,
+                            MonthlyAmount: null,
+                        });
+                    });
+                }
+                if ($('input[name="JD_Availability_Id"]').val() == "1") {
+                    //About Position push the data
+                    $('#dataTableabout tbody tr').each(function (rowInd) {
+                        var strId = $(this).find(`#AboutPositionId_${rowInd}`).val();
+                        var strval = $(this).find(`#AboutPositionValue_${rowInd}`).val();
+                        var strOrderBy = $(this).find(`#OrderBy_${rowInd}`).val();
+                        tbldataabout.push({
+                            AboutPositionId: strId,
+                            AboutPositionValue: strval,
+                            OrderBy: strOrderBy,
+                        });
+                    });
+                    //Key Role push the data
+                    $('#dataTablekeyrole tbody tr').each(function (rowInd) {
+                        var strId = $(this).find(`#KeyRoleId_${rowInd}`).val();
+                        var strval = $(this).find(`#KeyValue_${rowInd}`).val();
+                        var strOrderBy = $(this).find(`#OrderBy_${rowInd}`).val();
+                        tbldatakeyrole.push({
+                            KeyRoleId: strId,
+                            KeyValue: strval,
+                            OrderBy: strOrderBy,
+                        });
                     });
 
-                });
+                }
 
                 var formData = new FormData(this);
                 // Append the image file to FormData
@@ -566,8 +648,15 @@
                 //        formData.append('JD_AvailabilityIfYes_Doc', imageFile);
                 //    }
                 //}
-
+                var AppUserBy = $('.CreateMultiCheckBox').val();
+                if (AppUserBy != null && AppUserBy.length > 0) {
+                    formData.append('ApprovedBy', JSON.stringify(AppUserBy));
+                }
                 formData.append('tblcostdata', JSON.stringify(tblcostdata));
+                formData.append('tblcostdata', JSON.stringify(tblcostdata));
+                formData.append('tbldataabout', JSON.stringify(tbldataabout));
+                formData.append('tbldatakeyrole', JSON.stringify(tbldatakeyrole));
+
                 if (confirm('Are you sure you want to submit the form?')) {
                     $.ajax({
                         type: "POST",
@@ -578,7 +667,7 @@
                         success: function (resp) {
                             if (resp.success) {
                                 toastr.success("Success", resp.message);
-                                $("#formid")[0].reset();
+                                //$("#formid")[0].reset();
                             } else {
                                 toastr.error("Error", resp.message);
                             }
@@ -642,22 +731,22 @@
                     rowIndex++;
                 loadTypeOfNameDropdownabout(function (dropdownOptions) {
                     let newRow = `
-                                                                               <tr>
-                                                                                   <td>
-                                                                                       <select class="AboutPositionId form-control" name="AboutPositionId[]" id="AboutPositionId_${rowIndex}">
-                                                                                           ${dropdownOptions}
-                                                                                       </select>
-                                                                                   </td>
-                                                                                   <td>
-                                                                                       <input type="text" class="AboutPositionValue form-control" name="AboutPositionValue[]" id="AboutPositionValue_${rowIndex}" placeholder="About Position Value">
-                                                                                   </td>
-                                                                                    <td>
-                                                                                         <input type="number" class="OrderBy form-control" name="OrderBy[]" id="OrderBy_${rowIndex}" placeholder="Order By">
-                                                                                     </td>
-                                                                                   <td>
-                                                                                       <button type="button" class="deleteRowabout btn btn-danger">Delete</button>
-                                                                                   </td>
-                                                                               </tr>`;
+                                    <tr>
+                                        <td>
+                                            <select class="AboutPositionId form-control" name="AboutPositionId[]" id="AboutPositionId_${rowIndex}">
+                                                ${dropdownOptions}
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="AboutPositionValue form-control" name="AboutPositionValue[]" id="AboutPositionValue_${rowIndex}" placeholder="About Position Value">
+                                        </td>
+                                        <td>
+                                                <input type="number" class="OrderBy form-control" name="OrderBy[]" id="OrderBy_${rowIndex}" placeholder="Order By">
+                                            </td>
+                                        <td>
+                                            <button type="button" class="deleteRowabout btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>`;
                     $('#dataTableabout tbody').append(newRow);
                 });
             }
@@ -705,22 +794,22 @@
                     rowIndex++;
                 loadTypeOfNameDropdownKeyrole(function (dropdownOptions) {
                     let newRow = `
-                                                                    <tr>
-                                                                        <td>
-                                                                            <select class="KeyRoleId form-control" name="KeyRoleId[]" id="KeyRoleId_${rowIndex}">
-                                                                                ${dropdownOptions}
-                                                                            </select>
-                                                                        </td>
-                                                                        <td>
-                                                                            <input type="text" class="KeyValue form-control" name="KeyValue[]" id="KeyValue_${rowIndex}" placeholder="Key Value">
-                                                                        </td>
-                                                                         <td>
-                                                                              <input type="number" class="OrderBy form-control" name="OrderBy[]" id="OrderBy_${rowIndex}" placeholder="Order By">
-                                                                         </td>
-                                                                        <td>
-                                                                            <button type="button" class="deleteRowKeyrole btn btn-danger">Delete</button>
-                                                                        </td>
-                                                                    </tr>`;
+                                        <tr>
+                                            <td>
+                                                <select class="KeyRoleId form-control" name="KeyRoleId[]" id="KeyRoleId_${rowIndex}">
+                                                    ${dropdownOptions}
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="KeyValue form-control" name="KeyValue[]" id="KeyValue_${rowIndex}" placeholder="Key Value">
+                                            </td>
+                                                <td>
+                                                    <input type="number" class="OrderBy form-control" name="OrderBy[]" id="OrderBy_${rowIndex}" placeholder="Order By">
+                                                </td>
+                                            <td>
+                                                <button type="button" class="deleteRowKeyrole btn btn-danger">Delete</button>
+                                            </td>
+                                        </tr>`;
                     $('#dataTablekeyrole tbody').append(newRow);
                 });
             }

@@ -43,14 +43,13 @@ namespace Requirement.Controllers
                 //    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
                 //}
 
-
-
                 var tbl = new tbl_NewHire();
                 tbl.NewHireId_pk = Guid.NewGuid();
                 tbl.NewHiredDate = DateTime.Now;
                 tbl.HiringTypeId = model.HiringTypeId;
                 tbl.PositionName = model.PositionName;
-                tbl.ProjectName = model.ProjectName;
+                tbl.ThemeId = model.ThemeId;
+                tbl.ProjectId = model.ProjectId;
                 tbl.LocationId = model.LocationId;
                 tbl.OtherLocation = model.OtherLocation;
                 tbl.TypeofApplicableId = model.TypeofApplicableId;
@@ -77,109 +76,122 @@ namespace Requirement.Controllers
 
                 //Multiple Mode
                 string tblcostdataJson = Request.Form["tblcostdata"];
-                if (!string.IsNullOrWhiteSpace(tblcostdataJson))
+                if (!string.IsNullOrWhiteSpace(tblcostdataJson) && model.HiringTypeId == 2)
                 {
                     // Deserialize the JSON string into a list of CostData objects
                     var tblcostdata = JsonConvert.DeserializeObject<List<MultipleCostModel>>(tblcostdataJson);
-                    if (tblcostdata != null)
+                    if (tblcostdata != null && tblcostdata.Count > 0 && tbl != null)
                     {
-                        if (tblcostdata.Count > 0)
+                        var tblclist = new List<tbl_NewHireMultipleCost>();
+                        foreach (var item in tblcostdata)
                         {
-                            var tblc = new tbl_NewHireMultipleCost();
-                            var tblclist = new List<tbl_NewHireMultipleCost>();
-                            foreach (var item in tblcostdata.ToList())
+                            var tblc = new tbl_NewHireMultipleCost
                             {
-                                tblc.NewHireId_fk = tbl.NewHireId_pk;
-                                tblc.MultipleCostName = item.MultipleCostName;
-                                tblc.GrantID = item.GrantID;
-                                tblc.ActivityCode = item.ActivityCode;
-                                tblc.BudgetCode = item.BudgetCode;
-                                tblc.AllotmentPercent = item.AllotmentPercent;
-                                tblc.IsActive = true;
-                                tblc.CreatedBy = tbl.CreatedBy;
-                                tblc.CreatedOn = tbl.CreatedOn;
-                                tblclist.Add(tblc);
-                            }
-                            db.tbl_NewHireMultipleCost.AddRange(tblclist);
+                                NewHireId_fk = tbl.NewHireId_pk,
+                                MultipleCostName = item.MultipleCostName,
+                                GrantID = item.GrantID,
+                                ActivityCode = item.ActivityCode,
+                                BudgetCode = item.BudgetCode,
+                                AllotmentPercent = item.AllotmentPercent,
+                                MonthlyAmount = item.MonthlyAmount,
+                                IsActive = true,
+                                CreatedBy = MvcApplication.CUser.UserId,
+                                CreatedOn = tbl.CreatedOn
+                            };
+                            tblclist.Add(tblc);
                         }
+                        db.tbl_NewHireMultipleCost.AddRange(tblclist);
                     }
                 }
 
+                if (model.ApprovedBy != null && model.ApprovedBy.Any())
+                {
+                    //var tblS=new tbl_NewHireStatus();
+                    //tblS.NewHireId_fk=tbl.NewHireId_pk;
+                    //db.tbl_NewHireStatus.Add(tblS);
+                }
                 //JD Details Save
-                var tbljd = model.JobDModel.JobId_pk != Guid.Empty ? db.tbl_JobD.Find(model.JobDModel.JobId_pk) : new tbl_JobD();
-                var tbljdaboutist = new List<tbl_JobDAbout>();
-                var tbljdkeyroleist = new List<Tbl_JobDKeyRole>();
-                if (tbljd != null)
+                if (model.JD_Availability_Id == 1)
                 {
-                    tbljd.ApplicationClosureDate = model.JobDModel.ApplicationClosureDate;
-                    tbljd.AbouttheProject = !(string.IsNullOrWhiteSpace(model.JobDModel.AbouttheProject)) ? model.JobDModel.AbouttheProject.Trim() : null;
-                    tbljd.Remarks = !(string.IsNullOrWhiteSpace(model.JobDModel.Remarks)) ? model.JobDModel.Remarks.Trim() : null;
-                    tbljd.IsActive = true;
-                    if (tbljd.JobId_pk == Guid.Empty)
+                    var tbljd = model.JobDModel.JobId_pk != Guid.Empty ? db.tbl_JobD.Find(model.JobDModel.JobId_pk) : new tbl_JobD();
+                    var tbljdaboutist = new List<tbl_JobDAbout>();
+                    var tbljdkeyroleist = new List<Tbl_JobDKeyRole>();
+                    if (tbljd != null)
                     {
-                        tbljd.JobId_pk = Guid.NewGuid();
-                        tbljd.NewHireId_fk = tbl.NewHireId_pk;
-                        tbljd.CreatedBy = MvcApplication.CUser.UserId;
-                        tbljd.CreatedOn = DateTime.Now;
-
-                    }
-                    else if (tbljd.JobId_pk != Guid.Empty)
-                    {
-                        tbljd.UpdatedBy = MvcApplication.CUser.UserId;
-                        tbljd.UpdatedOn = DateTime.Now;
-                    }
-                }
-                string JobDAboutModelJson = Request.Form["JobDAboutModel"];
-                if (!string.IsNullOrWhiteSpace(JobDAboutModelJson))
-                {
-                    var jdaboutlist = JsonConvert.DeserializeObject<List<JobDAboutModel>>(JobDAboutModelJson);
-                   
-                    if (jdaboutlist != null)
-                    {
-                        if (jdaboutlist.Count > 0)
+                        tbljd.ApplicationClosureDate = model.JobDModel.ApplicationClosureDate;
+                        tbljd.HiringLink = !(string.IsNullOrWhiteSpace(model.JobDModel.HiringLink)) ? model.JobDModel.HiringLink.Trim() : null;
+                        tbljd.AbouttheProject = !(string.IsNullOrWhiteSpace(model.JobDModel.AbouttheProject)) ? model.JobDModel.AbouttheProject.Trim() : null;
+                        tbljd.Remarks = !(string.IsNullOrWhiteSpace(model.JobDModel.Remarks)) ? model.JobDModel.Remarks.Trim() : null;
+                        tbljd.IsActive = true;
+                        if (tbljd.JobId_pk == Guid.Empty)
                         {
-                            var tblabout = new tbl_JobDAbout();
+                            tbljd.JobId_pk = Guid.NewGuid();
+                            tbljd.NewHireId_fk = tbl.NewHireId_pk;
+                            tbljd.CreatedBy = MvcApplication.CUser.UserId;
+                            tbljd.CreatedOn = DateTime.Now;
+
+                        }
+                        else if (tbljd.JobId_pk != Guid.Empty)
+                        {
+                            tbljd.UpdatedBy = MvcApplication.CUser.UserId;
+                            tbljd.UpdatedOn = DateTime.Now;
+                        }
+                        db.tbl_JobD.Add(tbljd);
+                    }
+                    string JobDAboutModelJson = Request.Form["tbldataabout"];
+                    if (!string.IsNullOrWhiteSpace(JobDAboutModelJson))
+                    {
+                        var jdaboutlist = JsonConvert.DeserializeObject<List<JobDAboutModel>>(JobDAboutModelJson);
+
+                        if (jdaboutlist != null && jdaboutlist.Count > 0 && tbl != null && tbljd != null)
+                        {
                             foreach (var item in jdaboutlist.ToList())
                             {
-                                tblabout.JobDId_fk = tbljd.JobId_pk;
-                                tblabout.NewHireId_fk = tbl.NewHireId_pk;
-                                tblabout.AboutPositionId = item.AboutPositionId;
-                                tblabout.AboutPositionValue = item.AboutPositionValue;
-                                tblabout.OrderBy = item.OrderBy;
-                                tblabout.IsActive = true;
-                                tblabout.CreatedBy = tbl.CreatedBy;
-                                tblabout.CreatedOn = tbl.CreatedOn;
+                                var tblabout = new tbl_JobDAbout
+                                {
+                                    JobDId_fk = tbljd.JobId_pk,
+                                    NewHireId_fk = tbl.NewHireId_pk,
+                                    AboutPositionId = item.AboutPositionId,
+                                    AboutPositionValue = item.AboutPositionValue,
+                                    OrderBy = item.OrderBy,
+                                    IsActive = true,
+                                    CreatedBy = tbl.CreatedBy,
+                                    CreatedOn = tbl.CreatedOn,
+                                };
                                 tbljdaboutist.Add(tblabout);
                             }
                             db.tbl_JobDAbout.AddRange(tbljdaboutist);
                         }
                     }
-                }
-                string JobDKeyRoleModelJson = Request.Form["JobDKeyRoleModel"];
-                if (!string.IsNullOrWhiteSpace(JobDKeyRoleModelJson))
-                {
-                    var jdkeyrolelist = JsonConvert.DeserializeObject<List<JobDKeyRoleModel>>(JobDAboutModelJson);
-                   
-                    if (jdkeyrolelist != null)
+
+                    string JobDKeyRoleModelJson = Request.Form["tbldatakeyrole"];
+                    if (!string.IsNullOrWhiteSpace(JobDKeyRoleModelJson))
                     {
-                        if (jdkeyrolelist.Count > 0)
+                        var jdkeyrolelist = JsonConvert.DeserializeObject<List<JobDKeyRoleModel>>(JobDKeyRoleModelJson);
+
+                        if (jdkeyrolelist != null && jdkeyrolelist.Count > 0 && tbl != null && tbljd != null)
                         {
-                            var tblkeyrole = new Tbl_JobDKeyRole();
                             foreach (var item in jdkeyrolelist.ToList())
                             {
-                                tblkeyrole.JobDId_fk = tbljd.JobId_pk;
-                                tblkeyrole.NewHireId_fk = tbl.NewHireId_pk;
-                                tblkeyrole.KeyRoleId = item.KeyRoleId;
-                                tblkeyrole.KeyValue = item.KeyValue;
-                                tblkeyrole.OrderBy = item.OrderBy;
-                                tblkeyrole.IsActive = true;
-                                tblkeyrole.CreatedBy = tbl.CreatedBy;
-                                tblkeyrole.CreatedOn = tbl.CreatedOn;
+                                var tblkeyrole = new Tbl_JobDKeyRole
+                                {
+                                    JobDId_fk = tbljd.JobId_pk,
+                                    NewHireId_fk = tbl.NewHireId_pk,
+                                    KeyRoleId = item.KeyRoleId,
+                                    KeyValue = item.KeyValue,
+                                    OrderBy = item.OrderBy,
+                                    IsActive = true,
+                                    CreatedBy = tbl.CreatedBy,
+                                    CreatedOn = tbl.CreatedOn
+                                };
                                 tbljdkeyroleist.Add(tblkeyrole);
                             }
                             db.Tbl_JobDKeyRole.AddRange(tbljdkeyroleist);
+
                         }
+
                     }
+
                 }
 
                 if (model.JD_Availability_Id == 1 && model.JD_AvailabilityIfYes_Doc != null && model.JD_AvailabilityIfYes_Doc.ContentLength > 0)
@@ -219,7 +231,11 @@ namespace Requirement.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) });
+                return Json(new
+                {
+                    success = false,
+                    message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError)
+                });
             }
         }
 

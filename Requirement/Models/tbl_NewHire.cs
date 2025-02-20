@@ -19,7 +19,7 @@ namespace Requirement.Models
         public Nullable<int> HiringTypeId { get; set; }
         public Nullable<int> ThemeId { get; set; }
         public string PositionName { get; set; }
-        public string ProjectName { get; set; }
+        public Nullable<int> ProjectId { get; set; }
         public Nullable<int> LocationId { get; set; }
         public string OtherLocation { get; set; }
         public Nullable<int> TypeofApplicableId { get; set; }

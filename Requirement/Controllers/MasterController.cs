@@ -38,6 +38,26 @@ namespace Requirement.Controllers
                 return Json(new { IsSuccess = false, res = "There was a communication error." }, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult GetAllUserist(int SelectAll)
+        {
+            try
+            {
+                var items = CommonModel.GetUserAll(SelectAll,0,"");
+                if (items != null)
+                {
+                    if (items.Count > 0)
+                    {
+                        var data = JsonConvert.SerializeObject(items);
+                        return Json(new { IsSuccess = true, res = data }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json(new { IsSuccess = false, res = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new { IsSuccess = false, res = "There was a communication error." }, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion
 
 

@@ -271,10 +271,10 @@
     <Compile Include="Models\mst_Position.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\mst_Sal.cs">
+    <Compile Include="Models\mst_ProjectMaster.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\mst_SectionProcessStepOne.cs">
+    <Compile Include="Models\mst_Sal.cs">
       <DependentUpon>Employee.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\mst_SelectionInterview.cs">
@@ -933,6 +933,7 @@
     <Content Include="Content\dashboard\js\dashboard\dashboard-1.js" />
     <Content Include="Content\dashboard\js\dashboard\dashboard-2.html" />
     <Content Include="Content\dashboard\js\gleek.js" />
+    <Content Include="Content\dashboard\js\MultiSelect.js" />
     <Content Include="Content\dashboard\js\plugins-init\chartist.init.js" />
     <Content Include="Content\dashboard\js\plugins-init\chartjs-init.js" />
     <Content Include="Content\dashboard\js\plugins-init\form-pickers-init.js" />
@@ -944,6 +945,7 @@
     <Content Include="Content\dashboard\js\plugins-init\sparkline.init.js" />
     <Content Include="Content\dashboard\js\settings.js" />
     <Content Include="Content\dashboard\js\styleSwitcher.js" />
+    <Content Include="Content\dashboard\css\MultiSelectcss.css" />
     <Content Include="Content\dashboard\plugins\animate\animate.min.css" />
     <Content Include="Content\dashboard\plugins\bootstrap-datepicker\bootstrap-datepicker.min.css" />
     <Content Include="Content\dashboard\plugins\bootstrap-datepicker\bootstrap-datepicker.min.js" />

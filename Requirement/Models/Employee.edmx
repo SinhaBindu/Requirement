@@ -244,6 +244,18 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_Position' does not have a p
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="OrderBy" Type="int" />
         </EntityType>
+        <EntityType Name="mst_ProjectMaster">
+          <Key>
+            <PropertyRef Name="ProjectId_pk" />
+          </Key>
+          <Property Name="ProjectId_pk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="2000" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Recruitment_DB.dbo.mst_Sal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="mst_Sal">
@@ -388,8 +400,8 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="NewHiredDate" Type="datetime" />
           <Property Name="HiringTypeId" Type="int" />
           <Property Name="ThemeId" Type="int" />
-          <Property Name="PositionName" Type="varchar" MaxLength="255" />
-          <Property Name="ProjectName" Type="nvarchar" MaxLength="255" />
+          <Property Name="PositionName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ProjectId" Type="int" />
           <Property Name="LocationId" Type="int" />
           <Property Name="OtherLocation" Type="nvarchar" MaxLength="500" />
           <Property Name="TypeofApplicableId" Type="int" />
@@ -566,6 +578,7 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="mst_KeyRole" EntityType="Self.mst_KeyRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Location" EntityType="Self.mst_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Name" EntityType="Self.mst_Name" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mst_ProjectMaster" EntityType="Self.mst_ProjectMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_SelectionInterview" EntityType="Self.mst_SelectionInterview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_State" EntityType="Self.mst_State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mst_Theme" EntityType="Self.mst_Theme" Schema="dbo" store:Type="Tables" />
@@ -733,8 +746,9 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <EntitySet Name="mst_TypeofInterview" EntityType="Recruitment_DBModel.mst_TypeofInterview" />
           <EntitySet Name="tbl_JobDAbout" EntityType="Recruitment_DBModel.tbl_JobDAbout" />
           <EntitySet Name="Tbl_JobDKeyRole" EntityType="Recruitment_DBModel.Tbl_JobDKeyRole" />
-          <EntitySet Name="tbl_NewHire" EntityType="Recruitment_DBModel.tbl_NewHire" />
           <EntitySet Name="tbl_JobD" EntityType="Recruitment_DBModel.tbl_JobD" />
+          <EntitySet Name="mst_ProjectMaster" EntityType="Recruitment_DBModel.mst_ProjectMaster" />
+          <EntitySet Name="tbl_NewHire" EntityType="Recruitment_DBModel.tbl_NewHire" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1179,6 +1193,35 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
+        <EntityType Name="tbl_JobD">
+          <Key>
+            <PropertyRef Name="JobId_pk" />
+          </Key>
+          <Property Name="JobId_pk" Type="Guid" Nullable="false" />
+          <Property Name="NewHireId_fk" Type="Guid" />
+          <Property Name="HiringLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationClosureDate" Type="DateTime" Precision="0" />
+          <Property Name="AbouttheProject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="mst_ProjectMaster">
+          <Key>
+            <PropertyRef Name="ProjectId_pk" />
+          </Key>
+          <Property Name="ProjectId_pk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="OrderBy" Type="Int32" />
+        </EntityType>
         <EntityType Name="tbl_NewHire">
           <Key>
             <PropertyRef Name="NewHireId_pk" />
@@ -1187,8 +1230,8 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="NewHiredDate" Type="DateTime" Precision="3" />
           <Property Name="HiringTypeId" Type="Int32" />
           <Property Name="ThemeId" Type="Int32" />
-          <Property Name="PositionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ProjectName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PositionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" />
           <Property Name="LocationId" Type="Int32" />
           <Property Name="OtherLocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="TypeofApplicableId" Type="Int32" />
@@ -1220,23 +1263,6 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="IsDeletedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderBy" Type="Int32" />
-        </EntityType>
-        <EntityType Name="tbl_JobD">
-          <Key>
-            <PropertyRef Name="JobId_pk" />
-          </Key>
-          <Property Name="JobId_pk" Type="Guid" Nullable="false" />
-          <Property Name="NewHireId_fk" Type="Guid" />
-          <Property Name="HiringLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ApplicationClosureDate" Type="DateTime" Precision="0" />
-          <Property Name="AbouttheProject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="OrderBy" Type="Int32" />
         </EntityType>
         </Schema>
@@ -1687,6 +1713,37 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_JobD">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_JobD">
+              <MappingFragment StoreEntitySet="tbl_JobD">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="AbouttheProject" ColumnName="AbouttheProject" />
+                <ScalarProperty Name="ApplicationClosureDate" ColumnName="ApplicationClosureDate" />
+                <ScalarProperty Name="HiringLink" ColumnName="HiringLink" />
+                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
+                <ScalarProperty Name="JobId_pk" ColumnName="JobId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mst_ProjectMaster">
+            <EntityTypeMapping TypeName="Recruitment_DBModel.mst_ProjectMaster">
+              <MappingFragment StoreEntitySet="mst_ProjectMaster">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+                <ScalarProperty Name="ProjectId_pk" ColumnName="ProjectId_pk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbl_NewHire">
             <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_NewHire">
               <MappingFragment StoreEntitySet="tbl_NewHire">
@@ -1722,30 +1779,12 @@ warning 6002: The table/view 'Recruitment_DB.dbo.mst_TypeYesNo' does not have a 
                 <ScalarProperty Name="TypeofApplicableId" ColumnName="TypeofApplicableId" />
                 <ScalarProperty Name="OtherLocation" ColumnName="OtherLocation" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="PositionName" ColumnName="PositionName" />
                 <ScalarProperty Name="ThemeId" ColumnName="ThemeId" />
                 <ScalarProperty Name="HiringTypeId" ColumnName="HiringTypeId" />
                 <ScalarProperty Name="NewHiredDate" ColumnName="NewHiredDate" />
                 <ScalarProperty Name="NewHireId_pk" ColumnName="NewHireId_pk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_JobD">
-            <EntityTypeMapping TypeName="Recruitment_DBModel.tbl_JobD">
-              <MappingFragment StoreEntitySet="tbl_JobD">
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="AbouttheProject" ColumnName="AbouttheProject" />
-                <ScalarProperty Name="ApplicationClosureDate" ColumnName="ApplicationClosureDate" />
-                <ScalarProperty Name="HiringLink" ColumnName="HiringLink" />
-                <ScalarProperty Name="NewHireId_fk" ColumnName="NewHireId_fk" />
-                <ScalarProperty Name="JobId_pk" ColumnName="JobId_pk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

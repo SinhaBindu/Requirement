@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -134,6 +135,77 @@ namespace Requirement.Manager
                 return string.Empty;
         }
         #endregion
+        public static List<SelectListItem> GetUserAll(int IsSelect = 0,int RoleId=0,string UID="")
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            var tbld = SPManager.Usp_GetUserData(RoleId,UID);
+            if (tbld != null && tbld.Rows.Count > 0)
+            {
+                foreach (DataRow row in tbld.Rows)
+                {
+                    // Assuming the DataTable has columns "RoleId" and "RoleName"
+                    string ID = row["Value"].ToString();
+                    string Name = row["Text"].ToString();
+                    list.Add(new SelectListItem
+                    {
+                        Value = ID,
+                        Text = Name
+                    });
+                }
+            }
+
+            return list;
+        }
+        public static List<SelectListItem> GetRoles(int IsSelect = 0, int RoleId = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            string RId = RoleId == 0 ? "0" : RoleId.ToString();
+            list = _db.AspNetRoles.Where(x => x.Id == RId || RId == "0").Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList();
+            if (IsSelect == 0)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
+        public static List<SelectListItem> GetThemeMaster(int IsSelect = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list = _db.mst_Theme.OrderBy(x => x.OrderBy).Select(x => new SelectListItem { Value = x.ThemeId_pk.ToString(), Text = x.ThemeName }).ToList();
+            if (IsSelect == 0)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
+        public static List<SelectListItem> GetProjectMaster(int IsSelect = 0)
+        {
+            Recruitment_DBEntities _db = new Recruitment_DBEntities();
+            List<SelectListItem> list = new List<SelectListItem>();
+            list = _db.mst_ProjectMaster.OrderBy(x=>x.OrderBy).Select(x => new SelectListItem { Value = x.ProjectId_pk.ToString(), Text = x.ProjectName }).ToList();
+            if (IsSelect == 0)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "Select" });
+            }
+            else if (IsSelect == 1)
+            {
+                list.Insert(0, new SelectListItem { Value = "", Text = "All" });
+            }
+
+            return list;
+        }
         public static List<SelectListItem> GetALLHyringM(int IsSelect = 0)
         {
             Recruitment_DBEntities _db = new Recruitment_DBEntities();

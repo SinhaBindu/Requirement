@@ -56,7 +56,8 @@ namespace Requirement.Models
         public virtual DbSet<mst_TypeofInterview> mst_TypeofInterview { get; set; }
         public virtual DbSet<tbl_JobDAbout> tbl_JobDAbout { get; set; }
         public virtual DbSet<Tbl_JobDKeyRole> Tbl_JobDKeyRole { get; set; }
-        public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
         public virtual DbSet<tbl_JobD> tbl_JobD { get; set; }
+        public virtual DbSet<mst_ProjectMaster> mst_ProjectMaster { get; set; }
+        public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
     }
 }
