@@ -34,14 +34,22 @@ namespace Requirement.Models
         public virtual DbSet<mst_Designation> mst_Designation { get; set; }
         public virtual DbSet<mst_District> mst_District { get; set; }
         public virtual DbSet<mst_EmpCode> mst_EmpCode { get; set; }
+        public virtual DbSet<mst_KeyRole> mst_KeyRole { get; set; }
         public virtual DbSet<mst_Location> mst_Location { get; set; }
         public virtual DbSet<mst_Name> mst_Name { get; set; }
+        public virtual DbSet<mst_ProjectMaster> mst_ProjectMaster { get; set; }
+        public virtual DbSet<mst_SelectionInterview> mst_SelectionInterview { get; set; }
         public virtual DbSet<mst_State> mst_State { get; set; }
         public virtual DbSet<mst_Theme> mst_Theme { get; set; }
+        public virtual DbSet<mst_TypeofInterview> mst_TypeofInterview { get; set; }
+        public virtual DbSet<Tbl_JD> Tbl_JD { get; set; }
+        public virtual DbSet<tbl_JobD> tbl_JobD { get; set; }
+        public virtual DbSet<tbl_JobDAbout> tbl_JobDAbout { get; set; }
+        public virtual DbSet<Tbl_JobDKeyRole> Tbl_JobDKeyRole { get; set; }
+        public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
         public virtual DbSet<tbl_NewHireMultiple_old> tbl_NewHireMultiple_old { get; set; }
         public virtual DbSet<tbl_NewHireMultipleCost> tbl_NewHireMultipleCost { get; set; }
         public virtual DbSet<tbl_NewHireStatus> tbl_NewHireStatus { get; set; }
-        public virtual DbSet<tbl_Signature> tbl_Signature { get; set; }
         public virtual DbSet<mst_Applicable> mst_Applicable { get; set; }
         public virtual DbSet<mst_CostCentreCode> mst_CostCentreCode { get; set; }
         public virtual DbSet<mst_Grade> mst_Grade { get; set; }
@@ -51,13 +59,5 @@ namespace Requirement.Models
         public virtual DbSet<mst_Sal> mst_Sal { get; set; }
         public virtual DbSet<mst_SelectionProcess> mst_SelectionProcess { get; set; }
         public virtual DbSet<mst_TypeYesNo> mst_TypeYesNo { get; set; }
-        public virtual DbSet<mst_KeyRole> mst_KeyRole { get; set; }
-        public virtual DbSet<mst_SelectionInterview> mst_SelectionInterview { get; set; }
-        public virtual DbSet<mst_TypeofInterview> mst_TypeofInterview { get; set; }
-        public virtual DbSet<tbl_JobDAbout> tbl_JobDAbout { get; set; }
-        public virtual DbSet<Tbl_JobDKeyRole> Tbl_JobDKeyRole { get; set; }
-        public virtual DbSet<tbl_JobD> tbl_JobD { get; set; }
-        public virtual DbSet<mst_ProjectMaster> mst_ProjectMaster { get; set; }
-        public virtual DbSet<tbl_NewHire> tbl_NewHire { get; set; }
     }
 }

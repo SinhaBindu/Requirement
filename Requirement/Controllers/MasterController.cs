@@ -145,6 +145,291 @@ namespace Requirement.Controllers
         }
         #endregion end About Position 
 
-     
+        public ActionResult AddDesignation()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddDesignation(DesignationModel model)
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = model.Id_pk > 0 ? dbe.mst_Designation.Find(model.Id_pk) : new mst_Designation();
+            int res = 0;
+            try
+            {
+                if (string.IsNullOrEmpty(model.Designation))
+                {
+                    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
+                }
+                int maxOrderBy = db.mst_Designation.Select(j => (int?)j.OrderBy).DefaultIfEmpty(0).Max() ?? 0;
+                if (model.Id_pk == 0)
+                {
+                    tbl.Designation = model.Designation.Trim();
+                    tbl.IsActive = true;
+                    tbl.CreatedBy = MvcApplication.CUser.UserId;
+                    tbl.CreatedOn = DateTime.Now;
+                    tbl.OrderBy = maxOrderBy + 1;
+                    db.mst_Designation.Add(tbl);
+                    res = db.SaveChanges();
+                }
+                else if (model.Id_pk > 0)
+                {
+                    tbl.Id_pk = model.Id_pk;
+                    tbl.Designation = model.Designation.Trim();
+                    tbl.IsActive = true;
+                    tbl.UpdatedBy = MvcApplication.CUser.UserId;
+                    tbl.UpdatedOn = DateTime.Now;
+                    res = dbe.SaveChanges();
+                }
+
+                if (res > 0)
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.Insert) });
+                else
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.NotInsert) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) });
+            }
+        }
+        public ActionResult AddProject()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddProject(ProjectModel model)
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = model.ProjectId_pk > 0 ? dbe.mst_ProjectMaster.Find(model.ProjectId_pk) : new mst_ProjectMaster();
+            int res = 0;
+            try
+            {
+                if (string.IsNullOrEmpty(model.ProjectName))
+                {
+                    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
+                }
+                int maxOrderBy = db.mst_ProjectMaster.Select(j => (int?)j.OrderBy).DefaultIfEmpty(0).Max() ?? 0;
+                if (model.ProjectId_pk == 0)
+                {
+                    tbl.ProjectName = model.ProjectName.Trim();
+                    tbl.IsActive = true;
+                    tbl.CreatedBy = MvcApplication.CUser.UserId;
+                    tbl.CreatedOn = DateTime.Now;
+                    tbl.OrderBy = maxOrderBy + 1;
+                    dbe.mst_ProjectMaster.Add(tbl);
+                    res = dbe.SaveChanges();
+                }
+                else if (model.ProjectId_pk > 0)
+                {
+                    tbl.ProjectId_pk = model.ProjectId_pk;
+                    tbl.ProjectName = model.ProjectName.Trim();
+                    tbl.IsActive = true;
+                    tbl.UpdatedBy = MvcApplication.CUser.UserId;
+                    tbl.UpdatedOn = DateTime.Now;
+                    res = dbe.SaveChanges();
+                }
+
+                if (res > 0)
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.Insert) });
+                else
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.NotInsert) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) });
+            }
+        }
+
+
+        public ActionResult GetDesignationList()
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = dbe.mst_Designation.ToList();
+            try
+            {
+                if (tbl.Count > 0)
+                {
+                    //var tbldata = JsonConvert.SerializeObject(tbl);
+                    var html = ConvertViewToStringHtml("_DesignationData", tbl);
+                    return Json(new { IsSuccess = true, Data = html }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { IsSuccess = false, Data = "No records found." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsSuccess = false, Data = "An error occurred: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult AddTheme()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddTheme(ThemeModel model)
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = model.ThemeId_pk > 0 ? dbe.mst_Theme.Find(model.ThemeId_pk) : new mst_Theme();
+            int res = 0;
+            try
+            {
+                if (string.IsNullOrEmpty(model.ThemeName))
+                {
+                    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
+                }
+                int maxOrderBy = db.mst_Designation.Select(j => (int?)j.OrderBy).DefaultIfEmpty(0).Max() ?? 0;
+                if (model.ThemeId_pk == 0)
+                {
+                    tbl.ThemeCode = model.ThemeCode;
+                    tbl.ThemeName = model.ThemeName.Trim();
+                    tbl.IsActive = true;
+                    tbl.CreatedBy = MvcApplication.CUser.UserId;
+                    tbl.CreatedOn = DateTime.Now;
+                    tbl.OrderBy = maxOrderBy + 1;
+                    dbe.mst_Theme.Add(tbl);
+                    res = dbe.SaveChanges();
+                }
+                else if (model.ThemeId_pk > 0)
+                {
+                    tbl.ThemeId_pk = model.ThemeId_pk;
+                    tbl.ThemeCode = model.ThemeCode;
+                    tbl.ThemeName = model.ThemeName.Trim();
+                    tbl.IsActive = true;
+                    tbl.UpdatedBy = MvcApplication.CUser.UserId;
+                    tbl.UpdatedOn = DateTime.Now;
+                    res = dbe.SaveChanges();
+                }
+
+                if (res > 0)
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.Insert) });
+                else
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.NotInsert) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) });
+            }
+        }
+
+        public ActionResult GetThemeList()
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = dbe.mst_Theme.ToList();
+            try
+            {
+                if (tbl.Count > 0)
+                {
+                    //var tbldata = JsonConvert.SerializeObject(tbl);
+                    var html = ConvertViewToStringHtml("_ThemeData", tbl);
+                    return Json(new { IsSuccess = true, Data = html }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { IsSuccess = false, Data = "No records found." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsSuccess = false, Data = "An error occurred: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult GetProjectList()
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = dbe.mst_ProjectMaster.ToList();
+            try
+            {
+                if (tbl.Count > 0)
+                {
+                    //var tbldata = JsonConvert.SerializeObject(tbl);
+                    var html = ConvertViewToStringHtml("_ProjectData", tbl);
+                    return Json(new { IsSuccess = true, Data = html }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { IsSuccess = false, Data = "No records found." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsSuccess = false, Data = "An error occurred: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult AddKeyRole()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddKeyRole(KeyRoleModel model)
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = model.KeyRoleId_pk > 0 ? dbe.mst_KeyRole.Find(model.KeyRoleId_pk) : new mst_KeyRole();
+            int res = 0;
+            try
+            {
+                if (string.IsNullOrEmpty(model.KeyRoleName))
+                {
+                    return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.AllFieldsRequired) });
+                }
+                int maxOrderBy = db.mst_KeyRole.Select(j => (int?)j.OrderBy).DefaultIfEmpty(0).Max() ?? 0;
+                if (model.KeyRoleId_pk == 0)
+                {
+                    tbl.KeyRoleName = model.KeyRoleName.Trim();
+                    tbl.IsActive = true;
+                    tbl.CreatedBy = MvcApplication.CUser.UserId;
+                    tbl.CreatedOn = DateTime.Now;
+                    tbl.OrderBy = maxOrderBy + 1;
+                    dbe.mst_KeyRole.Add(tbl);
+                    res = dbe.SaveChanges();
+                }
+                else if (model.KeyRoleId_pk > 0)
+                {
+                    tbl.KeyRoleId_pk = model.KeyRoleId_pk;
+                    tbl.KeyRoleName = model.KeyRoleName.Trim();
+                    tbl.IsActive = true;
+                    tbl.UpdatedBy = MvcApplication.CUser.UserId;
+                    tbl.UpdatedOn = DateTime.Now;
+                    res = dbe.SaveChanges();
+                }
+
+                if (res > 0)
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.Insert) });
+                else
+                    return Json(new { success = true, message = Enums.GetEnumDescription(Enums.eReturnReg.NotInsert) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = Enums.GetEnumDescription(Enums.eReturnReg.ExceptionError) });
+            }
+        }
+
+        public ActionResult GetKeyRoleList()
+        {
+            Recruitment_DBEntities dbe = new Recruitment_DBEntities();
+            var tbl = dbe.mst_KeyRole.ToList();
+            try
+            {
+                if (tbl.Count > 0)
+                {
+                    //var tbldata = JsonConvert.SerializeObject(tbl);
+                    var html = ConvertViewToStringHtml("_KeyRoleData", tbl);
+                    return Json(new { IsSuccess = true, Data = html }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { IsSuccess = false, Data = "No records found." }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsSuccess = false, Data = "An error occurred: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
