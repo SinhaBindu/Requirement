@@ -927,6 +927,7 @@
     <Content Include="Content\dashboard\images\logo.png" />
     <Content Include="Content\dashboard\images\pci-color-logo.png" />
     <Content Include="Content\dashboard\images\pci-logo.png" />
+    <Content Include="Content\dashboard\images\sign.jpg" />
     <Content Include="Content\dashboard\images\users\1.jpg" />
     <Content Include="Content\dashboard\images\users\4.jpg" />
     <Content Include="Content\dashboard\images\users\5.jpg" />

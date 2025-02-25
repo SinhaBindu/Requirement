@@ -1,9 +1,180 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Approval Details";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
-
-    <p>Use this area to provide additional information.</p>
-</main>
+<div class="page-bread page-titles">
+    <div class="bread-flex">
+        <h1>@ViewBag.Title</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home/">Dashboard</a></li>
+            <li class="breadcrumb-item active">@ViewBag.Title</li>
+        </ol>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="approval-title">New Hire Approval Form for Full Time Employee</h3>
+            <table class="approval-table">
+                <tr>
+                    <th>Position Name</th>
+                    <td>Accountant</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>Patna</td>
+                </tr>
+                <tr>
+                    <th>No of Positions</th>
+                    <td>02</td>
+                </tr>
+                <tr>
+                    <th>Position Type</th>
+                    <td>New</td>
+                </tr>
+                <tr>
+                    <th>Reporting Manager</th>
+                    <td>Manager Finance</td>
+                </tr>
+                <tr>
+                    <th>Duration of the position</th>
+                    <td>1st March 2025 to 28th February 2026</td>
+                </tr>
+            </table>
+            <h4 class="approval-title-2">Cost Centre & Code</h4>
+            <table class="approval-table2">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Grade ID</th>
+                        <th>Activity Code</th>
+                        <th>Budget Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Accountant</td>
+                        <td>110018 till Sep 25</td>
+                        <td>210105</td>
+                        <td>PRSL90 25%</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>110029 till Mar 26</td>
+                        <td>210121</td>
+                        <td>PRSL15 55%</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>510013 till Mar 26</td>
+                        <td>610030</td>
+                        <td>PRSL011 <span class="text-bold">(20%/ Rs.9,780/- Per Month)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h4 class="approval-title-2">CTC and Grade</h4>
+            <table class="approval-table">
+                <tr>
+                    <th><span class="text-green">CTC Salary Range per month</span></th>
+                    <td><span class="text-green">45,000 from INR - to 50,000 INR</span></td>
+                </tr>
+                <tr>
+                    <th>Grade</th>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <th>JD Availability</th>
+                    <td>No (Need to be submitted within Five working days)</td>
+                </tr>
+            </table>
+            <h4 class="approval-title-2">Sourcing Channel</h4>
+            <table class="approval-table">
+                <tr>
+                    <th>Advertisement</th>
+                    <td>Internal (Average cost for advertising on Devnet is INR 5k per position)</td>
+                </tr>
+                <tr>
+                    <th>Empaneled Head-Hunting Agency</th>
+                    <td>Yes (additional cost max @@12% of CTO+GST will be applicable)</td>
+                </tr>
+            </table>
+            <h4 class="approval-title-2">Interview Panel (Suggestions):</h4>
+            <table class="approval-table">
+                <tr>
+                    <th>1st Panel</th>
+                    <td>1. Ms. Nitesh Srivastav, <br />2. Mr. Bhagirath– Manager-Finance-Core, <br />3.	Ms. Garima Anand – Manager P & C.</td>
+                </tr>
+                <tr>
+                    <th>2nd Panel</th>
+                    <td>1. Mr. Anuradha – Manager-Finance-Core, <br />2. Mr. Aashish Jain- Director Finance and Systems. </td>
+                </tr>
+            </table>
+            <h4 class="approval-title-2">Selection Process</h4>
+            <table class="approval-table">
+                <tr>
+                    <th>Step I: Written Assignment / Power-point Presentation/ Any other/None</th>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <th>Step II: Virtual / Face to Face Interaction</th>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <th>Step III: Next Level Interview required with CEO</th>
+                    <td>No</td>
+                </tr>
+            </table>
+            <h4 class="approval-title-2">Infrastructure Requirement</h4>
+            <table class="approval-table">
+                <tr>
+                    <th>1. Laptop with Specifications</th>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <th>2. Any specific software with license</th>
+                    <td>Yes</td>
+                </tr>
+            </table>
+            <h4 class="approval-title-2">Approved by</h4>
+            <div class="approval-data">
+                <div class="approval-box">
+                    <div class="box-manage">
+                        <h4>Approvals</h4>
+                        <span class="sign">
+                            <img src="~/Content/dashboard/images/sign.jpg" alt="sign" />
+                        </span>
+                        <p>Requested by: <br /><span class="text-bold">Mr. Bhagirath –Manager Finance - Core</span></p>
+                    </div>
+                </div>
+                <div class="approval-box">
+                    <div class="box-manage">
+                        <h4>Budget Reviewed by Finance</h4>
+                        <span class="sign">
+                            <img src="~/Content/dashboard/images/sign.jpg" alt="sign" />
+                        </span>
+                        <p>Requested by: <br /><span class="text-bold">Mr. Bhagirath –Manager Finance - Core</span></p>
+                    </div>
+                </div>
+                <div class="approval-box">
+                    <div class="box-manage">
+                        <h4>Budget Reviewed by Finance</h4>
+                        <span class="sign">
+                            <img src="~/Content/dashboard/images/sign.jpg" alt="sign" />
+                        </span>
+                        <p>Requested by: <br /><span class="text-bold">Mr. Bhagirath –Manager Finance - Core</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="notes-section" style="margin-top: 20px;">
+        <h5>Notes:</h5>
+        <ul>
+            <li>CEO will be the approving authority for the NHF with recommendation from Senior Director – F&S for all the positions under Unrestricted funds and for Grade G & above (even if the position is 100% budgeted under a project)</li>
+            <li>For shared cost resources under multiple projects, approval from all the respective budget holders will suffice after Finance review by Associate Director (F&S). Further Approval from CEO will not be required for such cases.</li>
+            <li>It is mandatory for CEO & SD-F&S to be there in the interview panel for Grade G and above and for Budget Holder positions. CEO will be the deciding authority for final selection of the candidates.</li>
+            <li>For positions where CEO is the Skip Level Supervisor, he will be involved in the Final Selection of the candidates. For rest of the positions, it will be solely his discretion to have an interaction with the candidate before selection. </li>
+            <li>In case of recommended candidates, concerned referee will neither be included in the interview panel nor in the selection process.</li>
+            <li>If competent interviewer is not available internally for any critical position, P&C will seek external expertise for assess</li>
+        </ul>
+    </div>
+</div>

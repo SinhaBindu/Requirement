@@ -46,3 +46,98 @@
     display: flex !important;
     gap: 20px
 }
+.notes-section li {
+    padding: 6px 0;
+}
+.approval-table {
+    border: 1px solid #EEF1F0;
+    width: 100%
+}
+    .approval-table th, .approval-table td {
+        padding: 7px 10px;
+        border-bottom: 1px solid #EEF1F0;
+    }
+    .approval-table th {
+        color: #7E808F;
+        border-right: 1px solid #EEF1F0;
+    }
+    .approval-table td {
+        color: #222
+    }
+.approval-table2 {
+    border: 1px solid #EEF1F0;
+    width: 100%
+}
+
+    .approval-table2 th, .approval-table2 td {
+        padding: 7px 10px;
+        border-bottom: 1px solid #EEF1F0;
+    }
+
+    .approval-table2 th {
+        color: #7E808F;
+        border-right: 1px solid #EEF1F0;
+        background: #F4F6F6
+    }
+
+    .approval-table2 td {
+        color: #222
+    }
+.approval-title {
+    text-align: center;
+    font-size: 22px !important;
+    color: #7571F9;
+}
+.approval-title-2 {
+    font-size: 17px !important;
+    color: #7571F9;
+    margin: 20px 0 8px
+}
+.text-bold {
+    font-weight: bold
+}
+.text-green {
+    background: #00FF00;
+    color: #000;
+    padding: 2px 8px
+}
+.approval-data {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.approval-box {
+    flex-basis: 25%;
+    background: #FAFAFA;
+    border-radius: 5px;
+}
+.sign {
+    text-align: center;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #F2F2F2;
+    background: #fff;
+    margin-bottom: 15px
+}
+.box-manage {
+    padding: 15px;
+}
+.box-manage h4 {
+    font-size: 14px;
+}
+@media screen and (max-width: 900px) {
+    .approval-box {
+        flex-basis: 48%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .approval-box {
+        flex-basis: 47%;
+    }
+}
+@media screen and (max-width: 550px) {
+    .approval-box {
+        flex-basis: 98%;
+    }
+}
